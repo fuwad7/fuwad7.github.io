@@ -1,35 +1,20 @@
-/*-----------------------------------------------------------------------------------
-    Template Name: Hotel Miranda Hoetel Resort Booking HTML Template
-    Template URI: https://webtend.biz/onitir
-    Author: WebTend
-    Author URI: https://www.webtend.com
-    Version: 1.0
-
-	Note: This is Main js File For custom and jQuery plugins activation Code..
------------------------------------------------------------------------------------
-
 /*---------------------------
 	JS INDEX
 	===================
 	01. Main Menu
 	02. Banner Slider
 	03. ROOM Slider(Big)
-	04. Testimonial Slider
-	05. Latest Post Slider
+	04. Review Slider
 	06. Feature Room Slider
 	07. CounterUp
 	08. Instagram Feed Slider
-	09. Food Menu SLider
-	10. Gallery Sliders & Popup
-	11. Room Slider Two
-	12. Banner Image Slider
-	13. offCanvas Active
-	14. init extra plugin
-	15. Active Gallery And Video Popup
-	16. Search Form
-	17. Prelader
-	18. Back to top
-	19. Sticky header
+	09. Gallery Sliders & Popup
+	10. Banner Image Slider
+	11. offCanvas Active
+	12. Search Form
+	13. Prelader
+	14. Back to top
+	15. Sticky header
 
 -----------------------------*/
 
@@ -43,7 +28,6 @@ var mirandaDoc;
 			this.bannerSlider();
 			this.roomSlider();
 			this.testimonialSlider();
-			this.latestPostlider();
 			this.featureRoom();
 			this.roomDetailsSlider();
 			this.counterToUp();
@@ -53,8 +37,6 @@ var mirandaDoc;
 			this.roomSliderTwo();
 			this.bannerImgSlider();
 			this.offCanvas();
-			this.extraPlugin();
-			this.popUpExtra();
 			this.searchForm();
 		},
 
@@ -284,41 +266,6 @@ var mirandaDoc;
 			});
 		},
 
-		//===== 05. Latest Post Slider
-		latestPostlider() {
-			var tslider = $('.latest-post-slider');
-			var arrows = $('.latest-post-arrow');
-			tslider.slick({
-				slidesToShow: 3,
-				slidesToScroll: 1,
-				fade: false,
-				infinite: true,
-				autoplay: true,
-				autoplaySpeed: 4000,
-				arrows: true,
-				dots: false,
-				prevArrow:
-					'<div class="slick-arrow prev-arrow"><i class="fal fa-arrow-left"></i></div>',
-				nextArrow:
-					'<div class="slick-arrow next-arrow"><i class="fal fa-arrow-right"></i></div>',
-				appendArrows: arrows,
-				responsive: [
-					{
-						breakpoint: 992,
-						settings: {
-							slidesToShow: 2,
-						},
-					},
-					{
-						breakpoint: 576,
-						settings: {
-							slidesToShow: 1,
-						},
-					},
-				],
-			});
-		},
-
 		//===== 06. Feature Room Slider
 		featureRoom() {
 			var fslider = $('.feature-room-slider');
@@ -430,27 +377,6 @@ var mirandaDoc;
 					},
 					mainClass: 'mfp-fade',
 				});
-			});
-		},
-
-		//===== 09. Food Menu SLider
-		menuSlider() {
-			var mslider = $('.menu-slider');
-			var arrows = $('.menu-slider-arrow');
-			mslider.slick({
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				fade: false,
-				infinite: true,
-				autoplay: true,
-				autoplaySpeed: 4000,
-				arrows: true,
-				dots: false,
-				prevArrow:
-					'<div class="slick-arrow prev-arrow"><i class="fal fa-arrow-left"></i></div>',
-				nextArrow:
-					'<div class="slick-arrow next-arrow"><i class="fal fa-arrow-right"></i></div>',
-				appendArrows: arrows,
 			});
 		},
 
@@ -629,23 +555,6 @@ var mirandaDoc;
 
 			// init isotope on features
 			$('.fetaure-masonary').isotope();
-		},
-
-		//===== 15. Active Gallery And Video Popup
-		popUpExtra() {
-			// Init magnificPopup on Popup Video
-			$('.popup-video').magnificPopup({
-				type: 'iframe',
-			});
-
-			// Init magnificPopup on Gallery
-			$('.gallery-loop .popup-image').magnificPopup({
-				type: 'image',
-				gallery: {
-					enabled: true,
-				},
-				mainClass: 'mfp-fade',
-			});
 		},
 
 		//===== 16. Search Form
