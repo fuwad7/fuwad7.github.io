@@ -1,751 +1,2804 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Md. Fuad Hasan — CS Graduate · Creative Professional</title>
-<meta name="description" content="Md. Fuad Hasan — Computer Science graduate from Daffodil International University, Java Development Intern at A2I, freelance graphic designer. Based in Dhaka, Bangladesh.">
-<meta name="theme-color" content="#131318">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bone:#F3EFE7;--bone-2:#EAE4D8;--ink:#131318;--ink-2:#191921;--ink-3:#20202B;
-  --mut:#6F6B62;--mut-d:rgba(243,239,231,.55);
-  --line:rgba(19,19,24,.16);--line-d:rgba(243,239,231,.16);
-  --acc:#FF4B1E;
-  --fd:'Syne',sans-serif;--fb:'Instrument Sans',sans-serif;--fm:'JetBrains Mono',monospace;
-  --ease:cubic-bezier(.22,1,.36,1);
-  --w:min(1360px,92vw);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--bone);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-::selection{background:var(--acc);color:var(--bone)}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit}
-:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:2px}
-h1,h2,h3{font-family:var(--fd);line-height:1;letter-spacing:-.01em;font-weight:800}
-.wrap{width:var(--w);margin:0 auto}
-section{position:relative}
-.skip{position:fixed;left:1rem;top:-4rem;z-index:200;background:var(--ink);color:var(--bone);padding:.6rem 1rem;border-radius:99px;transition:top .3s}
-.skip:focus{top:1rem}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuad | Creative Developer &amp; UI Engineer</title>
+  <meta name="description"
+    content="Portfolio of Fuad — Creative Developer & UI Engineer specializing in high-performance web applications, interactive motion, and immersive 3D experiences.">
 
-.noise{position:fixed;inset:-50%;z-index:97;pointer-events:none;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 8s steps(10) infinite}
-@keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,3%)}}
-.progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc);z-index:96}
-.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:99;border-radius:50%;transform:translate(-50%,-50%)}
-.cursor-dot{width:7px;height:7px;background:var(--acc)}
-.cursor-ring{width:36px;height:36px;border:1.5px solid var(--acc);opacity:.5;transition:width .35s var(--ease),height .35s var(--ease),opacity .3s}
-body.cursor-on .cursor-ring.grow{width:64px;height:64px;opacity:.9}
-@media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
-
-#loader{display:none}
-.js #loader{display:flex;position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--bone);align-items:flex-end;justify-content:space-between;padding:5vh 5vw;transition:transform .8s var(--ease)}
-#loader.done{transform:translateY(-101%)}
-#loader .ld-name{font-family:var(--fd);font-weight:800;font-size:clamp(2rem,6vw,4rem)}
-#loader .ld-count{font-family:var(--fm);font-size:clamp(2rem,6vw,4rem);color:var(--acc)}
-
-.nav{position:fixed;top:0;left:0;right:0;z-index:80;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
-.nav.scrolled{background:var(--bone);border-color:var(--line)}
-.nav-in{width:var(--w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px}
-.logo{font-family:var(--fd);font-weight:800;font-size:1.15rem;display:flex;align-items:baseline;gap:.35rem}
-.logo i{width:9px;height:9px;background:var(--acc);border-radius:50%;display:inline-block;animation:pulse 2.4s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
-.nav-links{display:flex;gap:2.2rem}
-.nav-links a{font-family:var(--fm);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;position:relative;padding:.3rem 0}
-.nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
-.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
-.nav-right{display:flex;align-items:center;gap:1.4rem}
-.nav-time{font-family:var(--fm);font-size:.72rem;letter-spacing:.12em;color:var(--mut)}
-.btn{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid currentColor;border-radius:99px;padding:.75rem 1.4rem;transition:background .35s var(--ease),color .35s var(--ease),transform .35s var(--ease)}
-.btn:hover{background:var(--ink);color:var(--bone)}
-.dark .btn:hover{background:var(--bone);color:var(--ink)}
-.btn .ar{transition:transform .35s var(--ease)}
-.btn:hover .ar{transform:translateX(4px)}
-.burger{display:none;flex-direction:column;gap:6px;padding:10px;z-index:92}
-.burger span{width:26px;height:2px;background:currentColor;transition:transform .4s var(--ease),opacity .3s}
-.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-
-.menu{position:fixed;inset:0;z-index:90;background:var(--ink);color:var(--bone);display:flex;flex-direction:column;justify-content:center;padding:0 8vw;clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);visibility:hidden}
-.menu.open{clip-path:inset(0 0 0% 0);visibility:visible}
-.menu a.m-link{font-family:var(--fd);font-weight:800;font-size:clamp(2.4rem,8vw,5.5rem);line-height:1.12;display:flex;align-items:baseline;gap:1.2rem;opacity:0;transform:translateY(40px);transition:opacity .6s var(--ease),transform .6s var(--ease),color .3s}
-.menu.open a.m-link{opacity:1;transform:none}
-.menu a.m-link:hover{color:var(--acc)}
-.menu a.m-link sup{font-family:var(--fm);font-size:.8rem;color:var(--acc)}
-.menu-foot{margin-top:6vh;display:flex;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut-d)}
-
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:110px;
-  background-image:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px calc(100%/6))}
-.hero-top{width:var(--w);margin:0 auto;display:flex;justify-content:space-between;font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);padding-bottom:1.2rem;flex-wrap:wrap;gap:1rem}
-.hero-name{width:var(--w);margin:0 auto;font-size:clamp(3.4rem,13.5vw,12.5rem);text-transform:uppercase;position:relative}
-.hero-name .row{display:flex;align-items:center;gap:2.5vw;flex-wrap:wrap}
-.hero-name .row.r2{justify-content:flex-end}
-.outline{color:transparent;-webkit-text-stroke:2.5px var(--ink)}
-@supports not (-webkit-text-stroke:2px black){.outline{color:var(--ink)}}
-.star{color:var(--acc);-webkit-text-stroke:0;font-size:.5em;transform:translateY(-.5em)}
-.hero-img{width:clamp(110px,16vw,230px);aspect-ratio:4/3;border-radius:999px;overflow:hidden;border:2px solid var(--ink);flex:none}
-.kb img{width:100%;height:100%;object-fit:cover;animation:kb 16s ease-in-out infinite alternate}
-@keyframes kb{from{transform:scale(1)}to{transform:scale(1.12) translate(2%,-2%)}}
-.hero-sub{width:var(--w);margin:3vh auto 0;display:grid;grid-template-columns:1.2fr auto 1fr;gap:2rem;align-items:end;padding-bottom:3vh}
-.hero-sub p{max-width:34ch;font-size:clamp(.95rem,1.3vw,1.15rem);color:#3c3c42}
-.hero-sub p b{color:var(--ink)}
-.orbit{position:relative;width:128px;height:128px;justify-self:center}
-.orbit svg{width:100%;height:100%;animation:spin 14s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.orbit text{font-family:var(--fm);font-size:9.5px;letter-spacing:.24em;fill:var(--ink)}
-.orbit-core{position:absolute;inset:0;display:grid;place-items:center;font-size:1.5rem;color:var(--acc)}
-.hero-meta{justify-self:end;text-align:right;font-family:var(--fm);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);display:flex;flex-direction:column;gap:.5rem}
-.scroll-cue{display:flex;align-items:center;gap:.8rem;color:var(--ink)}
-.scroll-cue i{width:1px;height:38px;background:var(--ink);display:block;position:relative;overflow:hidden}
-.scroll-cue i::after{content:"";position:absolute;inset:0;background:var(--acc);animation:drop 1.8s var(--ease) infinite}
-@keyframes drop{0%{transform:translateY(-100%)}60%{transform:translateY(0)}100%{transform:translateY(100%)}}
-
-.marquee{overflow:hidden;border-block:1.5px solid var(--ink);background:var(--bone)}
-.marquee.dark{background:var(--ink);color:var(--bone);border-color:var(--ink)}
-.marquee-track{display:flex;width:max-content;animation:mq 26s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-@keyframes mq{to{transform:translateX(-50%)}}
-.mq-group{display:flex;align-items:center}
-.mq-group span{font-family:var(--fd);font-weight:700;font-size:clamp(1.1rem,2.4vw,1.9rem);text-transform:uppercase;padding:1rem 1.6rem;white-space:nowrap}
-.mq-group i{color:var(--acc);font-style:normal;font-size:1.1rem}
-
-.pad{padding:clamp(90px,11vw,160px) 0}
-.sec-label{display:flex;align-items:center;gap:.8rem;font-family:var(--fm);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-bottom:2.2rem}
-.sec-label::before{content:"";width:10px;height:10px;background:var(--acc);border-radius:50%}
-.dark .sec-label{color:var(--mut-d)}
-.sec-title{font-size:clamp(2.2rem,5.4vw,4.6rem);text-transform:uppercase;max-width:14ch}
-
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
-.reveal.in{opacity:1;transform:none}
-.lm{display:block;overflow:hidden}
-.lm-i{display:inline-block;transform:translateY(115%);transition:transform 1s var(--ease);transition-delay:var(--d,0s)}
-.in .lm-i{transform:none}
-
-.about-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(2rem,6vw,7rem)}
-.about-sticky{position:sticky;top:110px;align-self:start}
-.about-sticky .sec-title{margin-bottom:2.2rem}
-.about-portrait{width:min(320px,80%);border:2px solid var(--ink);border-radius:8px;overflow:hidden;transform:rotate(-2deg);box-shadow:10px 12px 0 var(--acc)}
-.about-body p{font-size:clamp(1rem,1.4vw,1.25rem);color:#33333a;max-width:56ch;margin-bottom:1.4rem}
-.about-body p b{color:var(--ink)}
-.about-body .lead{font-family:var(--fd);font-weight:700;font-size:clamp(1.3rem,2.2vw,1.9rem);color:var(--ink);line-height:1.35;margin-bottom:2rem}
-.now-card{border:1.5px solid var(--ink);border-radius:12px;background:var(--bone-2);padding:1.4rem 1.6rem;margin:2.4rem 0;display:grid;gap:.7rem;max-width:480px}
-.now-card .nr{display:flex;justify-content:space-between;gap:1rem;font-size:.92rem;border-bottom:1px dashed var(--line);padding-bottom:.55rem}
-.now-card .nr:last-child{border:0;padding-bottom:0}
-.now-card .k{font-family:var(--fm);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);padding-top:.25rem}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:2.6rem 0;border-block:1.5px solid var(--ink);padding:1.6rem 0}
-.stat .num{font-family:var(--fd);font-weight:800;font-size:clamp(1.8rem,3.4vw,3rem);display:flex;align-items:baseline}
-.stat .num em{color:var(--acc);font-style:normal}
-.stat .lbl{font-family:var(--fm);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-top:.3rem}
-.chips{display:flex;flex-wrap:wrap;gap:.6rem}
-.chip{font-family:var(--fm);font-size:.7rem;letter-spacing:.1em;border:1.5px solid var(--line);border-radius:99px;padding:.45rem .95rem;transition:background .3s,color .3s,border-color .3s}
-.chip:hover{background:var(--ink);color:var(--bone);border-color:var(--ink)}
-
-.dark{background:var(--ink);color:var(--bone)}
-.dark .sec-title{color:var(--bone)}
-
-.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:4rem;flex-wrap:wrap}
-.work-head p{font-family:var(--fm);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mut-d)}
-.stack{display:flex;flex-direction:column;gap:3vh;padding-bottom:6vh}
-.pc{position:sticky;top:calc(96px + var(--st,0)*14px);background:var(--ink-2);border:1.5px solid var(--line-d);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1.05fr 1fr;min-height:62vh}
-.pc-info{padding:clamp(1.6rem,3.5vw,3.2rem);display:flex;flex-direction:column;gap:1.4rem;position:relative;z-index:1}
-.pc-num{position:absolute;right:1rem;bottom:-1.4rem;font-family:var(--fd);font-weight:800;font-size:clamp(6rem,12vw,11rem);color:transparent;-webkit-text-stroke:1.5px rgba(243,239,231,.12);pointer-events:none;line-height:1}
-.pc-tags{display:flex;gap:.5rem;flex-wrap:wrap}
-.pc-tags span{font-family:var(--fm);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line-d);border-radius:99px;padding:.35rem .8rem;color:var(--mut-d)}
-.pc h3{font-size:clamp(1.9rem,4vw,3.4rem);text-transform:uppercase}
-.pc h3 em{color:var(--acc);font-style:normal}
-.pc-desc{color:var(--mut-d);max-width:42ch}
-.pc-link{margin-top:auto;align-self:flex-start}
-.pc-media{overflow:hidden;position:relative;border-left:1.5px solid var(--line-d)}
-.pc-media img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:transform 1.2s var(--ease),filter .8s}
-.pc:hover .pc-media img{transform:scale(1.07);filter:saturate(1.15)}
-.pc-year{position:absolute;top:1rem;right:1rem;background:var(--acc);color:var(--ink);font-family:var(--fm);font-size:.68rem;letter-spacing:.14em;padding:.4rem .8rem;border-radius:99px;font-weight:500}
-
-.craft-grid{display:grid;grid-template-columns:.9fr 1.4fr;gap:clamp(2rem,6vw,6rem);align-items:start}
-.craft-note{position:sticky;top:110px}
-.craft-note p{color:#3c3c42;max-width:34ch;margin-top:1.6rem}
-.acc{border-top:1.5px solid var(--ink)}
-.acc:last-child{border-bottom:1.5px solid var(--ink)}
-.acc-h{width:100%;display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:1.2rem;padding:1.7rem 0;text-align:left;transition:padding-left .4s var(--ease)}
-.acc-h:hover{padding-left:1rem}
-.acc-h .n{font-family:var(--fm);font-size:.75rem;color:var(--acc)}
-.acc-h .t{font-family:var(--fd);font-weight:800;font-size:clamp(1.3rem,3vw,2.2rem);text-transform:uppercase}
-.acc-ico{width:38px;height:38px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:1.3rem;transition:transform .5s var(--ease),background .3s,color .3s;flex:none}
-.acc.open .acc-ico{transform:rotate(45deg);background:var(--acc);border-color:var(--acc);color:var(--ink)}
-.acc-p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--ease)}
-.acc.open .acc-p{grid-template-rows:1fr}
-.acc-inner{overflow:hidden}
-.acc-inner-pad{padding:0 0 2rem 70px;display:grid;gap:1.2rem}
-.acc-inner-pad p{color:#3c3c42;max-width:52ch}
-
-.xp-row{display:grid;grid-template-columns:150px 1.3fr 1fr auto;gap:1.2rem;align-items:center;padding:1.7rem 1rem;border-top:1px solid var(--line-d);transition:background .35s,color .35s,padding-left .4s var(--ease)}
-.xp-row:last-of-type{border-bottom:1px solid var(--line-d)}
-.xp-row:hover{background:var(--bone);color:var(--ink);padding-left:1.8rem}
-.xp-row .yr{font-family:var(--fm);font-size:.72rem;letter-spacing:.12em;color:var(--acc)}
-.xp-row .role{font-family:var(--fd);font-weight:700;font-size:clamp(1.05rem,2vw,1.5rem);text-transform:uppercase}
-.xp-row .co{color:var(--mut-d)}
-.xp-row:hover .co{color:var(--mut)}
-.xp-row .loc{font-family:var(--fm);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut-d)}
-.xp-row:hover .loc{color:var(--mut)}
-.awards{margin-top:5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line-d);border:1px solid var(--line-d)}
-.award{background:var(--ink);padding:1.8rem;transition:background .35s}
-.award:hover{background:var(--ink-3)}
-.award .yr{font-family:var(--fm);font-size:.68rem;color:var(--acc);letter-spacing:.16em}
-.award h4{font-family:var(--fd);font-size:1.05rem;margin:.7rem 0 .3rem;text-transform:uppercase}
-.award p{font-size:.85rem;color:var(--mut-d)}
-
-.lab{background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:26px 26px}
-.lab-board{position:relative;height:660px;margin-top:3rem}
-.postcard{position:absolute;width:240px;background:#FBF8F1;border:1px solid var(--line);padding:10px 10px 14px;box-shadow:0 18px 40px rgba(19,19,24,.16);transform:translate(var(--px,0),var(--py,0)) rotate(var(--r,0deg));transition:transform .5s var(--ease),box-shadow .5s var(--ease),z-index 0s;cursor:grab}
-.postcard:hover{transform:translate(var(--px,0),calc(var(--py,0px) - 14px)) rotate(0deg) scale(1.05);box-shadow:0 30px 60px rgba(19,19,24,.28);z-index:10}
-.postcard::before{content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);width:84px;height:26px;background:rgba(255,75,30,.7)}
-.postcard img{width:100%;aspect-ratio:1;object-fit:cover;filter:saturate(.9)}
-.postcard figcaption{font-family:var(--fm);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-top:.7rem;color:var(--mut);display:flex;justify-content:space-between}
-.lab-hint{text-align:center;margin-top:2.5rem;font-family:var(--fm);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
-
-.quotes-ui{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
-.q-btns{display:flex;gap:.7rem}
-.q-btn{width:52px;height:52px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:1.2rem;transition:background .3s,color .3s,transform .3s}
-.q-btn:hover{background:var(--ink);color:var(--bone)}
-.q-btn:active{transform:scale(.92)}
-.q-track{display:flex;gap:1.4rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;scrollbar-width:none}
-.q-track::-webkit-scrollbar{display:none}
-.quote{flex:0 0 min(480px,86vw);scroll-snap-align:start;border:1.5px solid var(--ink);border-radius:14px;padding:2.2rem;display:flex;flex-direction:column;gap:1.8rem;background:var(--bone);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
-.quote:hover{transform:translateY(-6px);box-shadow:8px 10px 0 var(--acc)}
-.quote .qt{font-family:var(--fd);font-weight:700;font-size:clamp(1.1rem,1.8vw,1.4rem);line-height:1.4}
-.quote .qt::before{content:"“";color:var(--acc);font-size:1.6em;line-height:0;vertical-align:-.3em;margin-right:.1em}
-.q-person{display:flex;align-items:center;gap:1rem;margin-top:auto}
-.q-person img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--ink)}
-.q-person .nm{font-weight:600;font-size:.95rem}
-.q-person .rl{font-family:var(--fm);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
-
-.contact-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(2.5rem,6vw,6rem)}
-.contact .sec-title{max-width:none}
-.email-big{display:inline-block;font-family:var(--fd);font-weight:800;font-size:clamp(1.4rem,3.4vw,2.6rem);margin:2.4rem 0 1rem;position:relative;text-transform:lowercase}
-.email-big::after{content:"";position:absolute;left:0;bottom:-4px;height:3px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
-.email-big:hover::after{transform:scaleX(1);transform-origin:left}
-.copy-mail{margin-bottom:2.6rem}
-.socials{display:grid;gap:0;border-top:1px solid var(--line-d)}
-.soc{display:flex;justify-content:space-between;align-items:center;padding:1.1rem .4rem;border-bottom:1px solid var(--line-d);font-family:var(--fm);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;transition:padding-left .35s var(--ease),color .3s}
-.soc:hover{padding-left:1.2rem;color:var(--acc)}
-.form-card{background:var(--ink-2);border:1.5px solid var(--line-d);border-radius:16px;padding:clamp(1.6rem,3vw,2.6rem)}
-.form-card h3{font-size:1.4rem;text-transform:uppercase;margin-bottom:1.8rem}
-.field{margin-bottom:1.5rem}
-.field label{display:block;font-family:var(--fm);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mut-d);margin-bottom:.5rem}
-.field input,.field textarea{width:100%;background:transparent;border:0;border-bottom:1.5px solid var(--line-d);color:var(--bone);font-family:var(--fb);font-size:1rem;padding:.6rem 0;transition:border-color .3s;resize:vertical}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--acc)}
-.submit{background:var(--acc);color:var(--ink);border:0;font-weight:500;width:100%;justify-content:center}
-.submit:hover{background:var(--bone);color:var(--ink)}
-.submit:disabled{opacity:.6;cursor:wait}
-
-footer{background:var(--ink);color:var(--bone);border-top:1px solid var(--line-d)}
-.foot-in{width:var(--w);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding:2.2rem 0;flex-wrap:wrap;font-family:var(--fm);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut-d)}
-.to-top{display:inline-flex;align-items:center;gap:.6rem;color:var(--bone);border:1.5px solid var(--line-d);border-radius:99px;padding:.7rem 1.3rem;transition:background .3s,color .3s}
-.to-top:hover{background:var(--acc);border-color:var(--acc);color:var(--ink)}
-
-.toast{position:fixed;bottom:2rem;left:50%;transform:translate(-50%,140%);background:var(--ink);color:var(--bone);border:1.5px solid var(--acc);border-radius:99px;padding:.85rem 1.6rem;font-family:var(--fm);font-size:.74rem;letter-spacing:.12em;z-index:95;transition:transform .55s var(--ease)}
-.toast.show{transform:translate(-50%,0)}
-
-@media(max-width:960px){
-  .nav-links,.nav-time{display:none}
-  .burger{display:flex}
-  .about-grid,.craft-grid,.contact-grid{grid-template-columns:1fr}
-  .about-sticky,.craft-note{position:static}
-  .pc{grid-template-columns:1fr;min-height:auto}
-  .pc-media{border-left:0;border-top:1.5px solid var(--line-d);min-height:260px}
-  .xp-row{grid-template-columns:1fr;gap:.35rem;padding:1.4rem .5rem}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .hero-sub{grid-template-columns:1fr;justify-items:start}
-  .hero-meta{justify-self:start;text-align:left}
-  .lab-board{height:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem;padding:0 0 1rem}
-  .postcard{position:static;width:100%;transform:rotate(var(--r,0deg))}
-}
-@media(max-width:520px){.lab-board{grid-template-columns:1fr}.hero-name .row.r2{justify-content:flex-start}}
-
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .marquee-track{animation:none}
-  .cursor-dot,.cursor-ring,.noise{display:none}
-}
-</style>
-<script>document.documentElement.classList.replace('no-js','js');</script>
-</head>
-<body>
-
-<a class="skip" href="#work">Skip to projects</a>
-<div id="loader" aria-hidden="true"><span class="ld-name">FUAD HASAN</span><span class="ld-count">0</span></div>
-<div class="noise" aria-hidden="true"></div>
-<div class="progress" aria-hidden="true"></div>
-<div class="cursor-dot" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"></div>
-<div class="toast" id="toast" role="status"></div>
-
-<header class="nav" id="nav">
-  <div class="nav-in">
-    <a class="logo" href="#top">FH<i></i></a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="#about" class="scr">About</a>
-      <a href="#work" class="scr">Projects</a>
-      <a href="#craft" class="scr">Skills</a>
-      <a href="#lab" class="scr">Lab</a>
-      <a href="#contact" class="scr">Contact</a>
-    </nav>
-    <div class="nav-right">
-      <span class="nav-time">BST <span class="clock">--:--:--</span></span>
-      <a href="#contact" class="btn magnet" data-grow>Let's talk <span class="ar">→</span></a>
-      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</header>
-
-<div class="menu" id="menu">
-  <nav aria-label="Menu" style="display:grid;gap:.5rem">
-    <a class="m-link" href="#about" style="transition-delay:.08s"><sup>01</sup>About</a>
-    <a class="m-link" href="#work" style="transition-delay:.14s"><sup>02</sup>Projects</a>
-    <a class="m-link" href="#craft" style="transition-delay:.20s"><sup>03</sup>Skills</a>
-    <a class="m-link" href="#lab" style="transition-delay:.26s"><sup>04</sup>Lab</a>
-    <a class="m-link" href="#contact" style="transition-delay:.32s"><sup>05</sup>Contact</a>
-  </nav>
-  <div class="menu-foot">
-    <span>fuadfuad091@gmail.com</span><span>Dhaka, BD</span><span class="clock">--:--:--</span>
-  </div>
-</div>
-
-<main id="top">
-
-<section class="hero">
-  <div class="hero-top"><span>Folio © 2026 — Vol. 01</span><span>Currently: Java Dev Intern @ A2I</span></div>
-  <h1 class="hero-name">
-    <span class="row"><span id="hn1">FUAD</span><span class="hero-img kb"><img src="https://picsum.photos/seed/fuad-portrait-dhaka/480/360" alt="Portrait of Md. Fuad Hasan"></span></span>
-    <span class="row r2"><span class="outline" id="hn2">HASAN</span><span class="star">✦</span></span>
-  </h1>
-  <div class="hero-sub">
-    <p>I'm a <b>Computer Science graduate from DIU</b> — a creative professional building functional solutions where <b>web development, design, and media production</b> meet.</p>
-    <div class="orbit" aria-hidden="true">
-      <svg viewBox="0 0 100 100"><defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
-      <text><textPath href="#circ">OPEN TO WORK • LET'S BUILD • OPEN TO WORK • </textPath></text></svg>
-      <span class="orbit-core">↓</span>
-    </div>
-    <div class="hero-meta">
-      <span>Based in Dhaka — <span class="clock">--:--:--</span> BST</span>
-      <span>Code × Design × Media</span>
-      <span class="scroll-cue">Scroll <i></i></span>
-    </div>
-  </div>
-  <div class="marquee" aria-hidden="true"><div class="marquee-track">
-    <div class="mq-group"><span>Web Developer</span><i>✦</i><span>Graphic Designer</span><i>✦</i><span>Video Editor</span><i>✦</i><span>IoT Builder</span><i>✦</i><span>AI Developer</span><i>✦</i></div>
-    <div class="mq-group"><span>Web Developer</span><i>✦</i><span>Graphic Designer</span><i>✦</i><span>Video Editor</span><i>✦</i><span>IoT Builder</span><i>✦</i><span>AI Developer</span><i>✦</i></div>
-  </div></div>
-</section>
-
-<section id="about" class="pad">
-  <div class="wrap about-grid">
-    <div class="about-sticky">
-      <div class="sec-label reveal">01 — About</div>
-      <h2 class="sec-title reveal-lines"><span class="lm"><span class="lm-i">A developer</span></span><span class="lm"><span class="lm-i" style="--d:.1s">who designs, a</span></span><span class="lm"><span class="lm-i" style="--d:.2s">designer who</span></span><span class="lm"><span class="lm-i" style="--d:.3s">ships.</span></span></h2>
-      <div class="about-portrait kb reveal" style="--d:.2s"><img src="https://picsum.photos/seed/fuad-desk-coding/640/480" alt="Fuad at his workspace" loading="lazy"></div>
-    </div>
-    <div class="about-body">
-      <p class="lead reveal">I'm a Computer Science graduate from Daffodil International University (CGPA 3.30) who loves solving complex problems and turning them into working products.</p>
-      <p class="reveal">I've been freelancing as a <b>graphic designer since 2019</b> — delivering branding, design, and video editing for clients using the full Adobe stack. In 2026 I joined <b>Aspire to Innovate (A2I)</b> as a Java Development Intern, bridging my design eye with real production code.</p>
-      <p class="reveal">I'm a quick learner who values <b>clear communication, collaboration, and detail</b> — whether it's a Photoshop layer mask, an IoT sensor reading, or a MySQL schema. Off-screen you'll find me playing sports, gaming, or chasing a new real-life project.</p>
-      <div class="now-card reveal">
-        <div class="nr"><span class="k">Role</span><span>Java Development Intern @ A2I</span></div>
-        <div class="nr"><span class="k">Based</span><span>Dhaka, Bangladesh</span></div>
-        <div class="nr"><span class="k">Studied</span><span>BSc, CIS — Daffodil Intl. University</span></div>
-        <div class="nr"><span class="k">Belief</span><span>Functional beats flashy.</span></div>
-      </div>
-      <div class="stats reveal">
-        <div class="stat"><div class="num"><span data-count="6" data-pad="2">00</span><em>+</em></div><div class="lbl">Years designing</div></div>
-        <div class="stat"><div class="num"><span data-count="3">0</span><em>.30</em></div><div class="lbl">CGPA · DIU</div></div>
-        <div class="stat"><div class="num"><span data-count="1">0</span></div><div class="lbl">IEEE paper published</div></div>
-        <div class="stat"><div class="num"><span data-count="2">0</span></div><div class="lbl">AWS certifications</div></div>
-      </div>
-      <div class="chips reveal">
-        <span class="chip">HTML</span><span class="chip">JavaScript</span><span class="chip">PHP</span><span class="chip">MySQL</span><span class="chip">C</span><span class="chip">Photoshop</span><span class="chip">Illustrator</span><span class="chip">After Effects</span><span class="chip">Premiere Pro</span><span class="chip">AWS</span><span class="chip">IoT</span><span class="chip">Machine Learning</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="work" class="dark pad">
-  <div class="wrap">
-    <div class="work-head">
-      <div>
-        <div class="sec-label reveal">02 — Selected Projects</div>
-        <h2 class="sec-title reveal-lines"><span class="lm"><span class="lm-i">Things I've</span></span><span class="lm"><span class="lm-i" style="--d:.1s">actually built.</span></span></h2>
-      </div>
-      <p class="reveal">github.com/fuwad7 · scroll to stack</p>
-    </div>
-    <div class="stack">
-      <article class="pc" style="--st:0">
-        <div class="pc-info">
-          <div class="pc-tags"><span>IoT</span><span>Embedded</span><span>ML</span><span>Cloud</span></div>
-          <h3>Smart Cattle Monitor<em>.</em></h3>
-          <p class="pc-desc">An ESP8266-based cattle collar integrating DS18B20 temperature, MPU6050 motion, and vibration sensors for real-time livestock health data — with a cloud pipeline and ML anomaly detection to flag sick animals early.</p>
-          <a class="btn pc-link magnet" href="https://github.com/fuwad7" target="_blank" rel="noopener" data-grow>View on GitHub <span class="ar">→</span></a>
-          <span class="pc-num">01</span>
-        </div>
-        <div class="pc-media"><img src="https://picsum.photos/seed/iot-cattle-collar-esp8266/900/700" alt="Smart cattle collar prototype" loading="lazy"><span class="pc-year">2025</span></div>
-      </article>
-      <article class="pc" style="--st:1">
-        <div class="pc-info">
-          <div class="pc-tags"><span>Web App</span><span>AI</span><span>RBAC</span><span>Analytics</span></div>
-          <h3>EduAI Portal<em>.</em></h3>
-          <p class="pc-desc">An AI-powered faculty portal with role-based access, automated grading, attendance, curriculum mapping, capstone supervision, and AI-assisted content generation — rethinking how teachers run teaching workflows.</p>
-          <a class="btn pc-link magnet" href="https://github.com/fuwad7" target="_blank" rel="noopener" data-grow>View on GitHub <span class="ar">→</span></a>
-          <span class="pc-num">02</span>
-        </div>
-        <div class="pc-media"><img src="https://picsum.photos/seed/eduai-faculty-portal/900/700" alt="EduAI portal interface" loading="lazy"><span class="pc-year">2025</span></div>
-      </article>
-      <article class="pc" style="--st:2">
-        <div class="pc-info">
-          <div class="pc-tags"><span>Research</span><span>ML</span><span>Agriculture</span></div>
-          <h3>IEEE QPAIN Paper<em>.</em></h3>
-          <p class="pc-desc">Co-authored a conference paper at the 2nd International Conference on Quantum Photonics, AI & Networking — "An Integrated Machine Learning Framework for Optimal Crop Selection and Yield Prediction."</p>
-          <a class="btn pc-link magnet" href="#contact" data-grow>Discuss research <span class="ar">→</span></a>
-          <span class="pc-num">03</span>
-        </div>
-        <div class="pc-media"><img src="https://picsum.photos/seed/ml-crop-selection-research/900/700" alt="IEEE conference paper on ML crop selection" loading="lazy"><span class="pc-year">2026</span></div>
-      </article>
-      <article class="pc" style="--st:3">
-        <div class="pc-info">
-          <div class="pc-tags"><span>Freelance</span><span>Branding</span><span>Motion</span></div>
-          <h3>Design Studio<em>.</em></h3>
-          <p class="pc-desc">Since 2019 I've been delivering end-to-end branding, graphic design, and video editing for clients — using Photoshop, Illustrator, Premiere Pro, and After Effects from first concept to final deliverable.</p>
-          <a class="btn pc-link magnet" href="#contact" data-grow>Hire for design <span class="ar">→</span></a>
-          <span class="pc-num">04</span>
-        </div>
-        <div class="pc-media"><img src="https://picsum.photos/seed/freelance-brand-design/900/700" alt="Freelance branding and design work" loading="lazy"><span class="pc-year">2019—</span></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="craft" class="pad">
-  <div class="wrap craft-grid">
-    <div class="craft-note">
-      <div class="sec-label reveal">03 — Skills</div>
-      <h2 class="sec-title reveal-lines"><span class="lm"><span class="lm-i">What I</span></span><span class="lm"><span class="lm-i" style="--d:.1s">bring to the</span></span><span class="lm"><span class="lm-i" style="--d:.2s">table.</span></span></h2>
-      <p class="reveal">Four disciplines I move between — click a row to expand.</p>
-    </div>
-    <div class="accs reveal">
-      <div class="acc open">
-        <button class="acc-h" aria-expanded="true"><span class="n">/01</span><span class="t">Web Development</span><span class="acc-ico">+</span></button>
-        <div class="acc-p"><div class="acc-inner"><div class="acc-inner-pad">
-          <p>Building functional web products from markup to database — front-end with HTML/JS, back-end with PHP and MySQL, and the server logic in between.</p>
-          <div class="chips"><span class="chip">HTML</span><span class="chip">JavaScript</span><span class="chip">PHP</span><span class="chip">MySQL</span><span class="chip">C</span></div>
-        </div></div></div>
-      </div>
-      <div class="acc">
-        <button class="acc-h" aria-expanded="false"><span class="n">/02</span><span class="t">Graphic Design</span><span class="acc-ico">+</span></button>
-        <div class="acc-p"><div class="acc-inner"><div class="acc-inner-pad">
-          <p>From logo marks and brand systems to posters and social graphics — using the full Adobe Creative Cloud to make ideas look as good as they work.</p>
-          <div class="chips"><span class="chip">Photoshop</span><span class="chip">Illustrator</span><span class="chip">Branding</span><span class="chip">Print Design</span></div>
-        </div></div></div>
-      </div>
-      <div class="acc">
-        <button class="acc-h" aria-expanded="false"><span class="n">/03</span><span class="t">Video & Motion</span><span class="acc-ico">+</span></button>
-        <div class="acc-p"><div class="acc-inner"><div class="acc-inner-pad">
-          <p>Editing, colour grading, and motion graphics for clients — Premiere Pro for the cut, After Effects for the polish, delivered end-to-end with revisions handled cleanly.</p>
-          <div class="chips"><span class="chip">Premiere Pro</span><span class="chip">After Effects</span><span class="chip">Motion Graphics</span><span class="chip">Colour Grading</span></div>
-        </div></div></div>
-      </div>
-      <div class="acc">
-        <button class="acc-h" aria-expanded="false"><span class="n">/04</span><span class="t">IoT & Cloud</span><span class="acc-ico">+</span></button>
-        <div class="acc-p"><div class="acc-inner"><div class="acc-inner-pad">
-          <p>Hardware prototyping with ESP8266, sensor integration (DS18B20, MPU6050), cloud pipelines, and AWS foundations — bridging the gap between physical devices and intelligent back-ends.</p>
-          <div class="chips"><span class="chip">ESP8266</span><span class="chip">Embedded Sensors</span><span class="chip">AWS Foundations</span><span class="chip">ML Anomaly Detection</span></div>
-        </div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="exp" class="dark pad">
-  <div class="wrap">
-    <div class="sec-label reveal">04 — Experience & Education</div>
-    <h2 class="sec-title reveal-lines" style="margin-bottom:3rem"><span class="lm"><span class="lm-i">Chapters so far.</span></span></h2>
-    <div class="reveal">
-      <div class="xp-row"><span class="yr">Jun – Sep 2026</span><span class="role">Java Development Intern</span><span class="co">Aspire to Innovate (A2I)</span><span class="loc">Dhaka</span></div>
-      <div class="xp-row"><span class="yr">2019 — Now</span><span class="role">Freelance Graphic Designer</span><span class="co">Independent</span><span class="loc">Remote</span></div>
-      <div class="xp-row"><span class="yr">2022 — 2026</span><span class="role">BSc · Computer & Info. Science</span><span class="co">Daffodil International University</span><span class="loc">CGPA 3.30</span></div>
-      <div class="xp-row"><span class="yr">2019 — 2021</span><span class="role">HSC · Dhaka City College</span><span class="co">West End High School (SSC)</span><span class="loc">GPA 4.92 / 4.35</span></div>
-    </div>
-    <div class="awards reveal">
-      <div class="award"><span class="yr">2026</span><h4>IEEE QPAIN</h4><p>2nd Intl. Conference — published paper on ML-based crop selection & yield prediction.</p></div>
-      <div class="award"><span class="yr">2026</span><h4>AWS Academy</h4><p>Graduate — AWS Cloud Foundations certification.</p></div>
-      <div class="award"><span class="yr">2026</span><h4>DIU</h4><p>BSc in Computer & Information Science, CGPA 3.30.</p></div>
-      <div class="award"><span class="yr">2019—</span><h4>Freelance</h4><p>Branding, design, video editing — multiple client projects delivered.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="lab" class="lab pad">
-  <div class="wrap">
-    <div class="sec-label reveal">05 — Lab</div>
-    <h2 class="sec-title reveal-lines"><span class="lm"><span class="lm-i">Off-hours</span></span><span class="lm"><span class="lm-i" style="--d:.1s">experiments.</span></span></h2>
-    <div class="lab-board reveal" id="labBoard">
-      <figure class="postcard" style="left:2%;top:6%;--r:-6deg" data-depth="14"><img src="https://picsum.photos/seed/lab-esp8266-prototype/480/480" alt="ESP8266 prototype build" loading="lazy"><figcaption><span>ESP8266 prototyping</span><span>2025</span></figcaption></figure>
-      <figure class="postcard" style="left:22%;top:38%;--r:4deg" data-depth="24"><img src="https://picsum.photos/seed/lab-photoshop-composition/480/480" alt="Photoshop composition" loading="lazy"><figcaption><span>Photoshop nights</span><span>2026</span></figcaption></figure>
-      <figure class="postcard" style="left:43%;top:3%;--r:-3deg" data-depth="10"><img src="https://picsum.photos/seed/lab-coding-setup-terminal/480/480" alt="Coding setup" loading="lazy"><figcaption><span>Terminal deep-dives</span><span>2026</span></figcaption></figure>
-      <figure class="postcard" style="left:62%;top:34%;--r:7deg" data-depth="20"><img src="https://picsum.photos/seed/lab-premiere-timeline/480/480" alt="Premiere Pro timeline" loading="lazy"><figcaption><span>Premiere edits</span><span>2025</span></figcaption></figure>
-      <figure class="postcard" style="left:80%;top:5%;--r:-8deg" data-depth="16"><img src="https://picsum.photos/seed/lab-dhaka-street-cricket/480/480" alt="Dhaka street cricket" loading="lazy"><figcaption><span>Cricket evenings</span><span>2025</span></figcaption></figure>
-      <figure class="postcard" style="left:33%;top:66%;--r:2deg" data-depth="12"><img src="https://picsum.photos/seed/lab-illustrator-vector-art/480/480" alt="Illustrator vector art" loading="lazy"><figcaption><span>Illustrator vectors</span><span>2024</span></figcaption></figure>
-    </div>
-    <p class="lab-hint reveal">Hover to straighten · move your mouse to drift</p>
-  </div>
-</section>
-
-<section id="words" class="pad" style="padding-top:0">
-  <div class="wrap">
-    <div class="quotes-ui">
-      <div>
-        <div class="sec-label reveal">References</div>
-        <h2 class="sec-title reveal-lines" style="font-size:clamp(1.8rem,3.6vw,3rem)"><span class="lm"><span class="lm-i">People who</span></span><span class="lm"><span class="lm-i" style="--d:.1s">know my work.</span></span></h2>
-      </div>
-      <div class="q-btns"><button class="q-btn" id="qPrev" aria-label="Previous quote">←</button><button class="q-btn" id="qNext" aria-label="Next quote">→</button></div>
-    </div>
-    <div class="q-track reveal" id="qTrack">
-      <blockquote class="quote"><p class="qt">Fuad brings a focused, detail-oriented approach to every project — a quick learner who genuinely enjoys solving complex problems and shipping functional solutions.</p><div class="q-person"><img src="https://picsum.photos/seed/person-male-academic-avatar/120/120" alt=""><div><div class="nm">Mr. Israfil</div><div class="rl">Lecturer · DIU · Israfil@cis.diu.edu.bd</div></div></div></blockquote>
-      <blockquote class="quote"><p class="qt">He values clear communication and collaboration — the kind of student and professional who makes every team around him a little better.</p><div class="q-person"><img src="https://picsum.photos/seed/person-male-lecturer-avatar/120/120" alt=""><div><div class="nm">Md. Moniruzzaman Hemal</div><div class="rl">Lecturer · DIU · moniruzzaman.cse0566.c@diu.edu.bd</div></div></div></blockquote>
-      <blockquote class="quote"><p class="qt">From first concept to final delivery, he manages the entire project cleanly — revisions, feedback, deadlines. A pleasure to brief and a joy to re-hire.</p><div class="q-person"><img src="https://picsum.photos/seed/person-client-avatar/120/120" alt=""><div><div class="nm">Freelance Client</div><div class="rl">Branding project · 2024</div></div></div></blockquote>
-      <blockquote class="quote"><p class="qt">He delivered the EduAI portal end-to-end with role-based access, analytics, and AI generation — a rare combination of product thinking and engineering discipline.</p><div class="q-person"><img src="https://picsum.photos/seed/person-collaborator-avatar/120/120" alt=""><div><div class="nm">Project Collaborator</div><div class="rl">DIU Capstone · 2025</div></div></div></blockquote>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="dark pad contact">
-  <div class="wrap contact-grid">
-    <div>
-      <div class="sec-label reveal">06 — Contact</div>
-      <h2 class="sec-title reveal-lines"><span class="lm"><span class="lm-i">Have a project?</span></span><span class="lm"><span class="lm-i" style="--d:.1s">Let's build it</span></span><span class="lm"><span class="lm-i" style="--d:.2s"><em style="color:var(--acc);font-style:normal">together.</em></span></span></h2>
-      <a class="email-big reveal" href="mailto:fuadfuad091@gmail.com" data-grow>fuadfuad091@gmail.com</a><br>
-      <button class="btn copy-mail magnet" id="copyMail" data-grow>Copy email <span class="ar">⧉</span></button>
-      <a class="email-big reveal" href="tel:+8801986095572" style="font-size:clamp(1.1rem,2.4vw,1.8rem)" data-grow>+880 1986-095572</a>
-      <div class="socials reveal">
-        <a class="soc" href="https://github.com/fuwad7" target="_blank" rel="noopener" data-grow><span>GitHub · fuwad7</span><span>↗</span></a>
-        <a class="soc" href="https://linkedin.com/in/fuwad07" target="_blank" rel="noopener" data-grow><span>LinkedIn · fuwad07</span><span>↗</span></a>
-        <a class="soc" href="mailto:fuadfuad091@gmail.com" data-grow><span>Email</span><span>↗</span></a>
-        <a class="soc" href="tel:+8801986095572" data-grow><span>Phone</span><span>↗</span></a>
-      </div>
-    </div>
-    <form class="form-card reveal" id="contactForm" novalidate>
-      <h3>Start a project</h3>
-      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Your name"></div>
-      <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com"></div>
-      <div class="field"><label for="f-msg">Tell me about it</label><textarea id="f-msg" name="message" rows="5" required placeholder="Timeline, scope, any wild ideas — all welcome."></textarea></div>
-      <button class="btn submit" type="submit" id="sendBtn">Send message <span class="ar">→</span></button>
-    </form>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="marquee dark" aria-hidden="true"><div class="marquee-track">
-    <div class="mq-group"><span>Let's build</span><i>✦</i><span>Let's design</span><i>✦</i><span>Let's ship</span><i>✦</i></div>
-    <div class="mq-group"><span>Let's build</span><i>✦</i><span>Let's design</span><i>✦</i><span>Let's ship</span><i>✦</i></div>
-  </div></div>
-  <div class="foot-in">
-    <span>© 2026 Md. Fuad Hasan</span>
-    <span>CS Graduate · Daffodil International University</span>
-    <span>Dhaka — <span class="clock">--:--:--</span> BST</span>
-    <a href="#top" class="to-top magnet" data-grow>Back to top ↑</a>
-  </div>
-</footer>
-
-<script>
-(function(){
-'use strict';
-var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-var touch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-
-var loader = document.getElementById('loader');
-function finishLoad(){
-  if(loader){ loader.classList.add('done'); document.body.style.overflow=''; }
-  scramble(document.getElementById('hn1'), 900);
-  setTimeout(function(){ scramble(document.getElementById('hn2'), 1100); }, 180);
-}
-if(loader){
-  document.body.style.overflow='hidden';
-  if(reduced){ loader.classList.add('done'); finishLoad(); }
-  else{
-    var c=0, ld=loader.querySelector('.ld-count');
-    var iv=setInterval(function(){
-      c=Math.min(100, c+Math.ceil(Math.random()*9));
-      ld.textContent=c;
-      if(c>=100){ clearInterval(iv); setTimeout(finishLoad, 260); }
-    }, 42);
-  }
-}
-
-var CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&@*+=/';
-function scramble(el, dur){
-  if(!el) return;
-  var fin = el.dataset.text || el.textContent;
-  el.dataset.text = fin;
-  if(reduced){ el.textContent = fin; return; }
-  dur = dur || Math.max(420, fin.length*55);
-  var frames = Math.round(dur/16), f=0;
-  (function tick(){
-    var out='', prog=(f/frames)*fin.length*1.35;
-    for(var i=0;i<fin.length;i++){
-      var ch=fin[i];
-      if(ch===' '){out+=' ';continue;}
-      out += i<prog ? ch : CHARS[Math.random()*CHARS.length|0];
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
     }
-    el.textContent=out;
-    if(f++<frames) requestAnimationFrame(tick); else el.textContent=fin;
-  })();
-}
-if(!reduced){
-  document.querySelectorAll('.scr').forEach(function(a){
-    a.addEventListener('mouseenter', function(){ scramble(a, 420); });
-  });
-}
+  </script>
 
-var fmt = new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'Asia/Dhaka'});
-function tickClock(){
-  var t = fmt.format(new Date());
-  document.querySelectorAll('.clock').forEach(function(el){ el.textContent=t; });
-}
-tickClock(); setInterval(tickClock, 1000);
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
 
-var nav=document.getElementById('nav'), prog=document.querySelector('.progress');
-function onScroll(){
-  var y=window.scrollY;
-  nav.classList.toggle('scrolled', y>40);
-  var h=document.documentElement.scrollHeight - window.innerHeight;
-  prog.style.width=(h>0 ? (y/h)*100 : 0)+'%';
-}
-window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-var burger=document.getElementById('burger'), menu=document.getElementById('menu');
-function setMenu(open){
-  burger.classList.toggle('open', open);
-  menu.classList.toggle('open', open);
-  burger.setAttribute('aria-expanded', open);
-  document.body.style.overflow = open ? 'hidden' : '';
-}
-burger.addEventListener('click', function(){ setMenu(!menu.classList.contains('open')); });
-menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-var io=new IntersectionObserver(function(es){
-  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-},{threshold:.15});
-document.querySelectorAll('.reveal,.reveal-lines').forEach(function(el){ io.observe(el); });
+  <style>
+    :root {
+      --bg: #050508;
+      --bg-card: rgba(18, 18, 26, 0.7);
+      --accent: #6366f1;
+      --accent-rgb: 99, 102, 241;
+      --accent-2: #a855f7;
+      --accent-2-rgb: 168, 85, 247;
+      --accent-3: #ec4899;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(99, 102, 241, 0.4);
+    }
 
-var cio=new IntersectionObserver(function(es){
-  es.forEach(function(e){
-    if(!e.isIntersecting) return;
-    var el=e.target, target=+el.dataset.count, pad=+(el.dataset.pad||0);
-    cio.unobserve(el);
-    function fmtN(n){ return String(n).padStart(pad,'0'); }
-    if(reduced){ el.textContent=fmtN(target); return; }
-    var t0=performance.now(), dur=1400;
-    (function step(t){
-      var p=Math.min(1,(t-t0)/dur), e2=1-Math.pow(1-p,3);
-      el.textContent=fmtN(Math.round(target*e2));
-      if(p<1) requestAnimationFrame(step);
-    })(t0);
-  });
-},{threshold:.5});
-document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+    [data-theme="violet"] {
+      --accent: #8b5cf6;
+      --accent-rgb: 139, 92, 246;
+      --accent-2: #ec4899;
+      --accent-2-rgb: 236, 72, 153;
+      --border-glow: rgba(139, 92, 246, 0.4);
+    }
 
-document.querySelectorAll('.acc').forEach(function(acc){
-  var h=acc.querySelector('.acc-h');
-  h.addEventListener('click', function(){
-    var open=acc.classList.toggle('open');
-    h.setAttribute('aria-expanded', open);
-  });
-});
+    [data-theme="emerald"] {
+      --accent: #10b981;
+      --accent-rgb: 16, 185, 129;
+      --accent-2: #06b6d4;
+      --accent-2-rgb: 6, 182, 212;
+      --border-glow: rgba(16, 185, 129, 0.4);
+    }
 
-var track=document.getElementById('qTrack');
-function qScroll(dir){
-  var card=track.querySelector('.quote');
-  var w=card ? card.getBoundingClientRect().width+22 : 400;
-  track.scrollBy({left:dir*w, behavior: reduced?'auto':'smooth'});
-}
-document.getElementById('qPrev').addEventListener('click', function(){ qScroll(-1); });
-document.getElementById('qNext').addEventListener('click', function(){ qScroll(1); });
+    [data-theme="cyan"] {
+      --accent: #06b6d4;
+      --accent-rgb: 6, 182, 212;
+      --accent-2: #3b82f6;
+      --accent-2-rgb: 59, 130, 246;
+      --border-glow: rgba(6, 182, 212, 0.4);
+    }
 
-var dot=document.querySelector('.cursor-dot'), ring=document.querySelector('.cursor-ring');
-if(!touch && !reduced){
-  document.body.classList.add('cursor-on');
-  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-  window.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'; },{passive:true});
-  (function loop(){
-    rx+=(mx-rx)*.14; ry+=(my-ry)*.14;
-    ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('a,button,[data-grow]').forEach(function(el){
-    el.addEventListener('mouseenter', function(){ ring.classList.add('grow'); });
-    el.addEventListener('mouseleave', function(){ ring.classList.remove('grow'); });
-  });
-}
+    [data-theme="amber"] {
+      --accent: #f59e0b;
+      --accent-rgb: 245, 158, 11;
+      --accent-2: #ef4444;
+      --accent-2-rgb: 239, 68, 68;
+      --border-glow: rgba(245, 158, 11, 0.4);
+    }
 
-if(!touch && !reduced){
-  document.querySelectorAll('.magnet').forEach(function(b){
-    b.addEventListener('mousemove', function(e){
-      var r=b.getBoundingClientRect();
-      var x=(e.clientX-r.left-r.width/2)*.22, y=(e.clientY-r.top-r.height/2)*.35;
-      b.style.transform='translate('+x+'px,'+y+'px)';
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    ::selection {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .serif {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ===== HERO CENTERING FIX ===== */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    #heroCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ===== CUSTOM CURSOR ===== */
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s ease-out;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+
+    .cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+        height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+        border-color 0.3s,
+        background-color 0.3s,
+        transform 0.1s ease-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+
+    .cursor-ring.action {
+      width: 54px;
+      height: 54px;
+      border-color: var(--accent);
+      background: rgba(var(--accent-rgb), 0.12);
+    }
+
+    .cursor-ring.view {
+      width: 80px;
+      height: 80px;
+      border-color: rgba(var(--accent-rgb), 0.6);
+      background: rgba(var(--accent-rgb), 0.2);
+      backdrop-filter: blur(2px);
+    }
+
+    .cursor-ring.view::after {
+      content: "EXPLORE";
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    @media (pointer: coarse),
+    (max-width: 768px) {
+
+      .cursor-dot,
+      .cursor-ring {
+        display: none !important;
+      }
+    }
+
+    /* ===== GRID & NOISE BG ===== */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .noise-layer {
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 90;
+      mix-blend-mode: overlay;
+    }
+
+    /* ===== GRADIENT TEXT ===== */
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent) 50%, var(--accent-2) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradient-shift 6s ease infinite alternate;
+    }
+
+    .gradient-text-alt {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @keyframes gradient-shift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* ===== FIXED MARQUEE STYLES ===== */
+    .marquee-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      will-change: transform;
+      animation: marquee-scroll 32s linear infinite;
+    }
+
+    .marquee-track.reverse {
+      animation: marquee-scroll-reverse 35s linear infinite;
+    }
+
+    .marquee-container:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee-scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes marquee-scroll-reverse {
+      0% {
+        transform: translateX(-50%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .tech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 1.4rem;
+      margin: 0 0.5rem;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #e5e7eb;
+      letter-spacing: 0.02em;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
+    }
+
+    .tech-pill:hover {
+      background: rgba(var(--accent-rgb), 0.15);
+      border-color: rgba(var(--accent-rgb), 0.5);
+      color: #ffffff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.25);
+    }
+
+    .tech-badge-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    /* ===== GLOW CARDS ===== */
+    .glow-card {
+      position: relative;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.04) 0%, rgba(14, 14, 20, 0.75) 60%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 0.35s,
+        box-shadow 0.35s;
+      backdrop-filter: blur(16px);
+    }
+
+    .glow-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: radial-gradient(350px circle at var(--mx, 50%) var(--my, 50%), rgba(var(--accent-rgb), 0.5), transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      opacity: 0;
+      transition: opacity 0.35s;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .glow-card:hover::before {
+      opacity: 1;
+    }
+
+    .glow-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(var(--accent-rgb), 0.3);
+      box-shadow: 0 16px 40px -12px rgba(var(--accent-rgb), 0.15);
+    }
+
+    /* ===== PROJECT CARDS ===== */
+    .project-card {
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(var(--accent-rgb), 0.15);
+    }
+
+    /* ===== DOCK NAV ===== */
+    .dock-nav {
+      background: rgba(12, 12, 18, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .dock-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      color: #9ca3af;
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform-origin: bottom center;
+    }
+
+    .dock-item:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .dock-item .dock-tip {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px) scale(0.9);
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .dock-item:hover .dock-tip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-8px) scale(1);
+    }
+
+    .dock-item.active {
+      color: #ffffff;
+      background: rgba(var(--accent-rgb), 0.2);
+    }
+
+    .dock-item.active .dock-dot {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .dock-dot {
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      transform: translateX(-50%) scale(0);
+      opacity: 0;
+      transition: all 0.25s;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--accent), var(--accent-2), var(--accent-3));
+      z-index: 1000;
+      width: 0%;
+      transition: width 0.08s linear;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    /* ===== ACCORDION ===== */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s;
+      opacity: 0;
+    }
+
+    .accordion.open .accordion-content {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    .accordion-icon {
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .accordion.open .accordion-icon {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+
+    /* ===== MODAL ===== */
+    .glass-modal {
+      background: rgba(10, 10, 16, 0.9);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(var(--accent-rgb), 0.15);
+    }
+
+    /* ===== TERMINAL WIDGET ===== */
+    .terminal-window {
+      background: rgba(8, 8, 12, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      border-radius: 1rem;
+    }
+
+    /* ===== METEORS & PARTICLES ===== */
+    .meteor {
+      position: absolute;
+      width: 1.5px;
+      height: 80px;
+      background: linear-gradient(to bottom, #ffffff, rgba(var(--accent-rgb), 0.8), transparent);
+      transform: rotate(215deg);
+      opacity: 0;
+      pointer-events: none;
+      animation: meteor-fall linear infinite;
+    }
+
+    @keyframes meteor-fall {
+      0% {
+        transform: translateY(-120px) translateX(0) rotate(215deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      85% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(750px) translateX(-450px) rotate(215deg);
+        opacity: 0;
+      }
+    }
+
+    /* ===== PULSE GLOW ===== */
+    @keyframes pulse-slow {
+
+      0%,
+      100% {
+        opacity: 0.35;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.6;
+        transform: scale(1.08);
+      }
+    }
+
+    .animate-pulse-glow {
+      animation: pulse-slow 8s ease-in-out infinite;
+    }
+
+    /* ===== CUSTOM SCROLLBAR ===== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #050508;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- Background Layers -->
+  <div class="noise-layer"></div>
+  <div class="scroll-progress" id="progressBar"></div>
+
+  <!-- Cursor Elements -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ================= TOP FLOATING BAR ================= -->
+  <header
+    class="fixed top-4 left-0 right-0 z-40 px-4 sm:px-8 max-w-7xl mx-auto flex items-center justify-between pointer-events-none">
+    <!-- Brand / Avatar Pill -->
+    <a href="#home"
+      class="pointer-events-auto inline-flex items-center gap-3 px-3.5 py-2 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-sm font-semibold text-white shadow-lg hover:border-white/20 transition-all group">
+      <div
+        class="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-xs font-bold text-white shadow-inner group-hover:scale-105 transition-transform">
+        F
+      </div>
+      <span class="tracking-tight">Fuad<span class="text-indigo-400">.dev</span></span>
+      <span
+        class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-medium text-emerald-400">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        Available
+      </span>
+    </a>
+
+    <!-- Top Right Utility Buttons -->
+    <div class="pointer-events-auto flex items-center gap-2">
+      <!-- Local Time Pill -->
+      <div id="liveClock"
+        class="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-xs text-gray-300 font-mono">
+        <i data-lucide="clock" class="w-3.5 h-3.5 text-indigo-400"></i>
+        <span id="timeText">--:--:-- GMT</span>
+      </div>
+
+      <!-- Theme Color Palette Button -->
+      <div class="relative">
+        <button id="themeToggleBtn" aria-label="Change Accent Color"
+          class="p-2 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-gray-300 hover:text-white hover:border-white/25 transition-all shadow-lg interactive"
+          title="Change Theme Accent">
+          <i data-lucide="palette" class="w-4 h-4 text-indigo-400"></i>
+        </button>
+        <!-- Color Dropdown -->
+        <div id="themeMenu"
+          class="hidden absolute right-0 mt-2 p-2 rounded-2xl bg-[#0e0e16]/95 backdrop-blur-2xl border border-white/15 shadow-2xl flex flex-col gap-1.5 z-50 min-w-[140px]">
+          <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider px-2 py-1">Theme Accent</div>
+          <button data-set-theme="indigo"
+            class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-left hover:bg-white/10 text-white transition-colors">
+            <span class="w-3 h-3 rounded-full bg-indigo-500"></span> Indigo Neon
+          </button>
+          <button data-set-theme="violet"
+            class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-left hover:bg-white/10 text-white transition-colors">
+            <span class="w-3 h-3 rounded-full bg-purple-500"></span> Royal Violet
+          </button>
+          <button data-set-theme="emerald"
+            class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-left hover:bg-white/10 text-white transition-colors">
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span> Cyber Emerald
+          </button>
+          <button data-set-theme="cyan"
+            class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-left hover:bg-white/10 text-white transition-colors">
+            <span class="w-3 h-3 rounded-full bg-cyan-400"></span> Electric Cyan
+          </button>
+          <button data-set-theme="amber"
+            class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs text-left hover:bg-white/10 text-white transition-colors">
+            <span class="w-3 h-3 rounded-full bg-amber-400"></span> Sunset Amber
+          </button>
+        </div>
+      </div>
+
+      <!-- Sound FX Toggle Button -->
+      <button id="soundToggleBtn" aria-label="Toggle Sound Effects"
+        class="p-2 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-gray-300 hover:text-white hover:border-white/25 transition-all shadow-lg interactive"
+        title="Sound Effects (Click to enable/mute)">
+        <i id="soundIcon" data-lucide="volume-x" class="w-4 h-4 text-gray-400"></i>
+      </button>
+
+      <!-- Command Palette (Cmd + K) Trigger -->
+      <button id="cmdPaletteBtn"
+        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-xs text-gray-300 hover:text-white hover:border-white/25 transition-all shadow-lg interactive">
+        <i data-lucide="search" class="w-3.5 h-3.5 text-indigo-400"></i>
+        <span class="hidden sm:inline">Search</span>
+        <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-mono text-gray-400">⌘K</kbd>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= DOCK NAVIGATION ================= -->
+  <nav
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 dock-nav rounded-2xl p-1.5 flex items-center gap-1 shadow-2xl"
+    id="mainDock">
+    <a href="#home" class="dock-item interactive active" data-section="home" aria-label="Home">
+      <div
+        class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
+        Home</div>
+      <i data-lucide="home" class="w-5 h-5"></i>
+      <div class="dock-dot"></div>
+    </a>
+    <a href="#work" class="dock-item interactive" data-section="work" aria-label="Work">
+      <div
+        class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
+        Work</div>
+      <i data-lucide="layout-grid" class="w-5 h-5"></i>
+      <div class="dock-dot"></div>
+    </a>
+    <a href="#about" class="dock-item interactive" data-section="about" aria-label="About">
+      <div
+        class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
+        About</div>
+      <i data-lucide="user" class="w-5 h-5"></i>
+      <div class="dock-dot"></div>
+    </a>
+    <a href="#terminal" class="dock-item interactive" data-section="terminal" aria-label="Terminal">
+      <div
+        class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
+        Terminal</div>
+      <i data-lucide="terminal" class="w-5 h-5"></i>
+      <div class="dock-dot"></div>
+    </a>
+    <a href="#services" class="dock-item interactive" data-section="services" aria-label="Services">
+      <div
+        class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
+        Services</div>
+      <i data-lucide="sparkles" class="w-5 h-5"></i>
+      <div class="dock-dot"></div>
+    </a>
+    <a href="#calculator" class="dock-item interactive" data-section="calculator" aria-label="Estimator">
+      <div
+        class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
+        Estimator</div>
+      <i data-lucide="calculator" class="w-5 h-5"></i>
+      <div class="dock-dot"></div>
+    </a>
+    <a href="#contact" class="dock-item interactive" data-section="contact" aria-label="Contact">
+      <div
+        class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
+        Contact</div>
+      <i data-lucide="mail" class="w-5 h-5"></i>
+      <div class="dock-dot"></div>
+    </a>
+  </nav>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section id="home" class="hero-section">
+    <!-- Dynamic Grid Background -->
+    <div class="grid-bg"></div>
+
+    <!-- Interactive Hero Canvas for Particles & Constellations -->
+    <canvas id="heroCanvas"></canvas>
+
+    <!-- Glowing Animated Blobs -->
+    <div
+      class="blob w-[500px] h-[500px] bg-indigo-600/30 -top-24 -left-24 rounded-full blur-[100px] animate-pulse-glow pointer-events-none absolute">
+    </div>
+    <div
+      class="blob w-[450px] h-[450px] bg-purple-600/25 top-1/2 -right-20 rounded-full blur-[110px] animate-pulse-glow pointer-events-none absolute"
+      style="animation-delay: -3s;"></div>
+    <div
+      class="blob w-[350px] h-[350px] bg-pink-600/20 bottom-10 left-1/4 rounded-full blur-[90px] animate-pulse-glow pointer-events-none absolute"
+      style="animation-delay: -6s;"></div>
+
+    <!-- Falling Meteors Container -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden" id="meteorsContainer"></div>
+
+    <div class="hero-content">
+      <!-- Status Pill -->
+      <div
+        class="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-md text-xs font-medium text-gray-200 shadow-xl hover:border-white/25 transition-all">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="font-semibold text-white">Open to Opportunities</span>
+        <span class="text-gray-500">•</span>
+        <span class="text-gray-300">Frontend / Full-Stack &amp; Creative UI</span>
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.08] mb-6 text-center">
+        Crafting digital <br class="hidden sm:block">
+        <span class="serif font-normal text-indigo-300 hover:text-indigo-200 transition-colors">experiences</span>
+        <span class="gradient-text font-black"> that resonate.</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal text-center">
+        Hey, I'm <strong class="text-white font-semibold">Fuad</strong> — an interaction designer and frontend engineer
+        crafting high-performance, fluid, and delightful web applications.
+      </p>
+
+      <!-- Interactive Role Scramble Badges -->
+      <div class="flex flex-wrap gap-3 justify-center items-center mb-12">
+        <span
+          class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all"
+          data-alt="UI &amp; Full-Stack Engineer">Frontend Architect</span>
+        <span
+          class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
+          data-alt="Motion &amp; 3D Specialist">Interaction Designer</span>
+        <span
+          class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-pink-500/50 hover:bg-pink-500/10 transition-all"
+          data-alt="WebGL &amp; AI Integration">Creative Technologist</span>
+      </div>
+
+      <!-- Hero CTA Buttons -->
+      <div class="flex flex-wrap gap-4 justify-center items-center">
+        <a href="#work"
+          class="interactive group relative inline-flex items-center gap-2.5 bg-white text-black px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-indigo-50 hover:text-indigo-950 transition-all shadow-xl hover:shadow-indigo-500/25 hover:scale-105 magnetic-btn">
+          Explore Projects
+          <i data-lucide="arrow-down-right"
+            class="w-4 h-4 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"></i>
+        </a>
+        <a href="#contact"
+          class="interactive inline-flex items-center gap-2 border border-white/20 bg-white/5 backdrop-blur-md text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-white/10 hover:border-white/35 transition-all shadow-lg magnetic-btn">
+          <i data-lucide="sparkles" class="w-4 h-4 text-indigo-400"></i>
+          Let's Collaborate
+        </a>
+        <button id="copyEmailHeroBtn"
+          class="interactive inline-flex items-center gap-2 px-5 py-3.5 rounded-full border border-white/10 bg-black/40 text-gray-300 hover:text-white hover:border-white/25 text-sm transition-all"
+          title="Copy Email to Clipboard">
+          <i data-lucide="copy" class="w-4 h-4 text-gray-400"></i>
+          <span id="heroEmailStatus">Copy Email</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INFINITE MARQUEE SECTION ================= -->
+  <section class="py-14 border-y border-white/10 bg-black/60 relative overflow-hidden backdrop-blur-md">
+    <div class="text-center mb-6">
+      <span
+        class="text-xs uppercase tracking-[0.25em] text-gray-400 font-semibold flex items-center justify-center gap-2">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping"></span>
+        Core Technologies &amp; Capabilities
+      </span>
+    </div>
+
+    <!-- Row 1: Forward Infinite Marquee -->
+    <div class="marquee-container mb-4">
+      <div class="marquee-track">
+        <div class="flex items-center">
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span> React
+            19</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-white/20 text-white">▲</span> Next.js 15
+          </div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">TS</span>
+            TypeScript</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-400/20 text-cyan-300">🌊</span>
+            Tailwind CSS</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-400">⚡</span>
+            Three.js / R3F</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-pink-500/20 text-pink-400">✦</span> Framer
+            Motion</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-400">🟢</span>
+            Node.js</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-amber-500/20 text-amber-400">⚡</span> Vite
+          </div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-400">🤖</span>
+            OpenAI / Gemini API</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-sky-500/20 text-sky-400">🐘</span>
+            PostgreSQL</div>
+        </div>
+        <div class="flex items-center">
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span> React
+            19</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-white/20 text-white">▲</span> Next.js 15
+          </div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">TS</span>
+            TypeScript</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-400/20 text-cyan-300">🌊</span>
+            Tailwind CSS</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-400">⚡</span>
+            Three.js / R3F</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-pink-500/20 text-pink-400">✦</span> Framer
+            Motion</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-400">🟢</span>
+            Node.js</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-amber-500/20 text-amber-400">⚡</span> Vite
+          </div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-400">🤖</span>
+            OpenAI / Gemini API</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-sky-500/20 text-sky-400">🐘</span>
+            PostgreSQL</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Reverse Infinite Marquee -->
+    <div class="marquee-container">
+      <div class="marquee-track reverse">
+        <div class="flex items-center">
+          <div class="tech-pill interactive"><span
+              class="tech-badge-icon bg-purple-500/20 text-purple-300 serif">UI</span> Product Design</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">✦</span>
+            Design Systems</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">🎬</span> Motion
+            Graphics</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">🌐</span> WebGL
+            Shaders</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">⚡</span>
+            Performance Audits</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
+            Full-Stack SaaS</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">✨</span>
+            Micro-Interactions</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-pink-500/20 text-pink-300">📱</span>
+            Responsive Layouts</div>
+        </div>
+        <div class="flex items-center">
+          <div class="tech-pill interactive"><span
+              class="tech-badge-icon bg-purple-500/20 text-purple-300 serif">UI</span> Product Design</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">✦</span>
+            Design Systems</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">🎬</span> Motion
+            Graphics</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">🌐</span> WebGL
+            Shaders</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">⚡</span>
+            Performance Audits</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
+            Full-Stack SaaS</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">✨</span>
+            Micro-Interactions</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-pink-500/20 text-pink-300">📱</span>
+            Responsive Layouts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATS COUNTER SECTION ================= -->
+  <section class="py-20 px-6 max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="glow-card p-6 text-center interactive">
+        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="5" data-suffix="+">0
+        </div>
+        <div class="text-gray-400 text-xs sm:text-sm mt-2 font-medium">Years Experience</div>
+      </div>
+      <div class="glow-card p-6 text-center interactive">
+        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="40" data-suffix="+">0
+        </div>
+        <div class="text-gray-400 text-xs sm:text-sm mt-2 font-medium">Completed Projects</div>
+      </div>
+      <div class="glow-card p-6 text-center interactive">
+        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="99" data-suffix="%">0
+        </div>
+        <div class="text-gray-400 text-xs sm:text-sm mt-2 font-medium">Satisfaction Rate</div>
+      </div>
+      <div class="glow-card p-6 text-center interactive">
+        <div class="text-4xl md:text-5xl font-black gradient-text counter font-mono" data-target="100" data-suffix="k+">
+          0</div>
+        <div class="text-gray-400 text-xs sm:text-sm mt-2 font-medium">Lines of Clean Code</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SELECTED WORK SECTION ================= -->
+  <section id="work" class="py-24 px-6 max-w-7xl mx-auto relative">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold mb-3">
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i> PORTFOLIO SHOWCASE
+        </div>
+        <h2 class="text-4xl md:text-6xl font-black text-white tracking-tight">
+          Featured <span class="serif font-normal text-indigo-300">Creations.</span>
+        </h2>
+        <p class="text-gray-400 mt-2 text-sm sm:text-base max-w-lg">
+          Explore recent applications, interactive experiments, and full-stack solutions. Click any project to open
+          detailed case studies.
+        </p>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="flex flex-wrap gap-2" id="projectFilters">
+        <button data-filter="all"
+          class="filter-btn active px-4 py-2 rounded-full text-xs font-semibold bg-white text-black transition-all shadow-md">All
+          Projects</button>
+        <button data-filter="fullstack"
+          class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">Full-Stack</button>
+        <button data-filter="creative"
+          class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">3D
+          &amp; Motion</button>
+        <button data-filter="ai"
+          class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">AI
+          Products</button>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+      <!-- Project 1 -->
+      <div
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        data-category="fullstack" data-id="p1">
+        <div>
+          <div
+            class="h-48 rounded-2xl bg-gradient-to-br from-indigo-950/80 via-purple-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(99,102,241,0.35),transparent_60%)]">
+            </div>
+            <div
+              class="relative z-10 w-full max-w-[240px] bg-black/70 border border-white/15 rounded-xl p-3 backdrop-blur-md shadow-2xl group-hover:scale-105 transition-transform duration-300">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+                <span class="text-[10px] font-mono text-indigo-400">analytics_v3.ts</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">LIVE
+                  99.9%</span>
+              </div>
+              <div class="h-8 flex items-end gap-1.5">
+                <div class="w-full bg-indigo-500/40 rounded-t h-4"></div>
+                <div class="w-full bg-indigo-500/60 rounded-t h-6"></div>
+                <div class="w-full bg-indigo-500 rounded-t h-8"></div>
+                <div class="w-full bg-purple-500 rounded-t h-5"></div>
+                <div class="w-full bg-indigo-400 rounded-t h-7"></div>
+              </div>
+            </div>
+            <span
+              class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-indigo-300">01</span>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">SaaS &amp; Analytics</span>
+            <span class="text-xs text-gray-500 font-mono">2026</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">Nebula Dashboard
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            Real-time collaborative analytics platform processing millions of events with sub-100ms latency and custom
+            chart components.
+          </p>
+        </div>
+        <div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Next.js
+              15</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">TypeScript</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">WebSockets</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/10">
+            <span class="text-xs text-indigo-400 font-medium group-hover:underline flex items-center gap-1">
+              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+            <button
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-indigo-600 transition-colors"
+              aria-label="Open project details">
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        data-category="creative" data-id="p2">
+        <div>
+          <div
+            class="h-48 rounded-2xl bg-gradient-to-br from-pink-950/80 via-purple-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(236,72,153,0.3),transparent_60%)]">
+            </div>
+            <div class="relative z-10 text-center group-hover:scale-110 transition-transform duration-300">
+              <div
+                class="w-20 h-20 rounded-full border border-pink-400/40 bg-pink-500/10 flex items-center justify-center mx-auto mb-2 shadow-2xl backdrop-blur-md">
+                <i data-lucide="box" class="w-8 h-8 text-pink-400 animate-spin" style="animation-duration: 15s;"></i>
+              </div>
+              <span class="text-[10px] font-mono text-pink-300 tracking-widest uppercase">3D Configurator Active</span>
+            </div>
+            <span
+              class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-pink-300">02</span>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-pink-400">E-Commerce &amp; 3D</span>
+            <span class="text-xs text-gray-500 font-mono">2026</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-pink-300 transition-colors">Aura Apparel 3D
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            Luxury apparel storefront featuring interactive WebGL material shaders, custom lighting rigs, and instant
+            checkout flow.
+          </p>
+        </div>
+        <div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Three.js</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">React Three
+              Fiber</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">GSAP</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Stripe</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/10">
+            <span class="text-xs text-pink-400 font-medium group-hover:underline flex items-center gap-1">
+              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+            <button
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-pink-600 transition-colors"
+              aria-label="Open project details">
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        data-category="ai" data-id="p3">
+        <div>
+          <div
+            class="h-48 rounded-2xl bg-gradient-to-br from-emerald-950/80 via-teal-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(16,185,129,0.3),transparent_60%)]">
+            </div>
+            <div
+              class="relative z-10 w-full max-w-[240px] bg-black/80 border border-white/15 rounded-2xl p-3.5 shadow-2xl backdrop-blur-md group-hover:scale-105 transition-transform duration-300">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-[11px] font-semibold text-white">Cortex Copilot</span>
+              </div>
+              <div class="p-2 rounded-lg bg-white/5 text-[10px] text-gray-300 leading-snug font-mono">
+                Generating optimized React hook... <span class="text-emerald-400">✓ Done (12ms)</span>
+              </div>
+            </div>
+            <span
+              class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-emerald-300">03</span>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400">AI Application</span>
+            <span class="text-xs text-gray-500 font-mono">2026</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">Cortex
+            Intelligence</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            AI workflow studio with streaming completions, vector database retrieval, and interactive node-based prompt
+            graphs.
+          </p>
+        </div>
+        <div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">OpenAI
+              API</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">React
+              Flow</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">FastAPI</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/10">
+            <span class="text-xs text-emerald-400 font-medium group-hover:underline flex items-center gap-1">
+              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+            <button
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-emerald-600 transition-colors"
+              aria-label="Open project details">
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        data-category="fullstack" data-id="p4">
+        <div>
+          <div
+            class="h-48 rounded-2xl bg-gradient-to-br from-amber-950/80 via-orange-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,158,11,0.3),transparent_60%)]">
+            </div>
+            <div class="relative z-10 text-center">
+              <div
+                class="px-4 py-2 rounded-xl bg-black/80 border border-amber-500/30 text-amber-300 font-mono text-xs shadow-xl backdrop-blur">
+                $ apex deploy --prod --fast
+              </div>
+              <div class="text-[10px] text-gray-400 mt-2 font-mono">Response: 200 OK • 18ms</div>
+            </div>
+            <span
+              class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-amber-300">04</span>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">DevOps &amp; APIs</span>
+            <span class="text-xs text-gray-500 font-mono">2025</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">Apex Developer Hub
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            High-throughput developer platform with interactive API playgrounds, live SDK generation, and telemetry
+            dashboards.
+          </p>
+        </div>
+        <div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">GraphQL</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Docker</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Redis</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Next.js</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/10">
+            <span class="text-xs text-amber-400 font-medium group-hover:underline flex items-center gap-1">
+              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+            <button
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-amber-600 transition-colors"
+              aria-label="Open project details">
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        data-category="creative" data-id="p5">
+        <div>
+          <div
+            class="h-48 rounded-2xl bg-gradient-to-br from-cyan-950/80 via-blue-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.3),transparent_60%)]">
+            </div>
+            <div class="relative z-10 flex items-center gap-3">
+              <div
+                class="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300">
+                <i data-lucide="activity" class="w-6 h-6 animate-pulse"></i>
+              </div>
+              <div class="text-left">
+                <div class="text-xs font-bold text-white">Audio Visualizer</div>
+                <div class="text-[10px] text-cyan-300 font-mono">60 FPS WebAudio GL</div>
+              </div>
+            </div>
+            <span
+              class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-cyan-300">05</span>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-cyan-400">Creative Audio &amp; GL</span>
+            <span class="text-xs text-gray-500 font-mono">2025</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">Vortex Soundscape
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            Spatial 3D audio synthesizer and frequency visualizer created with Web Audio API, WebGL particle ribbons,
+            and midi sync.
+          </p>
+        </div>
+        <div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">WebAudio</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">GLSL</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Canvas</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">TypeScript</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/10">
+            <span class="text-xs text-cyan-400 font-medium group-hover:underline flex items-center gap-1">
+              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+            <button
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-cyan-600 transition-colors"
+              aria-label="Open project details">
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        data-category="fullstack" data-id="p6">
+        <div>
+          <div
+            class="h-48 rounded-2xl bg-gradient-to-br from-violet-950/80 via-fuchsia-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.3),transparent_60%)]">
+            </div>
+            <div class="relative z-10 text-center">
+              <div class="flex -space-x-2 justify-center mb-2">
+                <span
+                  class="w-7 h-7 rounded-full bg-indigo-500 border border-black flex items-center justify-center text-[10px] font-bold text-white">JD</span>
+                <span
+                  class="w-7 h-7 rounded-full bg-purple-500 border border-black flex items-center justify-center text-[10px] font-bold text-white">MK</span>
+                <span
+                  class="w-7 h-7 rounded-full bg-pink-500 border border-black flex items-center justify-center text-[10px] font-bold text-white">+8</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white font-mono">Multiplayer CRDT
+                Sync</span>
+            </div>
+            <span
+              class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-purple-300">06</span>
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-purple-400">Collaboration &amp;
+              Canvas</span>
+            <span class="text-xs text-gray-500 font-mono">2025</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Prism Infinite
+            Canvas</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            Real-time infinite canvas for engineering diagrams, wireframing, and interactive markdown docs with
+            zero-latency multiplayer.
+          </p>
+        </div>
+        <div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Yjs
+              CRDT</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">React</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">WebRTC</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-white/10">
+            <span class="text-xs text-purple-400 font-medium group-hover:underline flex items-center gap-1">
+              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </span>
+            <button
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-purple-600 transition-colors"
+              aria-label="Open project details">
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT & SKILLS SECTION ================= -->
+  <section id="about" class="py-24 px-6 max-w-7xl mx-auto relative">
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <!-- Left Bio Column -->
+      <div class="lg:col-span-5 space-y-6">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold">
+          <i data-lucide="user-check" class="w-3.5 h-3.5"></i> BIOGRAPHY &amp; VISION
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+          Engineering with <br>
+          <span class="serif font-normal text-indigo-300">design intent.</span>
+        </h2>
+        <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
+          <p>
+            I am a creative developer who bridges the gap between sophisticated aesthetics and rock-solid software
+            architecture. I believe the best web experiences are lightning fast, responsive, and packed with thoughtful
+            micro-details.
+          </p>
+          <p>
+            Whether architecting high-traffic applications, building interactive 3D WebGL scenes, or polishing
+            micro-interactions, I focus on clean code, accessible user experiences, and relentless craftsmanship.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 pt-4">
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Location</div>
+            <div class="text-base font-bold text-white mt-1">Global / Remote</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+            <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Availability</div>
+            <div class="text-base font-bold text-emerald-400 mt-1 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Q3 / Q4 2026
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Skills Radar -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="glow-card p-6 interactive">
+            <div
+              class="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-4">
+              <i data-lucide="code-2" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Architecture</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Modern modular code, TypeScript typing, and scalable
+              frontend systems.</p>
+          </div>
+
+          <div class="glow-card p-6 interactive">
+            <div
+              class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
+              <i data-lucide="palette" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">UI/UX Design</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">Harmonious typography, spatial systems, and glassmorphic
+              micro-details.</p>
+          </div>
+
+          <div class="glow-card p-6 interactive">
+            <div
+              class="w-10 h-10 rounded-xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 mb-4">
+              <i data-lucide="zap" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Performance</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">60fps animations, optimized bundle sizes, and Core Web
+              Vitals.</p>
+          </div>
+        </div>
+
+        <div class="glow-card p-6 sm:p-8">
+          <h3 class="text-xl font-bold text-white mb-6 flex items-center justify-between">
+            <span>Proficiency &amp; Mastery</span>
+            <span class="text-xs font-mono text-indigo-400 font-normal">Active Tech Matrix</span>
+          </h3>
+
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-xs font-medium mb-1.5">
+                <span class="text-white">React, Next.js &amp; TypeScript</span>
+                <span class="text-indigo-400 font-mono">98%</span>
+              </div>
+              <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+                <div
+                  class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 w-[98%] transition-all duration-1000">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-medium mb-1.5">
+                <span class="text-white">Modern CSS, Tailwind &amp; Responsive Layouts</span>
+                <span class="text-purple-400 font-mono">95%</span>
+              </div>
+              <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+                <div
+                  class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 w-[95%] transition-all duration-1000">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-medium mb-1.5">
+                <span class="text-white">Motion Design, GSAP &amp; Three.js / WebGL</span>
+                <span class="text-pink-400 font-mono">90%</span>
+              </div>
+              <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+                <div
+                  class="h-full rounded-full bg-gradient-to-r from-pink-500 to-rose-500 w-[90%] transition-all duration-1000">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-medium mb-1.5">
+                <span class="text-white">Backend APIs, Node.js, Database &amp; Cloud</span>
+                <span class="text-emerald-400 font-mono">88%</span>
+              </div>
+              <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+                <div
+                  class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 w-[88%] transition-all duration-1000">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE TERMINAL SECTION ================= -->
+  <section id="terminal" class="py-20 px-6 max-w-5xl mx-auto relative">
+    <div class="text-center mb-10">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold mb-3">
+        <i data-lucide="terminal" class="w-3.5 h-3.5"></i> INTERACTIVE CLI
+      </div>
+      <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+        Developer <span class="serif font-normal text-indigo-300">Playground.</span>
+      </h2>
+      <p class="text-gray-400 mt-2 text-sm max-w-md mx-auto">
+        Type commands into the terminal below or click the quick pills to inspect system info, stack, and easter eggs.
+      </p>
+    </div>
+
+    <!-- Terminal Window -->
+    <div class="terminal-window overflow-hidden border border-white/15">
+      <div class="bg-black/80 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+        </div>
+        <div class="text-xs font-mono text-gray-400 flex items-center gap-1.5">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-indigo-400"></i> fuad@craftsman-box:~ (zsh)
+        </div>
+        <div class="text-[11px] font-mono text-gray-500">utf-8</div>
+      </div>
+
+      <div class="p-6 font-mono text-xs sm:text-sm text-gray-200 min-h-[260px] max-h-[360px] overflow-y-auto space-y-3"
+        id="terminalOutput">
+        <div class="text-gray-400">
+          ✨ Welcome to Fuad Interactive Shell v2.6.0 [Interactive Mode]<br>
+          Type <span class="text-indigo-400 font-semibold">help</span> to view available commands, or click any command
+          badge below.
+        </div>
+        <div class="text-emerald-400">
+          ✔ Environment loaded: Node v22.4.0 • React 19 • Ready.
+        </div>
+      </div>
+
+      <div class="bg-black/50 px-4 py-2.5 border-t border-white/10 flex flex-wrap gap-2 items-center">
+        <span class="text-[11px] font-mono text-gray-500">Quick commands:</span>
+        <button data-cmd="bio"
+          class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">bio</button>
+        <button data-cmd="skills"
+          class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">skills</button>
+        <button data-cmd="projects"
+          class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">projects</button>
+        <button data-cmd="contact"
+          class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">contact</button>
+        <button data-cmd="confetti"
+          class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-yellow-300 hover:bg-yellow-500/20 hover:border-yellow-500/40 transition-all">🎉
+          confetti</button>
+        <button data-cmd="clear"
+          class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-rose-300 hover:bg-rose-500/20 transition-all">clear</button>
+      </div>
+
+      <form id="terminalForm" class="bg-black/90 px-4 py-3 border-t border-white/10 flex items-center gap-2">
+        <span class="text-indigo-400 font-mono font-bold text-sm">fuad@web:~$</span>
+        <input type="text" id="terminalInput"
+          class="flex-1 bg-transparent border-none outline-none font-mono text-sm text-white placeholder-gray-600"
+          placeholder="Type a command (e.g., 'help', 'skills', 'contact')..." autocomplete="off" spellcheck="false">
+        <button type="submit"
+          class="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-xs font-semibold transition-colors">Run</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES OFFERED SECTION ================= -->
+  <section id="services" class="py-24 px-6 max-w-6xl mx-auto relative">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold mb-3">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> SPECIALIZED EXPERTISE
+      </div>
+      <h2 class="text-4xl md:text-6xl font-black text-white tracking-tight">
+        Services <span class="serif font-normal text-indigo-300">Offered.</span>
+      </h2>
+      <p class="text-gray-400 mt-3 text-sm sm:text-base">
+        High-impact development and design services tailored for startups, agencies, and high-growth brands.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <!-- Service 1 -->
+      <div
+        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive">
+        <div class="flex items-start sm:items-center gap-5">
+          <div
+            class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0 group-hover:scale-110 transition-transform">
+            <i data-lucide="globe" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-mono text-indigo-400">01</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors">
+                Full-Stack Web Development</h3>
+            </div>
+            <p class="text-gray-400 text-sm mt-1 max-w-xl">
+              Modern, scalable applications built with Next.js, React, Node.js, and TypeScript. Optimized for extreme
+              speed, SEO, and robust security.
+            </p>
+          </div>
+        </div>
+        <a href="#contact"
+          class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-indigo-600 transition-colors shrink-0">
+          Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <!-- Service 2 -->
+      <div
+        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive">
+        <div class="flex items-start sm:items-center gap-5">
+          <div
+            class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0 group-hover:scale-110 transition-transform">
+            <i data-lucide="layout" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-mono text-purple-400">02</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">UI/UX
+                &amp; Design Systems</h3>
+            </div>
+            <p class="text-gray-400 text-sm mt-1 max-w-xl">
+              End-to-end user interface systems, design tokens, component libraries in Figma &amp; code, crafted with
+              high fidelity and pixel precision.
+            </p>
+          </div>
+        </div>
+        <a href="#contact"
+          class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-purple-600 transition-colors shrink-0">
+          Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <!-- Service 3 -->
+      <div
+        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive">
+        <div class="flex items-start sm:items-center gap-5">
+          <div
+            class="w-12 h-12 rounded-2xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 shrink-0 group-hover:scale-110 transition-transform">
+            <i data-lucide="wand-2" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-mono text-pink-400">03</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">Motion
+                Design &amp; 3D Interactive</h3>
+            </div>
+            <p class="text-gray-400 text-sm mt-1 max-w-xl">
+              Immersive Three.js scenes, WebGL shaders, GSAP timelines, and scroll-driven stories that captivate
+              audiences and win awards.
+            </p>
+          </div>
+        </div>
+        <a href="#contact"
+          class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-pink-600 transition-colors shrink-0">
+          Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <!-- Service 4 -->
+      <div
+        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive">
+        <div class="flex items-start sm:items-center gap-5">
+          <div
+            class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-110 transition-transform">
+            <i data-lucide="cpu" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-mono text-emerald-400">04</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+                Performance &amp; Code Audits</h3>
+            </div>
+            <p class="text-gray-400 text-sm mt-1 max-w-xl">
+              In-depth architecture refactoring, bundle size trimming, React re-render optimization, and Core Web Vitals
+              remediation for 100/100 scores.
+            </p>
+          </div>
+        </div>
+        <a href="#contact"
+          class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-emerald-600 transition-colors shrink-0">
+          Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE ESTIMATOR ================= -->
+  <section id="calculator" class="py-20 px-6 max-w-4xl mx-auto relative">
+    <div class="glow-card p-8 sm:p-12 relative overflow-hidden">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold mb-3">
+          <i data-lucide="calculator" class="w-3.5 h-3.5"></i> INTERACTIVE ESTIMATOR
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          Estimate Your <span class="serif font-normal text-indigo-300">Project.</span>
+        </h2>
+        <p class="text-gray-400 text-xs sm:text-sm mt-2">
+          Select features and scope below to get an instant estimated investment and timeline for your product.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4 mb-8" id="estimatorOptions">
+        <label
+          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2500" checked>
+            <div>
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">Custom UI/UX Design</div>
+              <div class="text-[11px] text-gray-500">Figma mocks &amp; design system</div>
+            </div>
+          </div>
+          <span class="text-xs font-mono text-indigo-400 font-semibold">+$2.5k</span>
+        </label>
+
+        <label
+          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="3500" checked>
+            <div>
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">Full-Stack Frontend</div>
+              <div class="text-[11px] text-gray-500">Next.js 15, TypeScript, Tailwind</div>
+            </div>
+          </div>
+          <span class="text-xs font-mono text-indigo-400 font-semibold">+$3.5k</span>
+        </label>
+
+        <label
+          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2000">
+            <div>
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">3D &amp; Motion Graphics</div>
+              <div class="text-[11px] text-gray-500">Three.js / WebGL / GSAP</div>
+            </div>
+          </div>
+          <span class="text-xs font-mono text-indigo-400 font-semibold">+$2.0k</span>
+        </label>
+
+        <label
+          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2800">
+            <div>
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">Backend API &amp; DB</div>
+              <div class="text-[11px] text-gray-500">Auth, Postgres, Cloud, APIs</div>
+            </div>
+          </div>
+          <span class="text-xs font-mono text-indigo-400 font-semibold">+$2.8k</span>
+        </label>
+
+        <label
+          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="1800">
+            <div>
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">AI / LLM Integration</div>
+              <div class="text-[11px] text-gray-500">OpenAI, RAG, custom agents</div>
+            </div>
+          </div>
+          <span class="text-xs font-mono text-indigo-400 font-semibold">+$1.8k</span>
+        </label>
+
+        <label
+          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          <div class="flex items-center gap-3">
+            <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="1200">
+            <div>
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">SEO &amp; Performance Audit
+              </div>
+              <div class="text-[11px] text-gray-500">100/100 Lighthouse score guarantee</div>
+            </div>
+          </div>
+          <span class="text-xs font-mono text-indigo-400 font-semibold">+$1.2k</span>
+        </label>
+      </div>
+
+      <div
+        class="p-6 rounded-2xl bg-gradient-to-r from-indigo-950/70 via-purple-950/60 to-black border border-indigo-500/30 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <div class="text-xs font-semibold uppercase tracking-wider text-gray-400">Estimated Total &amp; Timeline</div>
+          <div class="flex items-baseline gap-3 mt-1">
+            <span class="text-4xl font-black text-white font-mono" id="estimatePrice">$6,000</span>
+            <span class="text-xs text-indigo-300 font-medium" id="estimateTime">~ 3 to 5 weeks</span>
+          </div>
+        </div>
+        <a href="#contact"
+          class="interactive inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm px-6 py-3.5 rounded-xl shadow-xl hover:shadow-indigo-500/30 transition-all w-full sm:w-auto justify-center">
+          Book This Scope <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FREQUENTLY ASKED QUESTIONS ================= -->
+  <section id="faq" class="py-24 px-6 max-w-4xl mx-auto relative">
+    <div class="text-center mb-16">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold mb-3">
+        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> GOT QUESTIONS?
+      </div>
+      <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight">
+        Frequently <span class="serif font-normal text-indigo-300">Asked.</span>
+      </h2>
+    </div>
+
+    <div class="space-y-4">
+      <div class="accordion glow-card overflow-hidden">
+        <button class="accordion-trigger w-full p-6 flex justify-between items-center text-left interactive"
+          aria-expanded="false">
+          <span class="text-base sm:text-lg font-bold text-white">What is your typical project workflow?</span>
+          <span class="accordion-icon text-2xl text-indigo-400 font-mono">+</span>
+        </button>
+        <div class="accordion-content">
+          <div class="px-6 pb-6 text-gray-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+            Every project begins with a discovery alignment session where we map goals and architecture. Next comes
+            rapid interactive prototyping, followed by full-stack implementation with weekly staging reviews. We finish
+            with rigorous testing, performance tuning, and seamless deployment.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion glow-card overflow-hidden">
+        <button class="accordion-trigger w-full p-6 flex justify-between items-center text-left interactive"
+          aria-expanded="false">
+          <span class="text-base sm:text-lg font-bold text-white">What technologies do you specialize in?</span>
+          <span class="accordion-icon text-2xl text-indigo-400 font-mono">+</span>
+        </button>
+        <div class="accordion-content">
+          <div class="px-6 pb-6 text-gray-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+            My primary stack revolves around React 19, Next.js 15, TypeScript, Tailwind CSS, Three.js / React Three
+            Fiber, Framer Motion, and Node.js. For databases and backends, I work with PostgreSQL, Supabase, Redis, and
+            modern AI/LLM APIs.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion glow-card overflow-hidden">
+        <button class="accordion-trigger w-full p-6 flex justify-between items-center text-left interactive"
+          aria-expanded="false">
+          <span class="text-base sm:text-lg font-bold text-white">Do you work on fixed-scope contracts or
+            retainers?</span>
+          <span class="accordion-icon text-2xl text-indigo-400 font-mono">+</span>
+        </button>
+        <div class="accordion-content">
+          <div class="px-6 pb-6 text-gray-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+            I provide both! For new product builds and redesigns, fixed-scope engagements provide clear milestones and
+            guaranteed delivery. For ongoing feature development and advisory, flexible monthly retainers are available.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion glow-card overflow-hidden">
+        <button class="accordion-trigger w-full p-6 flex justify-between items-center text-left interactive"
+          aria-expanded="false">
+          <span class="text-base sm:text-lg font-bold text-white">Can you collaborate with our existing engineering
+            team?</span>
+          <span class="accordion-icon text-2xl text-indigo-400 font-mono">+</span>
+        </button>
+        <div class="accordion-content">
+          <div class="px-6 pb-6 text-gray-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+            Absolutely. I regularly embed with in-house design and engineering teams, opening clean pull requests,
+            adhering to your CI/CD pipelines, and writing comprehensive unit tests and documentation.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT FORM SECTION ================= -->
+  <section id="contact" class="py-24 px-6 max-w-4xl mx-auto relative">
+    <div class="text-center mb-12">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold mb-3">
+        <i data-lucide="mail-check" class="w-3.5 h-3.5"></i> GET IN TOUCH
+      </div>
+      <h2 class="text-5xl sm:text-7xl font-black text-white tracking-tight leading-tight mb-4">
+        Let's build <br class="hidden sm:block">
+        <span class="gradient-text-alt">something iconic.</span>
+      </h2>
+      <p class="text-gray-400 text-sm sm:text-base max-w-lg mx-auto">
+        Have an upcoming project, redesign, or engineering question? Drop a message below and I'll respond within 24
+        hours.
+      </p>
+    </div>
+
+    <div class="glow-card p-8 sm:p-12 relative overflow-hidden">
+      <form id="contactForm" class="relative z-10 space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Your Name *</label>
+            <input type="text" id="contactName" required
+              class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all text-sm"
+              placeholder="e.g. Alex Mercer">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Email Address
+              *</label>
+            <input type="email" id="contactEmail" required
+              class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all text-sm"
+              placeholder="alex@company.com">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Estimated
+            Budget</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <label class="cursor-pointer select-none">
+              <input type="radio" name="budget" value="5k-10k" class="peer sr-only">
+              <span
+                class="block px-4 py-2.5 rounded-xl border border-white/10 text-center text-xs font-semibold text-gray-300 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/20 peer-checked:text-white hover:border-white/20 transition-all">$5K
+                - $10K</span>
+            </label>
+            <label class="cursor-pointer select-none">
+              <input type="radio" name="budget" value="10k-25k" class="peer sr-only" checked>
+              <span
+                class="block px-4 py-2.5 rounded-xl border border-white/10 text-center text-xs font-semibold text-gray-300 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/20 peer-checked:text-white hover:border-white/20 transition-all">$10K
+                - $25K</span>
+            </label>
+            <label class="cursor-pointer select-none">
+              <input type="radio" name="budget" value="25k-50k" class="peer sr-only">
+              <span
+                class="block px-4 py-2.5 rounded-xl border border-white/10 text-center text-xs font-semibold text-gray-300 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/20 peer-checked:text-white hover:border-white/20 transition-all">$25K
+                - $50K</span>
+            </label>
+            <label class="cursor-pointer select-none">
+              <input type="radio" name="budget" value="50k+" class="peer sr-only">
+              <span
+                class="block px-4 py-2.5 rounded-xl border border-white/10 text-center text-xs font-semibold text-gray-300 peer-checked:border-indigo-500 peer-checked:bg-indigo-500/20 peer-checked:text-white hover:border-white/20 transition-all">$50K+</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-center mb-2">
+            <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider">Project Details *</label>
+            <span class="text-[11px] font-mono text-gray-500" id="charCount">0 / 500</span>
+          </div>
+          <textarea id="contactMessage" required rows="4" maxlength="500"
+            class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none text-sm"
+            placeholder="Tell me about your product, timeline, and goals..."></textarea>
+        </div>
+
+        <button type="submit" id="submitContactBtn"
+          class="interactive w-full bg-white hover:bg-gray-100 text-black py-4 rounded-xl font-bold text-sm transition-all shadow-xl hover:shadow-indigo-500/20 flex items-center justify-center gap-2 group">
+          <span id="submitBtnText">Send Message</span>
+          <i data-lucide="send" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </button>
+      </form>
+
+      <!-- Success Toast Modal inside card -->
+      <div id="contactSuccessNotice"
+        class="hidden absolute inset-0 bg-black/90 backdrop-blur-md rounded-3xl p-8 z-20 flex flex-col items-center justify-center text-center">
+        <div
+          class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-4 animate-bounce">
+          <i data-lucide="check" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-2">Message Dispatched!</h3>
+        <p class="text-gray-300 text-sm max-w-sm mb-6">
+          Thank you for reaching out. I've received your note and will review the specifications promptly.
+        </p>
+        <button id="resetContactBtn"
+          class="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors">
+          Send Another Message
+        </button>
+      </div>
+    </div>
+
+    <!-- Social Link Badges -->
+    <div class="flex flex-wrap justify-center gap-6 mt-12 text-xs sm:text-sm">
+      <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
+        <i data-lucide="github" class="w-4 h-4"></i> GitHub
+      </a>
+      <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
+        <i data-lucide="twitter" class="w-4 h-4"></i> Twitter / X
+      </a>
+      <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
+        <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+      </a>
+      <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
+        <i data-lucide="dribbble" class="w-4 h-4"></i> Dribbble
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="relative py-12 px-6 text-center text-xs text-gray-500 border-t border-white/5 space-y-2">
+    <p>&copy; 2026 Fuad. Crafted with precision, vanilla JS, and modern CSS.</p>
+    <p class="text-[11px] text-gray-600">Press <kbd
+        class="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-gray-400 font-mono">⌘K</kbd> to open command
+      palette anywhere.</p>
+  </footer>
+
+  <!-- ================= PROJECT DETAILS MODAL ================= -->
+  <div id="projectModal"
+    class="hidden fixed inset-0 z-50 p-4 sm:p-6 flex items-center justify-center bg-black/80 backdrop-blur-lg">
+    <div class="glass-modal max-w-2xl w-full rounded-3xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
+      <button id="closeModalBtn"
+        class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/20 transition-colors"
+        aria-label="Close modal">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- ================= COMMAND PALETTE (CMD + K) ================= -->
+  <div id="cmdPaletteModal"
+    class="hidden fixed inset-0 z-50 p-4 sm:p-6 flex items-start justify-center pt-24 bg-black/80 backdrop-blur-md">
+    <div class="glass-modal max-w-lg w-full rounded-2xl overflow-hidden shadow-2xl border border-white/15">
+      <div class="p-4 border-b border-white/10 flex items-center gap-3">
+        <i data-lucide="search" class="w-4 h-4 text-indigo-400"></i>
+        <input type="text" id="cmdInput"
+          class="flex-1 bg-transparent border-none outline-none text-white text-sm placeholder-gray-500 font-sans"
+          placeholder="Type a command or jump to section...">
+        <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-mono text-gray-400">ESC</kbd>
+      </div>
+
+      <div class="p-2 max-h-64 overflow-y-auto space-y-1 text-xs" id="cmdList">
+        <a href="#home"
+          class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
+          <i data-lucide="home" class="w-4 h-4 text-gray-400"></i> Jump to Home
+        </a>
+        <a href="#work"
+          class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
+          <i data-lucide="layout-grid" class="w-4 h-4 text-gray-400"></i> Browse Selected Projects
+        </a>
+        <a href="#about"
+          class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
+          <i data-lucide="user" class="w-4 h-4 text-gray-400"></i> View Bio &amp; Skill Matrix
+        </a>
+        <a href="#terminal"
+          class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
+          <i data-lucide="terminal" class="w-4 h-4 text-gray-400"></i> Open Developer Terminal
+        </a>
+        <a href="#calculator"
+          class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
+          <i data-lucide="calculator" class="w-4 h-4 text-gray-400"></i> Project Estimator
+        </a>
+        <a href="#contact"
+          class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
+          <i data-lucide="mail" class="w-4 h-4 text-gray-400"></i> Send Message / Contact
+        </a>
+        <button id="cmdTriggerConfetti"
+          class="w-full text-left cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
+          <i data-lucide="party-popper" class="w-4 h-4 text-yellow-400"></i> Launch Confetti Celebration!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script>
+    /* ================= INITIALIZE LUCIDE ICONS ================= */
+    lucide.createIcons();
+
+    /* ================= WEB AUDIO SYNTHESIZER SOUND FX ================= */
+    let soundEnabled = false;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playTone(freq = 440, type = 'sine', duration = 0.08, gainVal = 0.08) {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) { }
+    }
+
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundIcon = document.getElementById('soundIcon');
+
+    soundToggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      if (soundEnabled) {
+        initAudio();
+        playTone(587, 'sine', 0.1, 0.1);
+        soundToggleBtn.classList.add('border-indigo-500', 'bg-indigo-500/20');
+        soundIcon.setAttribute('data-lucide', 'volume-2');
+        soundIcon.classList.remove('text-gray-400');
+        soundIcon.classList.add('text-indigo-400');
+      } else {
+        soundToggleBtn.classList.remove('border-indigo-500', 'bg-indigo-500/20');
+        soundIcon.setAttribute('data-lucide', 'volume-x');
+        soundIcon.classList.remove('text-indigo-400');
+        soundIcon.classList.add('text-gray-400');
+      }
+      lucide.createIcons();
     });
-    b.addEventListener('mouseleave', function(){ b.style.transform=''; });
-  });
-}
 
-var board=document.getElementById('labBoard');
-if(board && !touch && !reduced){
-  board.addEventListener('mousemove', function(e){
-    var r=board.getBoundingClientRect();
-    var nx=(e.clientX-r.left)/r.width-.5, ny=(e.clientY-r.top)/r.height-.5;
-    board.querySelectorAll('.postcard').forEach(function(p){
-      var d=+p.dataset.depth||12;
-      p.style.setProperty('--px',(nx*d)+'px');
-      p.style.setProperty('--py',(ny*d)+'px');
+    /* ================= LIVE CLOCK ================= */
+    function updateClock() {
+      const timeEl = document.getElementById('timeText');
+      if (!timeEl) return;
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      timeEl.textContent = `${timeStr} Local`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    /* ================= THEME ACCENT SWITCHER ================= */
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeMenu = document.getElementById('themeMenu');
+
+    themeToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      themeMenu.classList.toggle('hidden');
+      playTone(520, 'sine', 0.05);
     });
-  });
-  board.addEventListener('mouseleave', function(){
-    board.querySelectorAll('.postcard').forEach(function(p){
-      p.style.setProperty('--px','0px'); p.style.setProperty('--py','0px');
+
+    document.addEventListener('click', () => {
+      themeMenu.classList.add('hidden');
     });
-  });
-}
 
-var toast=document.getElementById('toast'), toastT;
-function showToast(msg){
-  toast.textContent=msg; toast.classList.add('show');
-  clearTimeout(toastT); toastT=setTimeout(function(){ toast.classList.remove('show'); }, 2600);
-}
+    document.querySelectorAll('[data-set-theme]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.dataset.setTheme;
+        if (theme === 'indigo') {
+          document.documentElement.removeAttribute('data-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+        playTone(660, 'sine', 0.08);
+        themeMenu.classList.add('hidden');
+      });
+    });
 
-var EMAIL='fuadfuad091@gmail.com';
-document.getElementById('copyMail').addEventListener('click', function(){
-  if(navigator.clipboard){ navigator.clipboard.writeText(EMAIL).then(function(){ showToast('Email copied ✓'); }); }
-  else{ showToast(EMAIL); }
-});
+    /* ================= SMOOTH CUSTOM CURSOR ================= */
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    let isMouseActive = false;
 
-var form=document.getElementById('contactForm'), sendBtn=document.getElementById('sendBtn');
-form.addEventListener('submit', function(e){
-  e.preventDefault();
-  if(!form.checkValidity()){ form.reportValidity(); return; }
-  sendBtn.disabled=true; sendBtn.innerHTML='Sending…';
-  setTimeout(function(){
-    sendBtn.innerHTML='Message sent ✓';
-    showToast("Thanks! Fuad will reply within 24 hours.");
-    form.reset();
-    setTimeout(function(){ sendBtn.disabled=false; sendBtn.innerHTML='Send message <span class="ar">→</span>'; }, 2600);
-  }, 900);
-});
-})();
-</script>
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isMouseActive) {
+        isMouseActive = true;
+        cursorDot.style.opacity = '1';
+        cursorRing.style.opacity = '1';
+      }
+      cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursorDot.style.opacity = '0';
+      cursorRing.style.opacity = '0';
+      isMouseActive = false;
+    });
+
+    function animateCursorRing() {
+      ringX += (mouseX - ringX) * 0.16;
+      ringY += (mouseY - ringY) * 0.16;
+      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+      requestAnimationFrame(animateCursorRing);
+    }
+    animateCursorRing();
+
+    function attachInteractiveHover() {
+      document.querySelectorAll('.interactive, a, button, input, textarea, .tech-pill').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          if (el.dataset.cursor === 'view') {
+            cursorRing.classList.add('view');
+            cursorRing.classList.remove('action');
+          } else {
+            cursorRing.classList.add('action');
+            cursorRing.classList.remove('view');
+          }
+          playTone(700, 'triangle', 0.03, 0.02);
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorRing.classList.remove('action', 'view');
+        });
+      });
+    }
+    attachInteractiveHover();
+
+    /* ================= HERO PARTICLES CANVAS ================= */
+    const heroCanvas = document.getElementById('heroCanvas');
+    if (heroCanvas) {
+      const ctx = heroCanvas.getContext('2d');
+      let width, height;
+      let particles = [];
+      const PARTICLE_COUNT = 40;
+
+      function resizeCanvas() {
+        const parent = heroCanvas.parentElement;
+        width = heroCanvas.width = parent ? parent.offsetWidth : window.innerWidth;
+        height = heroCanvas.height = parent ? parent.offsetHeight : window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = (Math.random() - 0.5) * 0.5;
+          this.radius = Math.random() * 2 + 1;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(168, 165, 247, 0.4)';
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
+      }
+
+      function drawLines() {
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 110) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(99, 102, 241, ${0.22 * (1 - dist / 110)})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animParticles() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        drawLines();
+        requestAnimationFrame(animParticles);
+      }
+      animParticles();
+    }
+
+    /* ================= FALLING METEORS ================= */
+    const meteorsContainer = document.getElementById('meteorsContainer');
+    if (meteorsContainer) {
+      for (let i = 0; i < 8; i++) {
+        const meteor = document.createElement('div');
+        meteor.className = 'meteor';
+        meteor.style.left = `${Math.random() * 100}%`;
+        meteor.style.top = `${Math.random() * 40}%`;
+        meteor.style.animationDelay = `${Math.random() * 7}s`;
+        meteor.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
+        meteorsContainer.appendChild(meteor);
+      }
+    }
+
+    /* ================= TEXT SCRAMBLE EFFECT ================= */
+    class TextScramble {
+      constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#_0101';
+        this.original = el.textContent;
+        this.frame = 0;
+        this.queue = [];
+        this.frameReq = null;
+      }
+      setText(newText) {
+        const oldText = this.el.textContent;
+        const len = Math.max(oldText.length, newText.length);
+        this.queue = [];
+        for (let i = 0; i < len; i++) {
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 12);
+          const end = start + Math.floor(Math.random() * 12) + 4;
+          this.queue.push({ from, to, start, end, char: '' });
+        }
+        if (this.frameReq) cancelAnimationFrame(this.frameReq);
+        this.frame = 0;
+        this.update();
+      }
+      update() {
+        let output = '';
+        let complete = 0;
+        for (let i = 0; i < this.queue.length; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+          if (this.frame >= end) {
+            complete++;
+            output += to;
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.3) {
+              char = this.chars[Math.floor(Math.random() * this.chars.length)];
+              this.queue[i].char = char;
+            }
+            output += `<span class="text-indigo-400">${char}</span>`;
+          } else {
+            output += from;
+          }
+        }
+        this.el.innerHTML = output;
+        if (complete !== this.queue.length) {
+          this.frameReq = requestAnimationFrame(() => this.update());
+          this.frame++;
+        }
+      }
+    }
+
+    document.querySelectorAll('.text-scramble').forEach(el => {
+      const fx = new TextScramble(el);
+      const original = el.textContent;
+      const alt = el.dataset.alt || original;
+      el.addEventListener('mouseenter', () => fx.setText(alt));
+      el.addEventListener('mouseleave', () => fx.setText(original));
+    });
+
+    /* ================= GLOW CARD MOUSE FOLLOWER ================= */
+    document.querySelectorAll('.glow-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        card.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+
+    /* ================= SCROLL PROGRESS & DOCK ACTIVE STATE ================= */
+    const progressBar = document.getElementById('progressBar');
+    const sections = ['home', 'work', 'about', 'terminal', 'services', 'calculator', 'contact'];
+    const dockItems = document.querySelectorAll('.dock-item');
+
+    function handleScroll() {
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (progressBar && maxScroll > 0) {
+        progressBar.style.width = `${(scrollY / maxScroll) * 100}%`;
+      }
+
+      let currentSec = 'home';
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.offsetTop - 200;
+        if (scrollY >= top) {
+          currentSec = id;
+        }
+      }
+
+      dockItems.forEach(item => {
+        if (item.dataset.section === currentSec) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    /* ================= STATS NUMERICAL COUNTER ================= */
+    const counters = document.querySelectorAll('.counter');
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const target = parseInt(el.dataset.target, 10);
+          const suffix = el.dataset.suffix || '';
+          const duration = 1800;
+          const start = performance.now();
+          function step(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.floor(eased * target) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+          counterObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+    counters.forEach(c => counterObs.observe(c));
+
+    /* ================= ACCORDION FAQ ================= */
+    document.querySelectorAll('.accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const accordion = btn.closest('.accordion');
+        const wasOpen = accordion.classList.contains('open');
+        document.querySelectorAll('.accordion').forEach(a => {
+          a.classList.remove('open');
+          a.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          accordion.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          playTone(450, 'sine', 0.05);
+        }
+      });
+    });
+
+    /* ================= PROJECT FILTERING ================= */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'bg-white', 'text-black');
+          b.classList.add('bg-white/5', 'text-gray-300');
+        });
+        btn.classList.add('active', 'bg-white', 'text-black');
+        btn.classList.remove('bg-white/5', 'text-gray-300');
+
+        const filter = btn.dataset.filter;
+        playTone(550, 'sine', 0.04);
+
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    /* ================= PROJECT CASE STUDY MODAL ================= */
+    const projectData = {
+      p1: {
+        title: "Nebula Analytics Dashboard",
+        category: "Full-Stack SaaS Platform",
+        tagline: "High-throughput data streaming and customizable visualization dashboards.",
+        description: "Nebula is a modern telemetry platform designed to process billions of client events. Built with Next.js 15 App Router, WebSockets, and Redis pub/sub to deliver real-time data sync with under 50ms latency.",
+        metrics: [
+          { label: "Throughput", val: "100k req/sec" },
+          { label: "Client Uptime", val: "99.99%" },
+          { label: "Latency", val: "< 45ms" }
+        ],
+        tech: ["Next.js 15", "TypeScript", "Tailwind CSS", "Redis", "D3.js", "WebSockets"]
+      },
+      p2: {
+        title: "Aura Apparel 3D Storefront",
+        category: "E-Commerce & Three.js WebGL",
+        tagline: "Next-generation 3D product configurator and dynamic clothing try-on.",
+        description: "A luxury lifestyle storefront empowering shoppers to customize fabric materials, lighting, and fit in photorealistic real-time WebGL. Increased user engagement by 320% and reduced return rates by 47%.",
+        metrics: [
+          { label: "Conversion Lift", val: "+320%" },
+          { label: "Return Rate Drop", val: "-47%" },
+          { label: "Frame Rate", val: "Smooth 60 FPS" }
+        ],
+        tech: ["Three.js", "React Three Fiber", "GLSL Shaders", "Stripe API", "GSAP"]
+      },
+      p3: {
+        title: "Cortex AI Intelligence Studio",
+        category: "AI Workflow & Prompt Orchestration",
+        tagline: "Visual node-based agent orchestration with real-time vector retrieval.",
+        description: "Cortex simplifies complex AI workflows by allowing engineering teams to visually wire together LLM agents, vector embeddings, and fallback logic in a fluid visual node editor.",
+        metrics: [
+          { label: "API Latency", val: "89ms avg" },
+          { label: "Active Users", val: "150k+" },
+          { label: "Model Support", val: "OpenAI, Gemini, Anthropic" }
+        ],
+        tech: ["OpenAI API", "React Flow", "FastAPI", "Python", "Tailwind CSS", "Pinecone"]
+      },
+      p4: {
+        title: "Apex Developer Hub",
+        category: "DevOps & Cloud Telemetry",
+        tagline: "Interactive API playgrounds and developer workflow orchestration.",
+        description: "A centralized platform featuring live in-browser GraphQL playgrounds, automatic SDK generators, and real-time container health monitoring.",
+        metrics: [
+          { label: "Deploy Time", val: "Under 12s" },
+          { label: "Integrations", val: "500+ orgs" },
+          { label: "Audit Score", val: "100/100" }
+        ],
+        tech: ["TypeScript", "GraphQL", "Docker", "Go Backend", "Next.js"]
+      },
+      p5: {
+        title: "Vortex Spatial Soundscape",
+        category: "Creative Audio & GLSL WebGL",
+        tagline: "Interactive WebAudio frequency visualizer and generative synthesizer.",
+        description: "An audio visual experiment mapping real-time micro-frequencies into dynamic 3D ribbon particles using Web Audio API nodes and GPU fragment shaders.",
+        metrics: [
+          { label: "Shader Speed", val: "120 FPS capable" },
+          { label: "Audio Engine", val: "WebAudio Native" },
+          { label: "Awards", val: "Site of the Day" }
+        ],
+        tech: ["Web Audio API", "GLSL", "Canvas API", "TypeScript"]
+      },
+      p6: {
+        title: "Prism Infinite Whiteboard",
+        category: "Real-time Collaboration Canvas",
+        tagline: "Zero-latency infinite collaborative whiteboard with multiplayer CRDT.",
+        description: "A high-performance infinite canvas supporting diagrams, freehand stylus drawing, and rich code blocks. Synced across distributed browsers with Yjs CRDTs.",
+        metrics: [
+          { label: "Collab Sync", val: "< 15ms" },
+          { label: "Concurrency", val: "50+ users/room" },
+          { label: "Data Safety", val: "E2E Encrypted" }
+        ],
+        tech: ["Yjs CRDT", "React", "WebRTC", "Canvas API", "Tailwind"]
+      }
+    };
+
+    const projectModal = document.getElementById('projectModal');
+    const modalContent = document.getElementById('modalContent');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    document.querySelectorAll('.project-item').forEach(card => {
+      card.addEventListener('click', () => {
+        const id = card.dataset.id;
+        const data = projectData[id];
+        if (!data) return;
+
+        modalContent.innerHTML = `
+          <div class="space-y-6">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">${data.category}</span>
+              <h3 class="text-3xl font-black text-white mt-1">${data.title}</h3>
+              <p class="text-gray-300 text-sm mt-1">${data.tagline}</p>
+            </div>
+
+            <p class="text-gray-400 text-sm leading-relaxed">${data.description}</p>
+
+            <div class="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-white/[0.03] border border-white/10 text-center">
+              ${data.metrics.map(m => `
+                <div>
+                  <div class="text-base font-bold text-white font-mono">${m.val}</div>
+                  <div class="text-[11px] text-gray-400">${m.label}</div>
+                </div>
+              `).join('')}
+            </div>
+
+            <div>
+              <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Technologies Used</div>
+              <div class="flex flex-wrap gap-2">
+                ${data.tech.map(t => `<span class="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">${t}</span>`).join('')}
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex gap-3">
+              <a href="#contact" onclick="projectModal.classList.add('hidden')" class="flex-1 bg-white hover:bg-gray-200 text-black text-center py-3 rounded-xl font-bold text-sm transition-colors">
+                Inquire About Similar Project
+              </a>
+            </div>
+          </div>
+        `;
+        projectModal.classList.remove('hidden');
+        playTone(600, 'sine', 0.06);
+        lucide.createIcons();
+      });
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      projectModal.classList.add('hidden');
+    });
+
+    projectModal.addEventListener('click', (e) => {
+      if (e.target === projectModal) projectModal.classList.add('hidden');
+    });
+
+    /* ================= INTERACTIVE TERMINAL ================= */
+    const terminalForm = document.getElementById('terminalForm');
+    const terminalInput = document.getElementById('terminalInput');
+    const terminalOutput = document.getElementById('terminalOutput');
+
+    const termCommands = {
+      help: () => `
+        <div class="space-y-1">
+          <div class="text-white font-semibold">Available Commands:</div>
+          <div><span class="text-indigo-400 font-bold">bio</span> — Summary of Fuad and background</div>
+          <div><span class="text-indigo-400 font-bold">skills</span> — Full stack and design capabilities</div>
+          <div><span class="text-indigo-400 font-bold">projects</span> — Key highlights and production systems</div>
+          <div><span class="text-indigo-400 font-bold">contact</span> — Get direct contact details</div>
+          <div><span class="text-indigo-400 font-bold">confetti</span> — Launch celebration fireworks</div>
+          <div><span class="text-indigo-400 font-bold">theme &lt;name&gt;</span> — Switch theme (indigo, violet, emerald, cyan, amber)</div>
+          <div><span class="text-indigo-400 font-bold">clear</span> — Wipe terminal output history</div>
+        </div>
+      `,
+      bio: () => `
+        <div class="text-gray-300 space-y-1">
+          <span class="text-white font-bold">Fuad</span> — Creative Developer &amp; Frontend Architect.<br>
+          Specializing in React, Next.js, Three.js WebGL, and scalable user interfaces.
+        </div>
+      `,
+      skills: () => `
+        <div class="space-y-1 text-gray-300">
+          <div>⚛ <strong class="text-white">Frontend:</strong> React 19, Next.js 15, TypeScript, Tailwind CSS, Vite</div>
+          <div>🎬 <strong class="text-white">Creative:</strong> Three.js, React Three Fiber, GSAP, Canvas 2D, GLSL</div>
+          <div>🟢 <strong class="text-white">Backend &amp; DB:</strong> Node.js, Express, PostgreSQL, Redis, Supabase, Python</div>
+        </div>
+      `,
+      projects: () => `
+        <div class="space-y-1 text-gray-300">
+          <div>01. <strong class="text-white">Nebula Dashboard</strong> (Next.js / Realtime Analytics)</div>
+          <div>02. <strong class="text-white">Aura 3D Apparel</strong> (Three.js WebGL Configurator)</div>
+          <div>03. <strong class="text-white">Cortex Studio</strong> (AI Agent Workflow Orchestration)</div>
+        </div>
+      `,
+      contact: () => `
+        <div class="text-emerald-300">
+          ✉ Email: hello@fuad.dev • Open to select freelance engagements and full-time roles.
+        </div>
+      `,
+      confetti: () => {
+        confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+        return `<span class="text-yellow-300">🎉 Confetti celebration launched!</span>`;
+      },
+      clear: () => {
+        terminalOutput.innerHTML = '';
+        return null;
+      }
+    };
+
+    function executeTerminalCommand(raw) {
+      const cmd = raw.trim().toLowerCase();
+      if (!cmd) return;
+
+      const userEntry = document.createElement('div');
+      userEntry.innerHTML = `<span class="text-indigo-400 font-bold">fuad@web:~$</span> <span class="text-white">${raw}</span>`;
+      terminalOutput.appendChild(userEntry);
+
+      if (cmd.startsWith('theme ')) {
+        const themeName = cmd.replace('theme ', '').trim();
+        if (['indigo', 'violet', 'emerald', 'cyan', 'amber'].includes(themeName)) {
+          if (themeName === 'indigo') document.documentElement.removeAttribute('data-theme');
+          else document.documentElement.setAttribute('data-theme', themeName);
+          const res = document.createElement('div');
+          res.innerHTML = `<span class="text-emerald-400">Theme switched to ${themeName}!</span>`;
+          terminalOutput.appendChild(res);
+        } else {
+          const res = document.createElement('div');
+          res.innerHTML = `<span class="text-rose-400">Invalid theme. Choose: indigo, violet, emerald, cyan, amber</span>`;
+          terminalOutput.appendChild(res);
+        }
+      } else if (termCommands[cmd]) {
+        const resHtml = termCommands[cmd]();
+        if (resHtml) {
+          const res = document.createElement('div');
+          res.innerHTML = resHtml;
+          terminalOutput.appendChild(res);
+        }
+      } else {
+        const res = document.createElement('div');
+        res.innerHTML = `<span class="text-rose-400">Command not recognized: '${raw}'. Type <strong class="text-white">help</strong> for a list of commands.</span>`;
+        terminalOutput.appendChild(res);
+      }
+
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+      playTone(500, 'square', 0.04, 0.03);
+    }
+
+    terminalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = terminalInput.value;
+      terminalInput.value = '';
+      executeTerminalCommand(val);
+    });
+
+    document.querySelectorAll('.term-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cmd = btn.dataset.cmd;
+        executeTerminalCommand(cmd);
+      });
+    });
+
+    /* ================= INTERACTIVE ESTIMATOR CALCULATOR ================= */
+    const estimatorChecks = document.querySelectorAll('.estimator-chk');
+    const estimatePrice = document.getElementById('estimatePrice');
+    const estimateTime = document.getElementById('estimateTime');
+
+    function calculateEstimate() {
+      let total = 0;
+      let count = 0;
+      estimatorChecks.forEach(chk => {
+        if (chk.checked) {
+          total += parseInt(chk.value, 10);
+          count++;
+        }
+      });
+
+      if (estimatePrice) estimatePrice.textContent = `$${total.toLocaleString()}`;
+      if (estimateTime) {
+        if (count <= 2) estimateTime.textContent = '~ 2 to 3 weeks';
+        else if (count <= 4) estimateTime.textContent = '~ 4 to 6 weeks';
+        else estimateTime.textContent = '~ 7 to 10 weeks';
+      }
+    }
+
+    estimatorChecks.forEach(chk => {
+      chk.addEventListener('change', () => {
+        calculateEstimate();
+        playTone(520, 'sine', 0.04);
+      });
+    });
+    calculateEstimate();
+
+    /* ================= COMMAND PALETTE (CMD + K) ================= */
+    const cmdPaletteModal = document.getElementById('cmdPaletteModal');
+    const cmdPaletteBtn = document.getElementById('cmdPaletteBtn');
+    const cmdInput = document.getElementById('cmdInput');
+    const cmdList = document.getElementById('cmdList');
+    const cmdTriggerConfetti = document.getElementById('cmdTriggerConfetti');
+
+    function toggleCmdPalette() {
+      cmdPaletteModal.classList.toggle('hidden');
+      if (!cmdPaletteModal.classList.contains('hidden')) {
+        cmdInput.value = '';
+        cmdInput.focus();
+        filterCmdItems('');
+        playTone(580, 'sine', 0.05);
+      }
+    }
+
+    cmdPaletteBtn.addEventListener('click', toggleCmdPalette);
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        toggleCmdPalette();
+      }
+      if (e.key === 'Escape') {
+        cmdPaletteModal.classList.add('hidden');
+        projectModal.classList.add('hidden');
+      }
+    });
+
+    cmdPaletteModal.addEventListener('click', (e) => {
+      if (e.target === cmdPaletteModal) cmdPaletteModal.classList.add('hidden');
+    });
+
+    function filterCmdItems(query) {
+      const items = cmdList.querySelectorAll('.cmd-item');
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(query.toLowerCase())) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    cmdInput.addEventListener('input', (e) => filterCmdItems(e.target.value));
+
+    cmdList.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        cmdPaletteModal.classList.add('hidden');
+      });
+    });
+
+    cmdTriggerConfetti.addEventListener('click', () => {
+      cmdPaletteModal.classList.add('hidden');
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+      playTone(800, 'sine', 0.1);
+    });
+
+    /* ================= COPY EMAIL ACTION ================= */
+    const copyEmailHeroBtn = document.getElementById('copyEmailHeroBtn');
+    const heroEmailStatus = document.getElementById('heroEmailStatus');
+
+    if (copyEmailHeroBtn) {
+      copyEmailHeroBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('hello@fuad.dev');
+        heroEmailStatus.textContent = 'Copied to Clipboard! ✓';
+        heroEmailStatus.classList.add('text-emerald-400');
+        playTone(750, 'sine', 0.08);
+        setTimeout(() => {
+          heroEmailStatus.textContent = 'Copy Email';
+          heroEmailStatus.classList.remove('text-emerald-400');
+        }, 2500);
+      });
+    }
+
+    /* ================= CONTACT FORM SUBMISSION ================= */
+    const contactForm = document.getElementById('contactForm');
+    const contactMessage = document.getElementById('contactMessage');
+    const charCount = document.getElementById('charCount');
+    const contactSuccessNotice = document.getElementById('contactSuccessNotice');
+    const resetContactBtn = document.getElementById('resetContactBtn');
+    const submitBtnText = document.getElementById('submitBtnText');
+
+    if (contactMessage) {
+      contactMessage.addEventListener('input', () => {
+        charCount.textContent = `${contactMessage.value.length} / 500`;
+      });
+    }
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitBtnText.textContent = 'Sending...';
+
+        setTimeout(() => {
+          contactSuccessNotice.classList.remove('hidden');
+          confetti({ particleCount: 100, spread: 70, origin: { y: 0.7 } });
+          playTone(650, 'sine', 0.15);
+          submitBtnText.textContent = 'Send Message';
+          lucide.createIcons();
+        }, 600);
+      });
+    }
+
+    if (resetContactBtn) {
+      resetContactBtn.addEventListener('click', () => {
+        contactSuccessNotice.classList.add('hidden');
+        contactForm.reset();
+        charCount.textContent = '0 / 500';
+      });
+    }
+  </script>
 </body>
+
 </html>
