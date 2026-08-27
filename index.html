@@ -592,6 +592,179 @@
     ::-webkit-scrollbar-thumb:hover {
       background: var(--accent);
     }
+
+    /* ===== TYPEWRITER EFFECT ===== */
+    .typewriter-line {
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+
+    .typewriter-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink-cursor 0.75s step-end infinite;
+      border-radius: 1px;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    @keyframes blink-cursor {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* ===== SCROLL REVEAL ANIMATIONS ===== */
+    /* Project cards: smooth fade-scale-up */
+    .reveal-project {
+      opacity: 0;
+      transform: translateY(60px) scale(0.92);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-project.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Stats cards: different animation per card */
+    .reveal-stat {
+      opacity: 0;
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-stat:nth-child(1) {
+      transform: translateX(-80px) rotate(-6deg);
+    }
+
+    .reveal-stat:nth-child(2) {
+      transform: translateY(80px) scale(0.6);
+    }
+
+    .reveal-stat:nth-child(3) {
+      transform: translateX(80px) rotate(6deg);
+    }
+
+    .reveal-stat:nth-child(4) {
+      transform: scale(0.3) rotate(12deg);
+    }
+
+    .reveal-stat.revealed {
+      opacity: 1;
+      transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+    }
+
+    /* Skill bars: animate width from 0 */
+    .skill-bar-fill {
+      width: 0 !important;
+      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .skill-bar-fill.animated {
+      width: var(--bar-width) !important;
+    }
+
+    .skill-percent {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .skill-percent.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Services: stacked slide from bottom with progressive offset */
+    .reveal-service {
+      opacity: 0;
+      transform: translateY(100px) scale(0.96);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-service.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Estimator animated price */
+    .estimator-reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .estimator-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* FAQ: alternating slide from left/right */
+    .reveal-faq {
+      opacity: 0;
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-faq:nth-child(odd) {
+      transform: translateX(-100px) skewX(-3deg);
+    }
+
+    .reveal-faq:nth-child(even) {
+      transform: translateX(100px) skewX(3deg);
+    }
+
+    .reveal-faq.revealed {
+      opacity: 1;
+      transform: translateX(0) skewX(0deg);
+    }
+
+    /* Contact form: pop-up scale + bounce */
+    .reveal-contact {
+      opacity: 0;
+      transform: scale(0.7) translateY(50px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .reveal-contact.revealed {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Counter number shimmer effect */
+    @keyframes shimmer-number {
+      0% {
+        background-position: -200% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    .counter-shimmer {
+      background: linear-gradient(90deg, #ffffff 30%, var(--accent) 50%, #ffffff 70%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer-number 2s ease-in-out 1;
+    }
   </style>
 </head>
 
@@ -771,10 +944,9 @@
       </div>
 
       <!-- Main Title -->
-      <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.08] mb-6 text-center">
-        Crafting digital <br class="hidden sm:block">
-        <span class="serif font-normal text-indigo-300 hover:text-indigo-200 transition-colors">experiences</span>
-        <span class="gradient-text font-black"> that resonate.</span>
+      <h1 id="heroTitle"
+        class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[1.08] mb-6 text-center">
+        <span id="typewriterTarget"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
       </h1>
 
       <!-- Subtitle -->
@@ -925,23 +1097,27 @@
   <!-- ================= STATS COUNTER SECTION ================= -->
   <section class="py-20 px-6 max-w-6xl mx-auto">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div class="glow-card p-6 text-center interactive">
-        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="5" data-suffix="+">0
+      <div class="glow-card p-6 text-center interactive reveal-stat">
+        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="5" data-suffix="+"
+          data-anim="bounce">0
         </div>
         <div class="text-gray-400 text-xs sm:text-sm mt-2 font-medium">Years Experience</div>
       </div>
-      <div class="glow-card p-6 text-center interactive">
-        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="40" data-suffix="+">0
+      <div class="glow-card p-6 text-center interactive reveal-stat">
+        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="40" data-suffix="+"
+          data-anim="slot">0
         </div>
         <div class="text-gray-400 text-xs sm:text-sm mt-2 font-medium">Completed Projects</div>
       </div>
-      <div class="glow-card p-6 text-center interactive">
-        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="99" data-suffix="%">0
+      <div class="glow-card p-6 text-center interactive reveal-stat">
+        <div class="text-4xl md:text-5xl font-black text-white counter font-mono" data-target="99" data-suffix="%"
+          data-anim="wave">0
         </div>
         <div class="text-gray-400 text-xs sm:text-sm mt-2 font-medium">Satisfaction Rate</div>
       </div>
-      <div class="glow-card p-6 text-center interactive">
-        <div class="text-4xl md:text-5xl font-black gradient-text counter font-mono" data-target="100" data-suffix="k+">
+      <div class="glow-card p-6 text-center interactive reveal-stat">
+        <div class="text-4xl md:text-5xl font-black gradient-text counter font-mono" data-target="100" data-suffix="k+"
+          data-anim="shimmer">
           0</div>
         <div class="text-gray-400 text-xs sm:text-sm mt-2 font-medium">Lines of Clean Code</div>
       </div>
@@ -985,7 +1161,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
       <!-- Project 1 -->
       <div
-        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
         data-category="fullstack" data-id="p1">
         <div>
           <div
@@ -1047,7 +1223,7 @@
 
       <!-- Project 2 -->
       <div
-        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
         data-category="creative" data-id="p2">
         <div>
           <div
@@ -1100,7 +1276,7 @@
 
       <!-- Project 3 -->
       <div
-        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
         data-category="ai" data-id="p3">
         <div>
           <div
@@ -1157,7 +1333,7 @@
 
       <!-- Project 4 -->
       <div
-        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
         data-category="fullstack" data-id="p4">
         <div>
           <div
@@ -1211,7 +1387,7 @@
 
       <!-- Project 5 -->
       <div
-        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
         data-category="creative" data-id="p5">
         <div>
           <div
@@ -1267,7 +1443,7 @@
 
       <!-- Project 6 -->
       <div
-        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer"
+        class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
         data-category="fullstack" data-id="p6">
         <div>
           <div
@@ -1410,11 +1586,11 @@
             <div>
               <div class="flex justify-between text-xs font-medium mb-1.5">
                 <span class="text-white">React, Next.js &amp; TypeScript</span>
-                <span class="text-indigo-400 font-mono">98%</span>
+                <span class="text-indigo-400 font-mono skill-percent">98%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
-                <div
-                  class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 w-[98%] transition-all duration-1000">
+                <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 skill-bar-fill"
+                  style="--bar-width: 98%">
                 </div>
               </div>
             </div>
@@ -1422,11 +1598,11 @@
             <div>
               <div class="flex justify-between text-xs font-medium mb-1.5">
                 <span class="text-white">Modern CSS, Tailwind &amp; Responsive Layouts</span>
-                <span class="text-purple-400 font-mono">95%</span>
+                <span class="text-purple-400 font-mono skill-percent">95%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
-                <div
-                  class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 w-[95%] transition-all duration-1000">
+                <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 skill-bar-fill"
+                  style="--bar-width: 95%">
                 </div>
               </div>
             </div>
@@ -1434,11 +1610,11 @@
             <div>
               <div class="flex justify-between text-xs font-medium mb-1.5">
                 <span class="text-white">Motion Design, GSAP &amp; Three.js / WebGL</span>
-                <span class="text-pink-400 font-mono">90%</span>
+                <span class="text-pink-400 font-mono skill-percent">90%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
-                <div
-                  class="h-full rounded-full bg-gradient-to-r from-pink-500 to-rose-500 w-[90%] transition-all duration-1000">
+                <div class="h-full rounded-full bg-gradient-to-r from-pink-500 to-rose-500 skill-bar-fill"
+                  style="--bar-width: 90%">
                 </div>
               </div>
             </div>
@@ -1446,11 +1622,11 @@
             <div>
               <div class="flex justify-between text-xs font-medium mb-1.5">
                 <span class="text-white">Backend APIs, Node.js, Database &amp; Cloud</span>
-                <span class="text-emerald-400 font-mono">88%</span>
+                <span class="text-emerald-400 font-mono skill-percent">88%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
-                <div
-                  class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 w-[88%] transition-all duration-1000">
+                <div class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 skill-bar-fill"
+                  style="--bar-width: 88%">
                 </div>
               </div>
             </div>
@@ -1547,7 +1723,7 @@
     <div class="space-y-4">
       <!-- Service 1 -->
       <div
-        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive">
+        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive reveal-service">
         <div class="flex items-start sm:items-center gap-5">
           <div
             class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0 group-hover:scale-110 transition-transform">
@@ -1573,7 +1749,7 @@
 
       <!-- Service 2 -->
       <div
-        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive">
+        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive reveal-service">
         <div class="flex items-start sm:items-center gap-5">
           <div
             class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0 group-hover:scale-110 transition-transform">
@@ -1599,7 +1775,7 @@
 
       <!-- Service 3 -->
       <div
-        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive">
+        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive reveal-service">
         <div class="flex items-start sm:items-center gap-5">
           <div
             class="w-12 h-12 rounded-2xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 shrink-0 group-hover:scale-110 transition-transform">
@@ -1625,7 +1801,7 @@
 
       <!-- Service 4 -->
       <div
-        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive">
+        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive reveal-service">
         <div class="flex items-start sm:items-center gap-5">
           <div
             class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-110 transition-transform">
@@ -1653,7 +1829,7 @@
 
   <!-- ================= INTERACTIVE ESTIMATOR ================= -->
   <section id="calculator" class="py-20 px-6 max-w-4xl mx-auto relative">
-    <div class="glow-card p-8 sm:p-12 relative overflow-hidden">
+    <div class="glow-card p-8 sm:p-12 relative overflow-hidden estimator-reveal">
       <div class="text-center max-w-xl mx-auto mb-10">
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold mb-3">
@@ -1772,7 +1948,7 @@
     </div>
 
     <div class="space-y-4">
-      <div class="accordion glow-card overflow-hidden">
+      <div class="accordion glow-card overflow-hidden reveal-faq">
         <button class="accordion-trigger w-full p-6 flex justify-between items-center text-left interactive"
           aria-expanded="false">
           <span class="text-base sm:text-lg font-bold text-white">What is your typical project workflow?</span>
@@ -1787,7 +1963,7 @@
         </div>
       </div>
 
-      <div class="accordion glow-card overflow-hidden">
+      <div class="accordion glow-card overflow-hidden reveal-faq">
         <button class="accordion-trigger w-full p-6 flex justify-between items-center text-left interactive"
           aria-expanded="false">
           <span class="text-base sm:text-lg font-bold text-white">What technologies do you specialize in?</span>
@@ -1802,7 +1978,7 @@
         </div>
       </div>
 
-      <div class="accordion glow-card overflow-hidden">
+      <div class="accordion glow-card overflow-hidden reveal-faq">
         <button class="accordion-trigger w-full p-6 flex justify-between items-center text-left interactive"
           aria-expanded="false">
           <span class="text-base sm:text-lg font-bold text-white">Do you work on fixed-scope contracts or
@@ -1817,7 +1993,7 @@
         </div>
       </div>
 
-      <div class="accordion glow-card overflow-hidden">
+      <div class="accordion glow-card overflow-hidden reveal-faq">
         <button class="accordion-trigger w-full p-6 flex justify-between items-center text-left interactive"
           aria-expanded="false">
           <span class="text-base sm:text-lg font-bold text-white">Can you collaborate with our existing engineering
@@ -1851,7 +2027,7 @@
       </p>
     </div>
 
-    <div class="glow-card p-8 sm:p-12 relative overflow-hidden">
+    <div class="glow-card p-8 sm:p-12 relative overflow-hidden reveal-contact">
       <form id="contactForm" class="relative z-10 space-y-6">
         <div class="grid md:grid-cols-2 gap-6">
           <div>
@@ -2078,7 +2254,7 @@
       if (!timeEl) return;
       const now = new Date();
       const timeStr = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      timeEl.textContent = `${timeStr} Dhaka`;
+      timeEl.textContent = `${timeStr} Local`;
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -2350,28 +2526,154 @@
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    /* ================= STATS NUMERICAL COUNTER ================= */
-    const counters = document.querySelectorAll('.counter');
-    const counterObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const el = e.target;
-          const target = parseInt(el.dataset.target, 10);
-          const suffix = el.dataset.suffix || '';
-          const duration = 1800;
-          const start = performance.now();
-          function step(now) {
-            const p = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = Math.floor(eased * target) + suffix;
-            if (p < 1) requestAnimationFrame(step);
+    /* ================= TYPEWRITER HERO ANIMATION ================= */
+    function initTypewriter() {
+      const target = document.getElementById('typewriterTarget');
+      if (!target) return;
+
+      const fullText = "Crafting digital experiences that resonate.";
+      let charIndex = 0;
+      target.textContent = "";
+
+      function typeChar() {
+        if (charIndex < fullText.length) {
+          const char = fullText.charAt(charIndex);
+          if (fullText.substring(charIndex).startsWith("experiences")) {
+            // Wrap 'experiences' in serif styling
+            const span = document.createElement('span');
+            span.className = 'serif font-normal text-indigo-300 hover:text-indigo-200 transition-colors';
+            span.textContent = "experiences";
+            target.appendChild(span);
+            charIndex += "experiences".length;
+          } else if (fullText.substring(charIndex).startsWith(" that resonate.")) {
+            // Wrap ' that resonate.' in gradient styling
+            const span = document.createElement('span');
+            span.className = 'gradient-text font-black';
+            span.textContent = " that resonate.";
+            target.appendChild(span);
+            charIndex += " that resonate.".length;
+          } else {
+            const textNode = document.createTextNode(char);
+            target.appendChild(textNode);
+            charIndex++;
           }
-          requestAnimationFrame(step);
-          counterObs.unobserve(el);
+          const speed = Math.floor(Math.random() * 40) + 35;
+          setTimeout(typeChar, speed);
+        }
+      }
+      setTimeout(typeChar, 400);
+    }
+    initTypewriter();
+
+    /* ================= STATS NUMERICAL COUNTER (DIFFERENT PER NUMBER) ================= */
+    function animateCounterDifferent(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      const animType = el.dataset.anim || 'bounce';
+
+      if (animType === 'bounce') {
+        // Animation 1: Elastic Bounce Finish (5+)
+        const duration = 1600;
+        const start = performance.now();
+        function stepBounce(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p) * Math.sin((p * 10 - 0.75) * (2 * Math.PI) / 3);
+          const current = Math.max(0, Math.min(target, Math.floor(eased * target)));
+          el.textContent = current + suffix;
+          if (p < 1) requestAnimationFrame(stepBounce);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(stepBounce);
+      } else if (animType === 'slot') {
+        // Animation 2: Slot Machine Scramble (40+)
+        let frame = 0;
+        const totalFrames = 35;
+        const interval = setInterval(() => {
+          frame++;
+          if (frame < totalFrames) {
+            const randomVal = Math.floor(Math.random() * 90) + 10;
+            el.textContent = randomVal + suffix;
+          } else {
+            clearInterval(interval);
+            el.textContent = target + suffix;
+          }
+        }, 45);
+      } else if (animType === 'wave') {
+        // Animation 3: Exponential Acceleration Wave (99%)
+        const duration = 1400;
+        const start = performance.now();
+        function stepWave(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = Math.pow(p, 3);
+          const current = Math.floor(eased * target);
+          el.textContent = current + suffix;
+          if (p < 1) requestAnimationFrame(stepWave);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(stepWave);
+      } else if (animType === 'shimmer') {
+        // Animation 4: Step Progression with Shimmer effect (100k+)
+        const duration = 1800;
+        const start = performance.now();
+        el.classList.add('counter-shimmer');
+        function stepShimmer(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 4);
+          const current = Math.floor(eased * target);
+          el.textContent = current + suffix;
+          if (p < 1) requestAnimationFrame(stepShimmer);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(stepShimmer);
+      }
+    }
+
+    /* ================= SCROLL OBSERVERS FOR ANIMATED SECTIONS ================= */
+    const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+    const generalScrollObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, idx) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = el.dataset.delay || (idx * 90);
+          setTimeout(() => {
+            el.classList.add('revealed');
+
+            if (el.classList.contains('reveal-stat')) {
+              const counterEl = el.querySelector('.counter');
+              if (counterEl && !counterEl.dataset.started) {
+                counterEl.dataset.started = 'true';
+                animateCounterDifferent(counterEl);
+              }
+            }
+          }, delay);
+
+          observer.unobserve(el);
         }
       });
-    }, { threshold: 0.3 });
-    counters.forEach(c => counterObs.observe(c));
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-project, .reveal-stat, .reveal-service, .reveal-faq, .reveal-contact, .estimator-reveal').forEach((el, index) => {
+      el.dataset.delay = (index % 4) * 120;
+      generalScrollObserver.observe(el);
+    });
+
+    const skillObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
+            setTimeout(() => bar.classList.add('animated'), i * 150);
+          });
+          document.querySelectorAll('.skill-percent').forEach((percent, i) => {
+            setTimeout(() => percent.classList.add('animated'), i * 150);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) skillObserver.observe(aboutSection);
 
     /* ================= ACCORDION FAQ ================= */
     document.querySelectorAll('.accordion-trigger').forEach(btn => {
