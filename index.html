@@ -3808,14 +3808,14 @@
     }
 
     /* ================= SCROLL OBSERVERS FOR ANIMATED SECTIONS ================= */
-    const observerOptions = { threshold: 0.02, rootMargin: "0px 0px 40px 0px" };
+    const observerOptions = { threshold: 0.05, rootMargin: "0px 0px -20px 0px" };
 
     function triggerMobileScrollReveals() {
       const revealElements = document.querySelectorAll('.reveal-header, .reveal-project, .reveal-stat, .reveal-service, .reveal-faq, .reveal-contact, .estimator-reveal, .reveal-bio, .reveal-location, .reveal-focus, .estimator-card');
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
       revealElements.forEach(el => {
         const rect = el.getBoundingClientRect();
-        if (rect.top <= windowHeight * 0.92 && rect.bottom >= 0) {
+        if (rect.top <= windowHeight * 0.92 && rect.bottom >= 30) {
           el.classList.add('revealed');
           if (el.classList.contains('reveal-stat')) {
             const counterEl = el.querySelector('.counter');
@@ -3824,6 +3824,8 @@
               animateCounterDifferent(counterEl);
             }
           }
+        } else {
+          el.classList.remove('revealed');
         }
       });
 
@@ -3831,7 +3833,7 @@
       const aboutSec = document.getElementById('about');
       if (aboutSec) {
         const aboutRect = aboutSec.getBoundingClientRect();
-        if (aboutRect.top <= windowHeight * 0.88 && aboutRect.bottom >= 0) {
+        if (aboutRect.top <= windowHeight * 0.88 && aboutRect.bottom >= 40) {
           skillBars.forEach((bar, i) => setTimeout(() => bar.classList.add('animated'), i * 80));
           document.querySelectorAll('.skill-percent').forEach((percent, i) => {
             setTimeout(() => {
@@ -3842,6 +3844,9 @@
           document.querySelectorAll('.about-counter').forEach((counter, i) => {
             setTimeout(() => animateAboutCounter(counter), 150 + i * 120);
           });
+        } else {
+          skillBars.forEach(bar => bar.classList.remove('animated'));
+          document.querySelectorAll('.skill-percent').forEach(percent => percent.classList.remove('animated'));
         }
       }
     }
@@ -3851,24 +3856,20 @@
     document.addEventListener('DOMContentLoaded', triggerMobileScrollReveals);
     setTimeout(triggerMobileScrollReveals, 200);
 
-    const generalScrollObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry, idx) => {
+    const generalScrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target;
         if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = el.dataset.delay || (idx * 90);
-          setTimeout(() => {
-            el.classList.add('revealed');
-
-            if (el.classList.contains('reveal-stat')) {
-              const counterEl = el.querySelector('.counter');
-              if (counterEl && !counterEl.dataset.started) {
-                counterEl.dataset.started = 'true';
-                animateCounterDifferent(counterEl);
-              }
+          el.classList.add('revealed');
+          if (el.classList.contains('reveal-stat')) {
+            const counterEl = el.querySelector('.counter');
+            if (counterEl && !counterEl.dataset.started) {
+              counterEl.dataset.started = 'true';
+              animateCounterDifferent(counterEl);
             }
-          }, delay);
-
-          observer.unobserve(el);
+          }
+        } else {
+          el.classList.remove('revealed');
         }
       });
     }, observerOptions);
@@ -3886,7 +3887,7 @@
       generalScrollObserver.observe(el);
     });
 
-    const skillObserver = new IntersectionObserver((entries, observer) => {
+    const skillObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           document.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
@@ -3901,10 +3902,12 @@
           document.querySelectorAll('.about-counter').forEach((counter, i) => {
             setTimeout(() => animateAboutCounter(counter), 250 + i * 180);
           });
-          observer.unobserve(entry.target);
+        } else {
+          document.querySelectorAll('.skill-bar-fill').forEach(bar => bar.classList.remove('animated'));
+          document.querySelectorAll('.skill-percent').forEach(percent => percent.classList.remove('animated'));
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
 
     const aboutSection = document.getElementById('about');
     if (aboutSection) skillObserver.observe(aboutSection);
