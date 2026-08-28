@@ -109,7 +109,7 @@
         radial-gradient(circle at 88% 44%, rgba(var(--accent-2-rgb), 0.09), transparent 30rem),
         radial-gradient(circle at 45% 100%, rgba(236, 72, 153, 0.06), transparent 26rem);
       background-size: 180% 180%;
-      animation: body-gradient-flow 22s ease-in-out infinite alternate;
+      animation: body-gradient-flow 6s ease-in-out infinite alternate;
       color: var(--text-main);
       overflow-x: hidden;
       width: 100%;
@@ -264,7 +264,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: gradient-shift 6s ease infinite alternate;
+      animation: gradient-shift 2.5s ease infinite alternate;
     }
 
     .gradient-text-alt {
@@ -273,7 +273,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: gradient-shift 7s ease-in-out infinite alternate;
+      animation: gradient-shift 3s ease-in-out infinite alternate;
     }
 
     @keyframes gradient-shift {
@@ -289,7 +289,7 @@
     /* Ambient gradient movement keeps the visual system alive without overpowering content. */
     .animated-gradient {
       background-size: 240% 240%;
-      animation: ambient-gradient 12s ease-in-out infinite alternate;
+      animation: ambient-gradient 4.5s ease-in-out infinite alternate;
     }
 
     @keyframes ambient-gradient {
@@ -804,6 +804,7 @@
     }
 
     @keyframes skill-scan {
+
       0%,
       35% {
         left: -35%;
@@ -861,7 +862,7 @@
     [class*="bg-gradient-"],
     .animated-gradient {
       background-size: 240% 240%;
-      animation: ambient-gradient 12s ease-in-out infinite alternate;
+      animation: ambient-gradient 4.5s ease-in-out infinite alternate;
     }
 
     /* The six About cards behave like interactive objects, not static reveals. */
@@ -884,297 +885,93 @@
     }
 
     .tool-card {
-      animation: tool-card-float 6s ease-in-out infinite;
+      animation: tool-card-float 3.5s ease-in-out infinite, toolkit-border-glow 3s ease-in-out infinite alternate;
       background-image:
-        radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(255, 255, 255, 0.15), transparent 8rem),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(var(--accent-rgb), 0.08));
-    }
-
-    .tool-card:nth-child(2) {
-      animation-delay: -1.5s;
-    }
-
-    .tool-card:nth-child(3) {
-      animation-delay: -3s;
-    }
-
-    .tool-card:nth-child(4) {
-      animation-delay: -4.5s;
-    }
-
-    .skill-card:nth-child(2) {
-      animation-delay: -1.2s;
-    }
-
-    .skill-card:nth-child(3) {
-      animation-delay: -2.4s;
-    }
-
-    .skill-card:nth-child(4) {
-      animation-delay: -3.6s;
-    }
-
-    .skill-card:nth-child(5) {
-      animation-delay: -4.8s;
-    }
-
-    .skill-card:hover,
-    .tool-card:hover {
-      --lift: -8px;
-      border-color: rgba(var(--accent-rgb), 0.5);
-      box-shadow: 0 22px 45px -18px rgba(var(--accent-rgb), 0.5);
-    }
-
-    .skill-card::after,
-    .tool-card::after {
-      content: "";
-      position: absolute;
-      inset: -80% 35% auto -35%;
-      height: 180%;
-      background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.16), transparent 65%);
-      transform: translateX(-120%) rotate(18deg);
-      transition: transform 0.8s ease;
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .skill-card:hover::after,
-    .tool-card:hover::after {
-      transform: translateX(180%) rotate(18deg);
-    }
-
-    .skill-card i {
-      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
-    }
-
-    .skill-card:hover i {
-      transform: translateZ(22px) rotate(-8deg) scale(1.18);
-      filter: drop-shadow(0 0 10px currentColor);
-    }
-
-    .skill-card > *,
-    .tool-card > * {
+        radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(255, 255, 255, 0.18), transparent 8rem),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(var(--accent-rgb), 0.12));
       position: relative;
-      z-index: 4;
-    }
-
-    .skill-card.is-selected,
-    .tool-card.is-selected {
-      --lift: -10px;
-      border-color: rgba(var(--accent-rgb), 0.75);
-      box-shadow: 0 24px 55px -18px rgba(var(--accent-rgb), 0.65), inset 0 0 24px rgba(var(--accent-rgb), 0.08);
-    }
-
-    .skill-card.is-selected .skill-meter-fill {
-      animation: meter-pulse 1.2s ease-in-out infinite alternate;
-    }
-
-    .skill-card:focus-visible,
-    .tool-card:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 4px;
-    }
-
-    .skill-meter {
-      height: 4px;
-      margin-top: 1.25rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.1);
       overflow: hidden;
     }
 
-    .skill-meter-fill {
-      display: block;
-      width: var(--skill-level);
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
-      background-size: 200% 100%;
-      animation: meter-flow 4s linear infinite;
-      transform-origin: left center;
-    }
-
-    .skill-card .skill-hint,
-    .tool-card .tool-hint {
-      opacity: 0;
-      max-height: 0;
-      transform: translateY(8px);
-      transition: opacity 0.3s ease, max-height 0.35s ease, transform 0.35s ease;
-      overflow: hidden;
-    }
-
-    .skill-card:hover .skill-hint,
-    .skill-card.is-selected .skill-hint,
-    .tool-card:hover .tool-hint,
-    .tool-card.is-selected .tool-hint {
-      opacity: 1;
-      max-height: 2rem;
-      transform: translateY(0);
-    }
-
-    @keyframes meter-flow {
-      to {
-        background-position: 200% 0;
-      }
-    }
-
-    @keyframes meter-pulse {
-      from {
-        filter: brightness(1);
-        transform: scaleY(1);
-      }
-
-      to {
-        filter: brightness(1.45);
-        transform: scaleY(1.8);
-      }
-    }
-
-    @keyframes skill-card-breathe {
-      0%,
-      100% {
-        box-shadow: 0 10px 28px -22px rgba(var(--accent-rgb), 0.05);
-      }
-
-      50% {
-        box-shadow: 0 18px 38px -22px rgba(var(--accent-rgb), 0.32);
-      }
-    }
-
-    @keyframes tool-card-float {
-      0%,
-      100% {
-        box-shadow: 0 10px 28px -22px rgba(var(--accent-rgb), 0.12);
-      }
-
-      50% {
-        box-shadow: 0 18px 34px -20px rgba(var(--accent-rgb), 0.32);
-      }
-    }
-
-    .about-counter {
+    .tool-card .tool-badge-text {
       display: inline-block;
-      opacity: 0;
-      transform: translateY(14px) scale(0.85);
-      transition: opacity 0.35s ease, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: tool-icon-bounce 2.5s ease-in-out infinite alternate;
     }
 
-    .about-counter.animated {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    .tool-card:hover .tool-badge-text {
+      transform: scale(1.35) rotate(10deg);
+      filter: drop-shadow(0 0 14px currentColor);
     }
 
-    /* Services: a scroll-driven 3D orbit. The page scroll is the only control. */
-    .services-orbit-shell {
-      position: relative;
-      isolation: isolate;
-      height: 300vh;
+    @keyframes tool-icon-bounce {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-4px) scale(1.1);
+      }
+
+      100% {
+        transform: translateY(2px) scale(0.95);
+      }
     }
 
-    .services-orbit-stage {
-      position: sticky;
-      top: 10vh;
-      height: 78vh;
-      min-height: 500px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      perspective: 1400px;
+    @keyframes toolkit-border-glow {
+      0% {
+        border-color: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(var(--accent-rgb), 0.05);
+      }
+
+      50% {
+        border-color: rgba(var(--accent-rgb), 0.5);
+        box-shadow: 0 8px 25px rgba(var(--accent-rgb), 0.3), inset 0 0 16px rgba(var(--accent-2-rgb), 0.18);
+      }
+
+      100% {
+        border-color: rgba(var(--accent-2-rgb), 0.4);
+        box-shadow: 0 6px 20px rgba(var(--accent-2-rgb), 0.25), inset 0 0 12px rgba(var(--accent-rgb), 0.12);
+      }
     }
 
-    .services-orbit-stage::before {
-      content: "";
+    .service-box-animated {
+      animation: service-box-pulse 6s ease-in-out infinite alternate;
+    }
+
+    .service-glow-aura {
       position: absolute;
-      width: min(60vw, 34rem);
-      height: min(60vw, 34rem);
-      border: 1px solid rgba(var(--accent-rgb), 0.22);
-      border-radius: 50%;
-      box-shadow:
-        0 0 80px rgba(var(--accent-rgb), 0.13),
-        inset 0 0 80px rgba(var(--accent-2-rgb), 0.08);
-      transform: rotateX(68deg) translateZ(-160px);
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(var(--accent-rgb), 0.08), transparent 60%);
       pointer-events: none;
-      z-index: 0;
+      animation: service-aura-rotate 10s linear infinite;
     }
 
-    .services-orbit-stage::after {
-      content: "SCROLL TO ORBIT";
-      position: absolute;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255, 255, 255, 0.38);
-      font: 600 0.62rem/1 'JetBrains Mono', monospace;
-      letter-spacing: 0.22em;
-      pointer-events: none;
-      z-index: 5;
+    @keyframes service-aura-rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
-    .services-orbit {
-      --orbit-radius: min(34vw, 340px);
-      position: relative;
-      width: min(86vw, 920px);
-      height: min(58vh, 480px);
-      transform-style: preserve-3d;
-      z-index: 2;
-      will-change: transform;
-      transition: transform 0.12s linear;
-    }
+    @keyframes service-box-pulse {
+      0% {
+        transform: scale(1);
+      }
 
-    .services-orbit::before {
-      content: "";
-      position: absolute;
-      width: 11rem;
-      height: 11rem;
-      top: 50%;
-      left: 50%;
-      border-radius: 50%;
-      transform: translate(-50%, -50%) translateZ(-140px);
-      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.2), rgba(var(--accent-2-rgb), 0.06) 42%, transparent 70%);
-      filter: blur(3px);
-      pointer-events: none;
-    }
+      50% {
+        transform: scale(1.01);
+      }
 
-    .service-slide {
-      --slide-angle: 0deg;
-      --orbit-opacity: 0.2;
-      --orbit-scale: 0.72;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: min(76vw, 760px);
-      min-height: 250px;
-      opacity: var(--orbit-opacity);
-      transform: translate(-50%, -50%) rotateY(var(--slide-angle)) translateZ(var(--orbit-radius)) scale(var(--orbit-scale));
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      filter: saturate(0.55) brightness(0.55) blur(0.4px);
-      transition: opacity 0.42s ease, filter 0.42s ease, box-shadow 0.42s ease;
-      will-change: transform, opacity;
-    }
-
-    .service-slide.is-center {
-      --orbit-opacity: 1;
-      --orbit-scale: 1;
-      z-index: 4;
-      filter: saturate(1) brightness(1) blur(0);
-      box-shadow: 0 30px 80px -30px rgba(var(--accent-rgb), 0.6);
-    }
-
-    .services-orbit .service-slide:hover {
-      transform: translate(-50%, -50%) rotateY(var(--slide-angle)) translateZ(calc(var(--orbit-radius) + 18px)) scale(var(--orbit-scale));
-    }
-
-    .service-orbit-readout {
-      position: absolute;
-      top: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      white-space: nowrap;
-      color: rgba(255, 255, 255, 0.5);
-      font: 500 0.68rem/1 'JetBrains Mono', monospace;
-      letter-spacing: 0.12em;
+      100% {
+        transform: scale(1);
+      }
     }
 
     /* Estimator uses a rolling price and a separate timeline glide */
@@ -1302,6 +1099,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
@@ -1543,7 +1341,7 @@
       <span
         class="text-xs uppercase tracking-[0.25em] text-gray-400 font-semibold flex items-center justify-center gap-2">
         <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping"></span>
-         Languages, Frameworks &amp; Design Tools
+        Languages, Frameworks &amp; Design Tools
       </span>
     </div>
 
@@ -1551,79 +1349,79 @@
     <div class="marquee-container mb-4">
       <div class="marquee-track">
         <div class="flex items-center">
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">☕</span>
-             Java <span class="text-[10px] text-red-200/70">• primary</span></div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-yellow-500/20 text-yellow-300">JS</span>
-             JavaScript</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">HTML</span>
-             HTML5</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">CSS</span>
-             CSS3</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">PHP</span>
-             PHP</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-green-500/20 text-green-400">Py</span>
-             Python</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-gray-500/20 text-gray-300">C</span>
-             C</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-400/20 text-orange-200">◉</span>
-             Jupyter Notebook</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">☕</span>
+            Java <span class="text-[10px] text-red-200/70">• primary</span></div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-yellow-500/20 text-yellow-300">JS</span>
+            JavaScript</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">HTML</span>
+            HTML5</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">CSS</span>
+            CSS3</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">PHP</span>
+            PHP</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-green-500/20 text-green-400">Py</span>
+            Python</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-gray-500/20 text-gray-300">C</span>
+            C</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-400/20 text-orange-200">◉</span>
+            Jupyter Notebook</div>
         </div>
-         <div class="flex items-center">
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">☕</span>
-             Java <span class="text-[10px] text-red-200/70">• primary</span></div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-yellow-500/20 text-yellow-300">JS</span>
-             JavaScript</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">HTML</span>
-             HTML5</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">CSS</span>
-             CSS3</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">PHP</span>
-             PHP</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-green-500/20 text-green-400">Py</span>
-             Python</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-gray-500/20 text-gray-300">C</span>
-             C</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-400/20 text-orange-200">◉</span>
-             Jupyter Notebook</div>
-         </div>
+        <div class="flex items-center">
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">☕</span>
+            Java <span class="text-[10px] text-red-200/70">• primary</span></div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-yellow-500/20 text-yellow-300">JS</span>
+            JavaScript</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">HTML</span>
+            HTML5</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">CSS</span>
+            CSS3</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">PHP</span>
+            PHP</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-green-500/20 text-green-400">Py</span>
+            Python</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-gray-500/20 text-gray-300">C</span>
+            C</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-400/20 text-orange-200">◉</span>
+            Jupyter Notebook</div>
+        </div>
       </div>
     </div>
 
     <!-- Row 2: Reverse Infinite Marquee -->
     <div class="marquee-container">
       <div class="marquee-track reverse">
-         <div class="flex items-center">
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span>
-             React</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-amber-500/20 text-amber-400">⚡</span>
-             Vite</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-400/20 text-cyan-300">🌊</span>
-             Tailwind CSS</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-400">◈</span>
-             Spring Boot</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">◆</span>
-             MySQL / JPA</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
-             Firebase</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-300">S</span>
-             Supabase</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">✦</span>
-             CryptoJS / JSEncrypt</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">Ai</span>
-             Adobe Illustrator</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">Ps</span>
-             Adobe Photoshop</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-300">Ae</span>
-             After Effects</div>
-           <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">Pr</span>
-             Premiere Pro</div>
+        <div class="flex items-center">
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span>
+            React</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-amber-500/20 text-amber-400">⚡</span>
+            Vite</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-400/20 text-cyan-300">🌊</span>
+            Tailwind CSS</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-400">◈</span>
+            Spring Boot</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">◆</span>
+            MySQL / JPA</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
+            Firebase</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-300">S</span>
+            Supabase</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">✦</span>
+            CryptoJS / JSEncrypt</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">Ai</span>
+            Adobe Illustrator</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">Ps</span>
+            Adobe Photoshop</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-300">Ae</span>
+            After Effects</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">Pr</span>
+            Premiere Pro</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-fuchsia-500/20 text-fuchsia-300">≈</span>
             Morphing Animation Effects</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">✦</span>
             Microinteractions</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">◇</span>
             Faux 3D Animation Effects</div>
-         </div>
+        </div>
         <div class="flex items-center">
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span>
             React</div>
@@ -1811,12 +1609,11 @@
         </div>
         <div>
           <div class="flex flex-wrap gap-2 mb-4">
-            <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Java</span>
-            <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Spring Boot</span>
-            <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Spring Data JPA</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Java</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Spring
+              Boot</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Spring Data
+              JPA</span>
             <span
               class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">MySQL</span>
           </div>
@@ -2058,28 +1855,50 @@
           Engineering with <br>
           <span class="serif font-normal text-indigo-300">design intent.</span>
         </h2>
-        <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
-          <p>
-            I am <strong class="text-white font-semibold">Mohammad Fuad Hasan</strong>, a graduate of
-            <strong>Computing and Information System (CIS)</strong> at <strong>Daffodil International
-              University</strong>.
-          </p>
-          <p>
-            I bridge the gap between software engineering, AI integrations, and responsive UI design. My work ranges
-            from AI-assisted faculty tools and cryptographic security portals to full-stack web applications and
-            interactive systems.
-          </p>
+
+        <!-- Animated Bio Glass Container -->
+        <div
+          class="p-6 rounded-3xl bg-gradient-to-br from-white/[0.04] via-indigo-950/20 to-black border border-indigo-500/30 backdrop-blur-md shadow-2xl relative overflow-hidden group hover:border-indigo-400/60 transition-all duration-500">
+          <div
+            class="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/25 transition-all">
+          </div>
+          <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed relative z-10">
+            <p>
+              I am <span class="gradient-text font-extrabold text-lg tracking-wide inline-block animate-pulse">Mohammad
+                Fuad Hasan</span> — CIS Graduate from <strong
+                class="text-indigo-300 border-b border-indigo-500/40 pb-0.5">Daffodil International University</strong>.
+            </p>
+            <p class="text-gray-300">
+              I bridge <span
+                class="text-white font-medium px-2 py-0.5 rounded bg-indigo-500/20 border border-indigo-500/30">software
+                engineering</span>, <span
+                class="text-white font-medium px-2 py-0.5 rounded bg-purple-500/20 border border-purple-500/30">AI
+                integrations</span>, and <span
+                class="text-white font-medium px-2 py-0.5 rounded bg-pink-500/20 border border-pink-500/30">motion UI
+                design</span> into responsive web applications.
+            </p>
+          </div>
+
+          <!-- Animated Status Pill -->
+          <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs relative z-10">
+            <span class="inline-flex items-center gap-1.5 text-emerald-400 font-mono">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Profile Active
+            </span>
+            <span class="text-gray-400 font-mono">CIS • Software &amp; Motion</span>
+          </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 pt-4">
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+        <div class="grid grid-cols-2 gap-4 pt-2">
+          <div
+            class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-indigo-500/40 transition-colors">
             <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Location</div>
             <div class="text-base font-bold text-white mt-1">Dhaka, Bangladesh</div>
           </div>
-           <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 animated-gradient">
-             <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Creative Focus</div>
-             <div class="text-base font-bold text-white mt-1">Motion-first interfaces</div>
-           </div>
+          <div
+            class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 animated-gradient hover:border-purple-500/40 transition-colors">
+            <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Creative Focus</div>
+            <div class="text-base font-bold text-white mt-1">Motion-first interfaces</div>
+          </div>
         </div>
       </div>
 
@@ -2093,36 +1912,39 @@
               <i data-lucide="code-2" class="w-5 h-5"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">Architecture</h3>
-             <p class="text-xs text-gray-400 leading-relaxed">Modern modular code, TypeScript typing, and scalable
-               frontend systems.</p>
-             <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill" style="--skill-level: 88%"></span></div>
-             <div class="skill-hint text-[10px] text-indigo-300 font-mono mt-2">hover / tap to inspect</div>
+            <p class="text-xs text-gray-400 leading-relaxed">Modern modular code, TypeScript typing, and scalable
+              frontend systems.</p>
+            <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill"
+                style="--skill-level: 88%"></span></div>
+            <div class="skill-hint text-[10px] text-indigo-300 font-mono mt-2">hover / tap to inspect</div>
           </div>
 
-           <div class="glow-card p-6 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
-             data-skill-level="84%" aria-label="UI/UX Design proficiency: 84 percent">
+          <div class="glow-card p-6 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
+            data-skill-level="84%" aria-label="UI/UX Design proficiency: 84 percent">
             <div
               class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
               <i data-lucide="palette" class="w-5 h-5"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">UI/UX Design</h3>
-             <p class="text-xs text-gray-400 leading-relaxed">Harmonious typography, spatial systems, and glassmorphic
-               micro-details.</p>
-             <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill" style="--skill-level: 84%"></span></div>
-             <div class="skill-hint text-[10px] text-purple-300 font-mono mt-2">hover / tap to inspect</div>
+            <p class="text-xs text-gray-400 leading-relaxed">Harmonious typography, spatial systems, and glassmorphic
+              micro-details.</p>
+            <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill"
+                style="--skill-level: 84%"></span></div>
+            <div class="skill-hint text-[10px] text-purple-300 font-mono mt-2">hover / tap to inspect</div>
           </div>
 
-           <div class="glow-card p-6 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
-             data-skill-level="90%" aria-label="Performance proficiency: 90 percent">
+          <div class="glow-card p-6 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
+            data-skill-level="90%" aria-label="Performance proficiency: 90 percent">
             <div
               class="w-10 h-10 rounded-xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 mb-4">
               <i data-lucide="zap" class="w-5 h-5"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">Performance</h3>
-             <p class="text-xs text-gray-400 leading-relaxed">60fps animations, optimized bundle sizes, and Core Web
-               Vitals.</p>
-             <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill" style="--skill-level: 90%"></span></div>
-             <div class="skill-hint text-[10px] text-pink-300 font-mono mt-2">hover / tap to inspect</div>
+            <p class="text-xs text-gray-400 leading-relaxed">60fps animations, optimized bundle sizes, and Core Web
+              Vitals.</p>
+            <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill"
+                style="--skill-level: 90%"></span></div>
+            <div class="skill-hint text-[10px] text-pink-300 font-mono mt-2">hover / tap to inspect</div>
           </div>
         </div>
 
@@ -2139,7 +1961,7 @@
                 <span class="about-counter" data-about-target="92" data-about-suffix="%" data-about-anim="ease">0</span>
               </div>
             </div>
-             <div class="skill-hint text-[10px] text-indigo-300 font-mono mt-3">tap to focus this strength</div>
+            <div class="skill-hint text-[10px] text-indigo-300 font-mono mt-3">tap to focus this strength</div>
           </div>
           <div class="about-metric p-5 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
             aria-label="Mastery: 88 percent">
@@ -2150,10 +1972,11 @@
                   detail into one experience.</p>
               </div>
               <div class="text-4xl font-black text-white font-mono">
-                <span class="about-counter" data-about-target="88" data-about-suffix="%" data-about-anim="cascade">0</span>
+                <span class="about-counter" data-about-target="88" data-about-suffix="%"
+                  data-about-anim="cascade">0</span>
               </div>
             </div>
-             <div class="skill-hint text-[10px] text-purple-300 font-mono mt-3">tap to focus this strength</div>
+            <div class="skill-hint text-[10px] text-purple-300 font-mono mt-3">tap to focus this strength</div>
           </div>
           <div class="about-metric p-5 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
             aria-label="Primary language: Java">
@@ -2161,22 +1984,22 @@
               <div class="text-[11px] text-red-300 font-semibold uppercase tracking-[0.18em]">Primary Language</div>
               <div class="text-3xl font-black text-white font-mono mt-2">Java</div>
               <p class="text-xs text-gray-400 mt-1">Spring Boot · JPA · MySQL · Security</p>
-               <div class="skill-hint text-[10px] text-red-300 font-mono mt-3">tap to inspect the core stack</div>
+              <div class="skill-hint text-[10px] text-red-300 font-mono mt-3">tap to inspect the core stack</div>
             </div>
           </div>
         </div>
 
         <div class="glow-card p-6 sm:p-8">
           <h3 class="text-xl font-bold text-white mb-6 flex items-center justify-between">
-           <span>Language Proficiency &amp; Stack</span>
-           <span id="languageFocus" class="text-xs font-mono text-red-300 font-normal">select a row to focus</span>
+            <span>Language Proficiency &amp; Stack</span>
+            <span id="languageFocus" class="text-xs font-mono text-red-300 font-normal">select a row to focus</span>
           </h3>
 
           <div class="space-y-4">
-             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
-               data-language="Java + Spring Boot" aria-label="Focus Java and Spring Boot proficiency">
+            <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
+              data-language="Java + Spring Boot" aria-label="Focus Java and Spring Boot proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                 <span class="text-white">Java &amp; Spring Boot</span>
+                <span class="text-white">Java &amp; Spring Boot</span>
                 <span class="text-red-300 font-mono skill-percent">35%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -2186,10 +2009,10 @@
               </div>
             </div>
 
-             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
-               data-language="JavaScript" aria-label="Focus JavaScript proficiency">
+            <div class="language-skill" tabindex="0" role="button" aria-pressed="false" data-language="JavaScript"
+              aria-label="Focus JavaScript proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                 <span class="text-white">JavaScript</span>
+                <span class="text-white">JavaScript</span>
                 <span class="text-indigo-400 font-mono skill-percent">30%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -2199,10 +2022,10 @@
               </div>
             </div>
 
-             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
-               data-language="HTML5 + CSS3" aria-label="Focus HTML5 and CSS3 proficiency">
+            <div class="language-skill" tabindex="0" role="button" aria-pressed="false" data-language="HTML5 + CSS3"
+              aria-label="Focus HTML5 and CSS3 proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                 <span class="text-white">HTML5 &amp; CSS3</span>
+                <span class="text-white">HTML5 &amp; CSS3</span>
                 <span class="text-purple-400 font-mono skill-percent">20%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -2212,10 +2035,10 @@
               </div>
             </div>
 
-             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
-               data-language="Python + Jupyter" aria-label="Focus Python and Jupyter proficiency">
+            <div class="language-skill" tabindex="0" role="button" aria-pressed="false" data-language="Python + Jupyter"
+              aria-label="Focus Python and Jupyter proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                 <span class="text-white">Python &amp; Jupyter</span>
+                <span class="text-white">Python &amp; Jupyter</span>
                 <span class="text-pink-400 font-mono skill-percent">10%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -2225,10 +2048,10 @@
               </div>
             </div>
 
-             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
-               data-language="PHP + MySQL" aria-label="Focus PHP and MySQL proficiency">
+            <div class="language-skill" tabindex="0" role="button" aria-pressed="false" data-language="PHP + MySQL"
+              aria-label="Focus PHP and MySQL proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                 <span class="text-white">PHP &amp; MySQL</span>
+                <span class="text-white">PHP &amp; MySQL</span>
                 <span class="text-emerald-400 font-mono skill-percent">5%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -2245,29 +2068,33 @@
               <span class="text-[11px] text-gray-500 font-mono">creative practice</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-               <div class="tool-card rounded-xl border border-orange-400/20 bg-orange-500/10 px-3 py-3 text-center interactive"
-                 tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Illustrator motion toolkit">
-                <div class="text-sm font-bold text-orange-300">Ai</div>
+              <div
+                class="tool-card rounded-xl border border-orange-400/20 bg-orange-500/10 px-3 py-3 text-center interactive"
+                tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Illustrator motion toolkit">
+                <div class="tool-badge-text text-sm font-bold text-orange-300">Ai</div>
                 <div class="text-[10px] text-gray-300 mt-1">Illustrator</div>
-                 <div class="tool-hint text-[9px] text-orange-200 font-mono mt-2">vector motion</div>
+                <div class="tool-hint text-[9px] text-orange-200 font-mono mt-2">vector motion</div>
               </div>
-               <div class="tool-card rounded-xl border border-blue-400/20 bg-blue-500/10 px-3 py-3 text-center interactive"
-                 tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Photoshop motion toolkit">
-                <div class="text-sm font-bold text-blue-300">Ps</div>
+              <div
+                class="tool-card rounded-xl border border-blue-400/20 bg-blue-500/10 px-3 py-3 text-center interactive"
+                tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Photoshop motion toolkit">
+                <div class="tool-badge-text text-sm font-bold text-blue-300">Ps</div>
                 <div class="text-[10px] text-gray-300 mt-1">Photoshop</div>
-                 <div class="tool-hint text-[9px] text-blue-200 font-mono mt-2">image systems</div>
+                <div class="tool-hint text-[9px] text-blue-200 font-mono mt-2">image systems</div>
               </div>
-               <div class="tool-card rounded-xl border border-purple-400/20 bg-purple-500/10 px-3 py-3 text-center interactive"
-                 tabindex="0" role="button" aria-pressed="false" aria-label="After Effects motion toolkit">
-                <div class="text-sm font-bold text-purple-300">Ae</div>
+              <div
+                class="tool-card rounded-xl border border-purple-400/20 bg-purple-500/10 px-3 py-3 text-center interactive"
+                tabindex="0" role="button" aria-pressed="false" aria-label="After Effects motion toolkit">
+                <div class="tool-badge-text text-sm font-bold text-purple-300">Ae</div>
                 <div class="text-[10px] text-gray-300 mt-1">After Effects</div>
-                 <div class="tool-hint text-[9px] text-purple-200 font-mono mt-2">expressive motion</div>
+                <div class="tool-hint text-[9px] text-purple-200 font-mono mt-2">expressive motion</div>
               </div>
-               <div class="tool-card rounded-xl border border-indigo-400/20 bg-indigo-500/10 px-3 py-3 text-center interactive"
-                 tabindex="0" role="button" aria-pressed="false" aria-label="Premiere Pro motion toolkit">
-                <div class="text-sm font-bold text-indigo-300">Pr</div>
+              <div
+                class="tool-card rounded-xl border border-indigo-400/20 bg-indigo-500/10 px-3 py-3 text-center interactive"
+                tabindex="0" role="button" aria-pressed="false" aria-label="Premiere Pro motion toolkit">
+                <div class="tool-badge-text text-sm font-bold text-indigo-300">Pr</div>
                 <div class="text-[10px] text-gray-300 mt-1">Premiere Pro</div>
-                 <div class="tool-hint text-[9px] text-indigo-200 font-mono mt-2">rhythm + timing</div>
+                <div class="tool-hint text-[9px] text-indigo-200 font-mono mt-2">rhythm + timing</div>
               </div>
             </div>
           </div>
@@ -2323,6 +2150,9 @@
           class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">bio</button>
         <button data-cmd="skills"
           class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">skills</button>
+        <button data-cmd="toolkit"
+          class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-purple-300 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/40 transition-all">🎨
+          toolkit</button>
         <button data-cmd="projects"
           class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">projects</button>
         <button data-cmd="contact"
@@ -2360,118 +2190,138 @@
       </p>
     </div>
 
-    <div class="services-orbit-shell" id="servicesOrbitShell">
-      <div class="services-orbit-stage">
-        <div class="service-orbit-readout" id="servicePosition" aria-live="polite">01 / 04 · SCROLL TO EXPLORE</div>
-        <div class="services-orbit" id="servicesOrbit" aria-label="Scroll-driven services orbit">
+    <!-- Unique 3D Glass Animated Services Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="servicesContainer">
       <!-- Service 1 -->
       <div
-        class="glow-card service-slide p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive"
-        data-service-index="0">
-        <div class="flex items-start sm:items-center gap-5">
-          <div
-            class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0 group-hover:scale-110 transition-transform">
-            <i data-lucide="globe" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-3">
-              <span class="text-xs font-mono text-indigo-400">01</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors">
-                Full-Stack Web Development</h3>
+        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-950/40 via-black to-indigo-950/20 hover:border-indigo-400/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(99,102,241,0.25)]">
+        <div class="service-glow-aura"></div>
+        <div>
+          <div class="flex items-center justify-between mb-6">
+            <div
+              class="w-14 h-14 rounded-2xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+              <i data-lucide="globe" class="w-7 h-7"></i>
             </div>
-            <p class="text-gray-400 text-sm mt-1 max-w-xl">
-              Modern, scalable applications built with Java, Spring Boot, React, Vite, and JavaScript. Optimized for
-              speed, SEO, robust APIs, and production-ready security.
-            </p>
+            <span
+              class="text-sm font-mono text-indigo-400 font-bold px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20">01</span>
           </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors">
+            Full-Stack Web Development
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            Modern, scalable applications built with Java, Spring Boot, React, Vite, and JavaScript. Optimized for
+            speed, SEO, robust APIs, and production-ready security.
+          </p>
         </div>
-        <a href="#contact"
-          class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-indigo-600 transition-colors shrink-0">
-          Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-        </a>
+        <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+          <span
+            class="text-xs text-indigo-400 font-mono flex items-center gap-1 font-medium group-hover:translate-x-1 transition-transform">
+            ⚡ High-Performance Architecture
+          </span>
+          <a href="#contact"
+            class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/10 hover:bg-indigo-600 border border-white/15 text-white transition-all shadow-md">
+            Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
       </div>
 
       <!-- Service 2 -->
       <div
-        class="glow-card service-slide p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive"
-        data-service-index="1">
-        <div class="flex items-start sm:items-center gap-5">
-          <div
-            class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0 group-hover:scale-110 transition-transform">
-            <i data-lucide="layout" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-3">
-              <span class="text-xs font-mono text-purple-400">02</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">UI/UX
-                &amp; Design Systems</h3>
+        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-purple-500/20 bg-gradient-to-br from-purple-950/40 via-black to-purple-950/20 hover:border-purple-400/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(168,85,247,0.25)]">
+        <div class="service-glow-aura"></div>
+        <div>
+          <div class="flex items-center justify-between mb-6">
+            <div
+              class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 shadow-lg">
+              <i data-lucide="layout" class="w-7 h-7"></i>
             </div>
-            <p class="text-gray-400 text-sm mt-1 max-w-xl">
-              End-to-end user interface systems, design tokens, component libraries in Figma &amp; code, crafted with
-              high fidelity and pixel precision.
-            </p>
+            <span
+              class="text-sm font-mono text-purple-400 font-bold px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">02</span>
           </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+            UI/UX &amp; Design Systems
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            End-to-end user interface systems, design tokens, component libraries in Figma &amp; code, crafted with
+            high fidelity and pixel precision.
+          </p>
         </div>
-        <a href="#contact"
-          class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-purple-600 transition-colors shrink-0">
-          Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-        </a>
+        <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+          <span
+            class="text-xs text-purple-400 font-mono flex items-center gap-1 font-medium group-hover:translate-x-1 transition-transform">
+            🎨 Pixel-Perfect Interfaces
+          </span>
+          <a href="#contact"
+            class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/10 hover:bg-purple-600 border border-white/15 text-white transition-all shadow-md">
+            Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
       </div>
 
       <!-- Service 3 -->
       <div
-        class="glow-card service-slide p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive"
-        data-service-index="2">
-        <div class="flex items-start sm:items-center gap-5">
-          <div
-            class="w-12 h-12 rounded-2xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 shrink-0 group-hover:scale-110 transition-transform">
-            <i data-lucide="wand-2" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-3">
-              <span class="text-xs font-mono text-pink-400">03</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">
-                Expressive Typography Animations</h3>
+        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-pink-500/20 bg-gradient-to-br from-pink-950/40 via-black to-pink-950/20 hover:border-pink-400/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(236,72,153,0.25)]">
+        <div class="service-glow-aura"></div>
+        <div>
+          <div class="flex items-center justify-between mb-6">
+            <div
+              class="w-14 h-14 rounded-2xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-pink-400 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+              <i data-lucide="wand-2" class="w-7 h-7"></i>
             </div>
-            <p class="text-gray-400 text-sm mt-1 max-w-xl">
-              Kinetic type systems with morphing animation effects, thoughtful microinteractions, and faux 3D animation
-              effects that give digital products more depth through layered motion and perspective.
-            </p>
+            <span
+              class="text-sm font-mono text-pink-400 font-bold px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20">03</span>
           </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors">
+            Expressive Motion &amp; Typography
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            Kinetic type systems with morphing animation effects, thoughtful microinteractions, and faux 3D animation
+            effects that give digital products depth through layered motion.
+          </p>
         </div>
-        <a href="#contact"
-          class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-pink-600 transition-colors shrink-0">
-          Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-        </a>
+        <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+          <span
+            class="text-xs text-pink-400 font-mono flex items-center gap-1 font-medium group-hover:translate-x-1 transition-transform">
+            ✨ Morphing &amp; Faux 3D FX
+          </span>
+          <a href="#contact"
+            class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/10 hover:bg-pink-600 border border-white/15 text-white transition-all shadow-md">
+            Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
       </div>
 
       <!-- Service 4 -->
       <div
-        class="glow-card service-slide p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive"
-        data-service-index="3">
-        <div class="flex items-start sm:items-center gap-5">
-          <div
-            class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-110 transition-transform">
-            <i data-lucide="cpu" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-3">
-              <span class="text-xs font-mono text-emerald-400">04</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
-                Performance &amp; Code Audits</h3>
+        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-950/40 via-black to-emerald-950/20 hover:border-emerald-400/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(16,185,129,0.25)]">
+        <div class="service-glow-aura"></div>
+        <div>
+          <div class="flex items-center justify-between mb-6">
+            <div
+              class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 shadow-lg">
+              <i data-lucide="cpu" class="w-7 h-7"></i>
             </div>
-            <p class="text-gray-400 text-sm mt-1 max-w-xl">
-              In-depth architecture refactoring, bundle size trimming, React re-render optimization, and Core Web Vitals
-              remediation for 100/100 scores.
-            </p>
+            <span
+              class="text-sm font-mono text-emerald-400 font-bold px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">04</span>
           </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+            Performance &amp; Code Audits
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            In-depth architecture refactoring, bundle size trimming, React re-render optimization, and Core Web Vitals
+            remediation for 100/100 scores.
+          </p>
         </div>
-        <a href="#contact"
-          class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-emerald-600 transition-colors shrink-0">
-          Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-        </a>
-      </div>
-      </div>
+        <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+          <span
+            class="text-xs text-emerald-400 font-mono flex items-center gap-1 font-medium group-hover:translate-x-1 transition-transform">
+            🚀 60 FPS &amp; Web Vitals
+          </span>
+          <a href="#contact"
+            class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/10 hover:bg-emerald-600 border border-white/15 text-white transition-all shadow-md">
+            Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -2574,8 +2424,8 @@
           <div class="flex items-baseline gap-3 mt-1">
             <span class="text-4xl font-black text-white font-mono estimator-price-number" id="estimatePrice"
               aria-live="polite">$6,000</span>
-            <span class="text-xs text-indigo-300 font-medium estimate-time-slide" id="estimateTime"
-              aria-live="polite">~ 3 to 5 weeks</span>
+            <span class="text-xs text-indigo-300 font-medium estimate-time-slide" id="estimateTime" aria-live="polite">~
+              3 to 5 weeks</span>
           </div>
         </div>
         <a href="#contact"
@@ -2763,8 +2613,7 @@
 
     <!-- Social Link Badges -->
     <div class="flex flex-wrap justify-center gap-6 mt-12 text-xs sm:text-sm">
-      <a href="#work"
-        class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
+      <a href="#work" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
         <i data-lucide="briefcase-business" class="w-4 h-4"></i> Selected Work
       </a>
       <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
@@ -3471,69 +3320,11 @@
     });
 
     /* ================= SERVICES 3D SCROLL ORBIT ================= */
-    const servicesOrbitShell = document.getElementById('servicesOrbitShell');
-    const servicesOrbit = document.getElementById('servicesOrbit');
-    const serviceSlides = servicesOrbit ? [...servicesOrbit.querySelectorAll('.service-slide')] : [];
-    const servicePosition = document.getElementById('servicePosition');
-
-    if (servicesOrbitShell && servicesOrbit && serviceSlides.length) {
-      let orbitFrame = 0;
-      let activeService = 0;
-
-      serviceSlides.forEach((slide, index) => {
-        slide.style.setProperty('--slide-angle', `${index * (360 / serviceSlides.length)}deg`);
-      });
-
-      function updateServicesOrbit() {
-        orbitFrame = 0;
-        const viewportHeight = window.innerHeight;
-        const sectionStart = servicesOrbitShell.offsetTop - viewportHeight * 0.1;
-        const scrollTravel = Math.max(servicesOrbitShell.offsetHeight - viewportHeight * 0.78, 1);
-        const progress = Math.max(0, Math.min(1, (window.scrollY - sectionStart) / scrollTravel));
-        const rotation = -progress * 360;
-        servicesOrbit.style.transform = `rotateY(${rotation.toFixed(2)}deg)`;
-
-        let closestIndex = 0;
-        let closestDistance = Infinity;
-
-        serviceSlides.forEach((slide, index) => {
-          const angle = (index * (360 / serviceSlides.length) + rotation) * Math.PI / 180;
-          const frontness = (Math.cos(angle) + 1) / 2;
-          const distance = 1 - frontness;
-          const opacity = 0.14 + Math.pow(frontness, 0.72) * 0.86;
-          const scale = 0.7 + Math.pow(frontness, 1.15) * 0.3;
-
-          slide.style.setProperty('--orbit-opacity', opacity.toFixed(3));
-          slide.style.setProperty('--orbit-scale', scale.toFixed(3));
-          slide.style.zIndex = String(Math.round(frontness * 100));
-
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestIndex = index;
-          }
-        });
-
-        if (closestIndex !== activeService) {
-          activeService = closestIndex;
-          playTone(520 + activeService * 55, 'sine', 0.035, 0.018);
-        }
-
-        serviceSlides.forEach((slide, index) => {
-          slide.classList.toggle('is-center', index === activeService);
-        });
-        if (servicePosition) {
-          servicePosition.textContent = `${String(activeService + 1).padStart(2, '0')} / ${String(serviceSlides.length).padStart(2, '0')} · SCROLL TO EXPLORE`;
-        }
-      }
-
-      function scheduleOrbitUpdate() {
-        if (!orbitFrame) orbitFrame = requestAnimationFrame(updateServicesOrbit);
-      }
-
-      window.addEventListener('scroll', scheduleOrbitUpdate, { passive: true });
-      window.addEventListener('resize', scheduleOrbitUpdate);
-      requestAnimationFrame(updateServicesOrbit);
-    }
+    /* ===== SERVICES ANIMATED GRID ===== */
+    const serviceBoxes = document.querySelectorAll('.service-box-animated');
+    serviceBoxes.forEach(box => {
+      box.addEventListener('mouseenter', () => playTone(540, 'sine', 0.05, 0.02));
+    });
 
     /* ================= ACCORDION FAQ ================= */
     document.querySelectorAll('.accordion-trigger').forEach(btn => {
@@ -3723,7 +3514,8 @@
         <div class="space-y-1">
           <div class="text-white font-semibold">Available Commands:</div>
           <div><span class="text-indigo-400 font-bold">bio</span> — Summary of Mohammad Fuad Hasan &amp; Education</div>
-          <div><span class="text-indigo-400 font-bold">skills</span> — Language proficiency &amp; tech breakdown</div>
+          <div><span class="text-indigo-400 font-bold">skills</span> — Full stack &amp; design toolkit breakdown</div>
+          <div><span class="text-purple-400 font-bold">toolkit</span> — Design &amp; Motion toolkit skills (Ai, Ps, Ae, Pr)</div>
           <div><span class="text-indigo-400 font-bold">projects</span> — Selected projects from the portfolio</div>
           <div><span class="text-indigo-400 font-bold">contact</span> — Get direct contact details</div>
           <div><span class="text-indigo-400 font-bold">confetti</span> — Launch celebration fireworks</div>
@@ -3735,16 +3527,27 @@
         <div class="text-gray-300 space-y-1">
           <span class="text-white font-bold">Mohammad Fuad Hasan</span><br>
           Graduate of Computing and Information System (CIS) at Daffodil International University.<br>
-          📍 Dhaka, Bangladesh • Open for projects and software engineering roles.
+          📍 Dhaka, Bangladesh • Email: <a href="mailto:fuadfuad091@gmail.com" class="text-indigo-300 underline">fuadfuad091@gmail.com</a>
         </div>
       `,
       skills: () => `
         <div class="space-y-1 text-gray-300">
-          <div>☕ <strong class="text-white">Java / Spring Boot:</strong> colonyManagement, Spring Data JPA, MySQL, Spring Security</div>
-          <div>🟡 <strong class="text-white">JavaScript:</strong> EduAI, Digi-Seal, interactive web apps</div>
-          <div>🟧 <strong class="text-white">HTML / CSS:</strong> responsive web interfaces and UI layouts</div>
-          <div>🐍 <strong class="text-white">Python / Jupyter:</strong> Machine-Learning-Lab and data science experiments</div>
-          <div>🐘 <strong class="text-white">PHP / MySQL:</strong> JobChai and web engineering projects</div>
+          <div>☕ <strong class="text-white">Java / Spring Boot:</strong> colonyManagement, JPA, MySQL, Security</div>
+          <div>🟡 <strong class="text-white">JavaScript / React:</strong> EduAI, Digi-Seal, interactive web apps</div>
+          <div>🎨 <strong class="text-purple-300">Design &amp; Motion Toolkit:</strong> Adobe Ai (Illustrator), Ps (Photoshop), Ae (After Effects), Pr (Premiere Pro)</div>
+          <div>✨ <strong class="text-pink-300">Motion Skills:</strong> Morphing Animations, Microinteractions, Faux 3D Animation Effects</div>
+          <div>🐍 <strong class="text-white">Python / Jupyter:</strong> Machine-Learning-Lab &amp; data science</div>
+          <div>🐘 <strong class="text-white">PHP / MySQL:</strong> JobChai &amp; Web Engineering</div>
+        </div>
+      `,
+      toolkit: () => `
+        <div class="space-y-1.5 text-gray-200">
+          <div class="text-purple-400 font-bold">🎨 Design &amp; Motion Toolkit Skills:</div>
+          <div>🟧 <strong class="text-orange-300">Adobe Illustrator (Ai):</strong> Vector graphics, icon systems &amp; brand assets</div>
+          <div>🟦 <strong class="text-blue-300">Adobe Photoshop (Ps):</strong> UI mockups, image processing &amp; texture composition</div>
+          <div>🟪 <strong class="text-purple-300">After Effects (Ae):</strong> Expressive motion graphics &amp; keyframe UI animations</div>
+          <div>🟦 <strong class="text-indigo-300">Premiere Pro (Pr):</strong> Video editing, temporal pacing &amp; showreels</div>
+          <div>🌀 <strong class="text-pink-300">Creative Motion:</strong> Morphing animation effects, interactive microinteractions, Faux 3D perspective depth</div>
         </div>
       `,
       projects: () => `
@@ -3759,7 +3562,7 @@
       `,
       contact: () => `
         <div class="text-emerald-300">
-          ✉ Email: hello@fuad.dev • Open to select freelance engagements and full-time roles.
+          ✉ Email: fuadfuad091@gmail.com • Open for software engineering and creative motion roles.
         </div>
       `,
       confetti: () => {
@@ -3954,7 +3757,7 @@
 
     if (copyEmailHeroBtn) {
       copyEmailHeroBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText('hello@fuad.dev');
+        navigator.clipboard.writeText('fuadfuad091@gmail.com');
         heroEmailStatus.textContent = 'Copied to Clipboard! ✓';
         heroEmailStatus.classList.add('text-emerald-400');
         playTone(750, 'sine', 0.08);
