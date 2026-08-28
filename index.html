@@ -991,7 +991,22 @@
     }
 
     .service-box-animated {
-      animation: service-box-pulse 6s ease-in-out infinite alternate;
+      background-size: 300% 300% !important;
+      animation: fast-service-gradient 3s ease-in-out infinite alternate, service-box-pulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes fast-service-gradient {
+      0% {
+        background-position: 0% 20%;
+      }
+
+      50% {
+        background-position: 100% 80%;
+      }
+
+      100% {
+        background-position: 50% 100%;
+      }
     }
 
     .service-glow-aura {
@@ -1000,9 +1015,9 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle at 50% 50%, rgba(var(--accent-rgb), 0.08), transparent 60%);
+      background: radial-gradient(circle at 50% 50%, rgba(var(--accent-rgb), 0.28), transparent 60%);
       pointer-events: none;
-      animation: service-aura-rotate 10s linear infinite;
+      animation: service-aura-rotate 3.5s linear infinite;
     }
 
     @keyframes service-aura-rotate {
@@ -1238,13 +1253,6 @@
         </div>
       </div>
 
-      <!-- Sound FX Toggle Button -->
-      <button id="soundToggleBtn" aria-label="Toggle Sound Effects"
-        class="p-2 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-gray-300 hover:text-white hover:border-white/25 transition-all shadow-lg interactive"
-        title="Sound Effects (Click to enable/mute)">
-        <i id="soundIcon" data-lucide="volume-x" class="w-4 h-4 text-gray-400"></i>
-      </button>
-
       <!-- Command Palette (Cmd + K) Trigger -->
       <button id="cmdPaletteBtn"
         class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-xs text-gray-300 hover:text-white hover:border-white/25 transition-all shadow-lg interactive">
@@ -1358,13 +1366,13 @@
       <div class="flex flex-wrap gap-3 justify-center items-center mb-12">
         <span
           class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-indigo-500/50 hover:bg-indigo-500/10 transition-all"
-          data-alt="UI &amp; Full-Stack Engineer">Frontend Architect</span>
+          data-alt="Spring Boot &amp; React Specialist">Full-Stack Web Developer</span>
         <span
           class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
-          data-alt="Full-Stack Web Developer">UI/UX Engineer</span>
+          data-alt="Branding &amp; Creative Media">Graphics Designer</span>
         <span
           class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-pink-500/50 hover:bg-pink-500/10 transition-all"
-          data-alt="Graphics &amp; UI Integration">Graphics Designer</span>
+          data-alt="Custom Themes &amp; CMS">WordPress Developer</span>
       </div>
 
       <!-- Hero CTA Buttons -->
@@ -1456,8 +1464,8 @@
             Spring Boot</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">◆</span>
             MySQL / JPA</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
-            Firebase</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-400">🚀</span>
+            Postman</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-300">S</span>
             Supabase</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-600/20 text-blue-300">W</span>
@@ -1482,8 +1490,8 @@
             Spring Boot</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">◆</span>
             MySQL / JPA</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
-            Firebase</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-400">🚀</span>
+            Postman</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-300">S</span>
             Supabase</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-600/20 text-blue-300">W</span>
@@ -2239,7 +2247,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="servicesContainer">
       <!-- Service 1 -->
       <div
-        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-950/40 via-black to-indigo-950/20 hover:border-indigo-400/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(99,102,241,0.25)]">
+        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-indigo-500/30 bg-gradient-to-br from-indigo-900/60 via-blue-900/40 via-purple-900/50 to-indigo-950/90 hover:border-indigo-400/70 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(99,102,241,0.35)]">
         <div class="service-glow-aura"></div>
         <div>
           <div class="flex items-center justify-between mb-6">
@@ -2272,7 +2280,7 @@
 
       <!-- Service 2 -->
       <div
-        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-purple-500/20 bg-gradient-to-br from-purple-950/40 via-black to-purple-950/20 hover:border-purple-400/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(168,85,247,0.25)]">
+        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-purple-500/30 bg-gradient-to-br from-purple-900/60 via-fuchsia-900/40 via-pink-900/50 to-purple-950/90 hover:border-purple-400/70 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(168,85,247,0.35)]">
         <div class="service-glow-aura"></div>
         <div>
           <div class="flex items-center justify-between mb-6">
@@ -2305,7 +2313,7 @@
 
       <!-- Service 3 -->
       <div
-        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-pink-500/20 bg-gradient-to-br from-pink-950/40 via-black to-pink-950/20 hover:border-pink-400/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(236,72,153,0.25)]">
+        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-pink-500/30 bg-gradient-to-br from-pink-900/60 via-rose-900/40 via-purple-900/50 to-pink-950/90 hover:border-pink-400/70 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(236,72,153,0.35)]">
         <div class="service-glow-aura"></div>
         <div>
           <div class="flex items-center justify-between mb-6">
@@ -2338,7 +2346,7 @@
 
       <!-- Service 4 -->
       <div
-        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-emerald-950/40 via-black to-emerald-950/20 hover:border-emerald-400/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(16,185,129,0.25)]">
+        class="glow-card service-box-animated p-8 flex flex-col justify-between group interactive relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-900/60 via-teal-900/40 via-cyan-900/50 to-emerald-950/90 hover:border-emerald-400/70 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(16,185,129,0.35)]">
         <div class="service-glow-aura"></div>
         <div>
           <div class="flex items-center justify-between mb-6">
@@ -2406,7 +2414,7 @@
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="3500" checked>
             <div>
               <div class="text-sm font-semibold text-white group-hover:text-indigo-300">Full-Stack Frontend</div>
-              <div class="text-[11px] text-gray-500">Next.js 15, TypeScript, Tailwind</div>
+              <div class="text-[11px] text-gray-500">AngularJS, React, HTML5, CSS3</div>
             </div>
           </div>
           <span class="text-xs font-mono text-indigo-400 font-semibold">+$3.5k</span>
@@ -2431,7 +2439,7 @@
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2800">
             <div>
               <div class="text-sm font-semibold text-white group-hover:text-indigo-300">Backend API &amp; DB</div>
-              <div class="text-[11px] text-gray-500">Auth, Postgres, Cloud, APIs</div>
+              <div class="text-[11px] text-gray-500">Auth, Spring Boot, MySQL, REST APIs</div>
             </div>
           </div>
           <span class="text-xs font-mono text-indigo-400 font-semibold">+$2.8k</span>
@@ -2454,9 +2462,9 @@
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="1200">
             <div>
-              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">SEO &amp; Performance Audit
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">Graphics Design
               </div>
-              <div class="text-[11px] text-gray-500">100/100 Lighthouse score guarantee</div>
+              <div class="text-[11px] text-gray-500">Branding, visual assets, logo &amp; media editing</div>
             </div>
           </div>
           <span class="text-xs font-mono text-indigo-400 font-semibold">+$1.2k</span>
@@ -2519,7 +2527,7 @@
         <div class="accordion-content">
           <div class="px-6 pb-6 text-gray-300 text-sm leading-relaxed border-t border-white/5 pt-4">
             Java is my strongest language, with Spring Boot, Spring Data JPA, MySQL, and Spring Security forming my
-            backend foundation. I also work with React, Vite, Tailwind CSS, JavaScript, Python, PHP, Firebase, Supabase,
+            backend foundation. I also work with React, Vite, Tailwind CSS, JavaScript, Python, PHP, Postman, Supabase,
             cryptography tools, and modern AI/LLM APIs.
           </div>
         </div>
@@ -2677,9 +2685,7 @@
   <!-- ================= FOOTER ================= -->
   <footer class="relative py-12 px-6 text-center text-xs text-gray-500 border-t border-white/5 space-y-2">
     <p>&copy; 2026 Fuad. Crafted with precision, vanilla JS, and modern CSS.</p>
-    <p class="text-[11px] text-gray-600">Press <kbd
-        class="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-gray-400 font-mono">⌘K</kbd> to open command
-      palette anywhere.</p>
+
   </footer>
 
   <!-- ================= PROJECT DETAILS MODAL ================= -->
@@ -2777,23 +2783,25 @@
     const soundToggleBtn = document.getElementById('soundToggleBtn');
     const soundIcon = document.getElementById('soundIcon');
 
-    soundToggleBtn.addEventListener('click', () => {
-      soundEnabled = !soundEnabled;
-      if (soundEnabled) {
-        initAudio();
-        playTone(587, 'sine', 0.1, 0.1);
-        soundToggleBtn.classList.add('border-indigo-500', 'bg-indigo-500/20');
-        soundIcon.setAttribute('data-lucide', 'volume-2');
-        soundIcon.classList.remove('text-gray-400');
-        soundIcon.classList.add('text-indigo-400');
-      } else {
-        soundToggleBtn.classList.remove('border-indigo-500', 'bg-indigo-500/20');
-        soundIcon.setAttribute('data-lucide', 'volume-x');
-        soundIcon.classList.remove('text-indigo-400');
-        soundIcon.classList.add('text-gray-400');
-      }
-      lucide.createIcons();
-    });
+    if (soundToggleBtn) {
+      soundToggleBtn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        if (soundEnabled) {
+          initAudio();
+          playTone(587, 'sine', 0.1, 0.1);
+          soundToggleBtn.classList.add('border-indigo-500', 'bg-indigo-500/20');
+          soundIcon.setAttribute('data-lucide', 'volume-2');
+          soundIcon.classList.remove('text-gray-400');
+          soundIcon.classList.add('text-indigo-400');
+        } else {
+          soundToggleBtn.classList.remove('border-indigo-500', 'bg-indigo-500/20');
+          soundIcon.setAttribute('data-lucide', 'volume-x');
+          soundIcon.classList.remove('text-indigo-400');
+          soundIcon.classList.add('text-gray-400');
+        }
+        lucide.createIcons();
+      });
+    }
 
     /* ================= LIVE CLOCK ================= */
     function updateClock() {
