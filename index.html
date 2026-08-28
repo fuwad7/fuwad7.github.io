@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fuad | Creative Developer &amp; UI Engineer</title>
+  <title>Fuad | Full-Stack Web Developer &amp; Software Engineer</title>
   <meta name="description"
-    content="Portfolio of Fuad — Creative Developer & UI Engineer specializing in high-performance web applications, expressive motion, and interactive experiences.">
+    content="Portfolio of Fuad — Creative Developer & UI Engineer specializing in high-performance web applications, modern web architecture, and interactive experiences.">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -448,13 +448,28 @@
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(var(--accent-rgb), 0.15);
     }
 
-    /* ===== DOCK NAV ===== */
+    /* ===== DOCK NAV & MOBILE RESPONSIVE ===== */
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+      width: 100% !important;
+      position: relative;
+    }
+
+    section {
+      overflow-x: hidden;
+    }
+
     .dock-nav {
       background: rgba(12, 12, 18, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      width: max-content;
+      max-width: calc(100vw - 1rem);
+      box-sizing: border-box;
+      margin: 0 auto;
     }
 
     .dock-item {
@@ -468,6 +483,40 @@
       color: #9ca3af;
       transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
       transform-origin: bottom center;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      .dock-nav {
+        bottom: 0.75rem !important;
+        padding: 4px 6px !important;
+        gap: 3px !important;
+        border-radius: 1rem !important;
+        max-width: min(calc(100vw - 16px), 440px) !important;
+      }
+
+      .dock-item {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 8px !important;
+      }
+
+      .dock-item i {
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      /* Prevent horizontal translates from causing side overflow on phones */
+      .reveal-faq:nth-child(odd),
+      .reveal-faq:nth-child(even),
+      .reveal-stat:nth-child(1),
+      .reveal-stat:nth-child(3) {
+        transform: translateY(24px) !important;
+      }
+
+      .reveal-project, .reveal-stat, .reveal-service, .reveal-faq, .reveal-contact, .estimator-reveal {
+        transition-duration: 0.45s !important;
+      }
     }
 
     .dock-item:hover {
@@ -1306,10 +1355,10 @@
           data-alt="UI &amp; Full-Stack Engineer">Frontend Architect</span>
         <span
           class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
-          data-alt="Motion Graphics Specialist">Interaction Designer</span>
+          data-alt="Full-Stack Web Developer">UI/UX Engineer</span>
         <span
           class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-pink-500/50 hover:bg-pink-500/10 transition-all"
-          data-alt="Motion &amp; AI Integration">Creative Technologist</span>
+          data-alt="Web &amp; AI Integration">Software Engineer</span>
       </div>
 
       <!-- Hero CTA Buttons -->
@@ -1363,8 +1412,8 @@
             Python</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-gray-500/20 text-gray-300">C</span>
             C</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-400/20 text-orange-200">◉</span>
-            Jupyter Notebook</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-600/20 text-blue-300">W</span>
+            WordPress</div>
         </div>
         <div class="flex items-center">
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">☕</span>
@@ -1381,8 +1430,8 @@
             Python</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-gray-500/20 text-gray-300">C</span>
             C</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-400/20 text-orange-200">◉</span>
-            Jupyter Notebook</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-600/20 text-blue-300">W</span>
+            WordPress</div>
         </div>
       </div>
     </div>
@@ -1405,8 +1454,8 @@
             Firebase</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-300">S</span>
             Supabase</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">✦</span>
-            CryptoJS / JSEncrypt</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-600/20 text-blue-300">W</span>
+            WordPress</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">Ai</span>
             Adobe Illustrator</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">Ps</span>
@@ -1415,12 +1464,6 @@
             After Effects</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">Pr</span>
             Premiere Pro</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-fuchsia-500/20 text-fuchsia-300">≈</span>
-            Morphing Animation Effects</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">✦</span>
-            Microinteractions</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">◇</span>
-            Faux 3D Animation Effects</div>
         </div>
         <div class="flex items-center">
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span>
@@ -1437,8 +1480,8 @@
             Firebase</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-300">S</span>
             Supabase</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">✦</span>
-            CryptoJS / JSEncrypt</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-600/20 text-blue-300">W</span>
+            WordPress</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">Ai</span>
             Adobe Illustrator</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">Ps</span>
@@ -1447,12 +1490,6 @@
             After Effects</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">Pr</span>
             Premiere Pro</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-fuchsia-500/20 text-fuchsia-300">≈</span>
-            Morphing Animation Effects</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">✦</span>
-            Microinteractions</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">◇</span>
-            Faux 3D Animation Effects</div>
         </div>
       </div>
     </div>
@@ -1513,8 +1550,8 @@
         <button data-filter="fullstack"
           class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">Full-Stack</button>
         <button data-filter="creative"
-          class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">Motion
-          &amp; Interaction</button>
+          class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">Web
+          &amp; CMS</button>
         <button data-filter="ai"
           class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">AI
           Products</button>
@@ -1591,7 +1628,7 @@
                 class="px-4 py-2 rounded-xl bg-black/80 border border-pink-400/30 text-pink-300 font-mono text-xs shadow-xl backdrop-blur">
                 colonyManagement v1.0
               </div>
-              <span class="text-[10px] font-mono text-gray-400 mt-2 block">Java • Spring Boot • JPA</span>
+              <span class="text-[10px] font-mono text-gray-400 mt-2 block">Java • Spring Boot • AngularJS • JPA</span>
             </div>
             <span
               class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-pink-300">02</span>
@@ -1612,6 +1649,7 @@
             <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Java</span>
             <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Spring
               Boot</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">AngularJS</span>
             <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Spring Data
               JPA</span>
             <span
@@ -1823,7 +1861,7 @@
             <span
               class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Python</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Jupyter</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">WordPress</span>
             <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Machine
               Learning</span>
           </div>
@@ -1874,8 +1912,7 @@
                 engineering</span>, <span
                 class="text-white font-medium px-2 py-0.5 rounded bg-purple-500/20 border border-purple-500/30">AI
                 integrations</span>, and <span
-                class="text-white font-medium px-2 py-0.5 rounded bg-pink-500/20 border border-pink-500/30">motion UI
-                design</span> into responsive web applications.
+                class="text-white font-medium px-2 py-0.5 rounded bg-pink-500/20 border border-pink-500/30">web architecture</span> into responsive web applications.
             </p>
           </div>
 
@@ -1884,7 +1921,7 @@
             <span class="inline-flex items-center gap-1.5 text-emerald-400 font-mono">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Profile Active
             </span>
-            <span class="text-gray-400 font-mono">CIS • Software &amp; Motion</span>
+            <span class="text-gray-400 font-mono">CIS • Software &amp; Web</span>
           </div>
         </div>
 
@@ -1897,7 +1934,7 @@
           <div
             class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 animated-gradient hover:border-purple-500/40 transition-colors">
             <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Creative Focus</div>
-            <div class="text-base font-bold text-white mt-1">Motion-first interfaces</div>
+            <div class="text-base font-bold text-white mt-1">Responsive Web Applications</div>
           </div>
         </div>
       </div>
@@ -1968,7 +2005,7 @@
             <div class="relative z-10 flex items-start justify-between gap-4">
               <div>
                 <div class="text-[11px] text-purple-300 font-semibold uppercase tracking-[0.18em]">Mastery</div>
-                <p class="text-xs text-gray-400 mt-2 max-w-[12rem]">Blending visual systems, motion, and engineering
+                <p class="text-xs text-gray-400 mt-2 max-w-[12rem]">Blending clean code, modern UI, and engineering
                   detail into one experience.</p>
               </div>
               <div class="text-4xl font-black text-white font-mono">
@@ -2035,10 +2072,10 @@
               </div>
             </div>
 
-            <div class="language-skill" tabindex="0" role="button" aria-pressed="false" data-language="Python + Jupyter"
-              aria-label="Focus Python and Jupyter proficiency">
+            <div class="language-skill" tabindex="0" role="button" aria-pressed="false" data-language="WordPress + PHP"
+              aria-label="Focus WordPress and PHP proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                <span class="text-white">Python &amp; Jupyter</span>
+                <span class="text-white">WordPress &amp; PHP</span>
                 <span class="text-pink-400 font-mono skill-percent">10%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
@@ -2064,34 +2101,34 @@
 
           <div class="mt-8 pt-6 border-t border-white/10">
             <div class="flex items-center justify-between mb-4">
-              <span class="text-sm font-bold text-white">Design &amp; Motion Toolkit</span>
+              <span class="text-sm font-bold text-white">Development &amp; Web Toolkit</span>
               <span class="text-[11px] text-gray-500 font-mono">creative practice</span>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
               <div
                 class="tool-card rounded-xl border border-orange-400/20 bg-orange-500/10 px-3 py-3 text-center interactive"
-                tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Illustrator motion toolkit">
+                tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Illustrator design toolkit">
                 <div class="tool-badge-text text-sm font-bold text-orange-300">Ai</div>
                 <div class="text-[10px] text-gray-300 mt-1">Illustrator</div>
-                <div class="tool-hint text-[9px] text-orange-200 font-mono mt-2">vector motion</div>
+                <div class="tool-hint text-[9px] text-orange-200 font-mono mt-2">vector assets</div>
               </div>
               <div
                 class="tool-card rounded-xl border border-blue-400/20 bg-blue-500/10 px-3 py-3 text-center interactive"
-                tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Photoshop motion toolkit">
+                tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Photoshop design toolkit">
                 <div class="tool-badge-text text-sm font-bold text-blue-300">Ps</div>
                 <div class="text-[10px] text-gray-300 mt-1">Photoshop</div>
                 <div class="tool-hint text-[9px] text-blue-200 font-mono mt-2">image systems</div>
               </div>
               <div
                 class="tool-card rounded-xl border border-purple-400/20 bg-purple-500/10 px-3 py-3 text-center interactive"
-                tabindex="0" role="button" aria-pressed="false" aria-label="After Effects motion toolkit">
+                tabindex="0" role="button" aria-pressed="false" aria-label="After Effects design toolkit">
                 <div class="tool-badge-text text-sm font-bold text-purple-300">Ae</div>
                 <div class="text-[10px] text-gray-300 mt-1">After Effects</div>
-                <div class="tool-hint text-[9px] text-purple-200 font-mono mt-2">expressive motion</div>
+                <div class="tool-hint text-[9px] text-purple-200 font-mono mt-2">UI composition</div>
               </div>
               <div
                 class="tool-card rounded-xl border border-indigo-400/20 bg-indigo-500/10 px-3 py-3 text-center interactive"
-                tabindex="0" role="button" aria-pressed="false" aria-label="Premiere Pro motion toolkit">
+                tabindex="0" role="button" aria-pressed="false" aria-label="Premiere Pro design toolkit">
                 <div class="tool-badge-text text-sm font-bold text-indigo-300">Pr</div>
                 <div class="text-[10px] text-gray-300 mt-1">Premiere Pro</div>
                 <div class="tool-hint text-[9px] text-indigo-200 font-mono mt-2">rhythm + timing</div>
@@ -2272,17 +2309,16 @@
               class="text-sm font-mono text-pink-400 font-bold px-3 py-1 rounded-full bg-pink-500/10 border border-pink-500/20">03</span>
           </div>
           <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors">
-            Expressive Motion &amp; Typography
+            WordPress &amp; Web Development
           </h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            Kinetic type systems with morphing animation effects, thoughtful microinteractions, and faux 3D animation
-            effects that give digital products depth through layered motion.
+            Custom WordPress theme development, responsive CMS integration, plugin customization, and full-stack web solutions tailored to client specifications.
           </p>
         </div>
         <div class="pt-4 border-t border-white/10 flex items-center justify-between">
           <span
             class="text-xs text-pink-400 font-mono flex items-center gap-1 font-medium group-hover:translate-x-1 transition-transform">
-            ✨ Morphing &amp; Faux 3D FX
+            ✨ WordPress &amp; CMS
           </span>
           <a href="#contact"
             class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/10 hover:bg-pink-600 border border-white/15 text-white transition-all shadow-md">
@@ -2372,8 +2408,8 @@
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2000">
             <div>
-              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">Motion &amp; Interaction</div>
-              <div class="text-[11px] text-gray-500">Typography / SVG / CSS / GSAP</div>
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">WordPress &amp; CMS Integration</div>
+              <div class="text-[11px] text-gray-500">Custom theme, plugins &amp; CMS setup</div>
             </div>
           </div>
           <span class="text-xs font-mono text-indigo-400 font-semibold">+$2.0k</span>
@@ -3231,7 +3267,48 @@
     }
 
     /* ================= SCROLL OBSERVERS FOR ANIMATED SECTIONS ================= */
-    const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+    const observerOptions = { threshold: 0.02, rootMargin: "0px 0px 40px 0px" };
+
+    function triggerMobileScrollReveals() {
+      const revealElements = document.querySelectorAll('.reveal-project, .reveal-stat, .reveal-service, .reveal-faq, .reveal-contact, .estimator-reveal');
+      const windowHeight = window.innerHeight;
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= windowHeight * 0.94) {
+          el.classList.add('revealed');
+          if (el.classList.contains('reveal-stat')) {
+            const counterEl = el.querySelector('.counter');
+            if (counterEl && !counterEl.dataset.started) {
+              counterEl.dataset.started = 'true';
+              animateCounterDifferent(counterEl);
+            }
+          }
+        }
+      });
+
+      const skillBars = document.querySelectorAll('.skill-bar-fill');
+      const aboutSec = document.getElementById('about');
+      if (aboutSec) {
+        const aboutRect = aboutSec.getBoundingClientRect();
+        if (aboutRect.top <= windowHeight * 0.88) {
+          skillBars.forEach((bar, i) => setTimeout(() => bar.classList.add('animated'), i * 80));
+          document.querySelectorAll('.skill-percent').forEach((percent, i) => {
+            setTimeout(() => {
+              percent.classList.add('animated');
+              animateSkillPercent(percent);
+            }, i * 80);
+          });
+          document.querySelectorAll('.about-counter').forEach((counter, i) => {
+            setTimeout(() => animateAboutCounter(counter), 150 + i * 120);
+          });
+        }
+      }
+    }
+
+    window.addEventListener('scroll', triggerMobileScrollReveals, { passive: true });
+    window.addEventListener('resize', triggerMobileScrollReveals);
+    document.addEventListener('DOMContentLoaded', triggerMobileScrollReveals);
+    setTimeout(triggerMobileScrollReveals, 200);
 
     const generalScrollObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry, idx) => {
@@ -3395,7 +3472,7 @@
           { label: "Data Layer", val: "Spring Data JPA / MySQL" },
           { label: "Project", val: "colonyManagement" }
         ],
-        tech: ["Java", "Spring Boot", "Spring Data JPA", "MySQL", "Spring Security"]
+        tech: ["Java", "Spring Boot", "AngularJS", "Spring Data JPA", "MySQL", "Spring Security"]
       },
       p3: {
         title: "Mermaid Pearl Resort",
@@ -3437,13 +3514,13 @@
         title: "Machine Learning Lab",
         category: "Data Science & Predictive Modeling",
         tagline: "Machine Learning algorithms and data processing notebooks.",
-        description: "A repository of machine learning experiments, classification models, linear regression analysis, and exploratory data science workflows implemented in Python and Jupyter Notebooks.",
+        description: "A repository of machine learning experiments, classification models, linear regression analysis, and exploratory data science workflows implemented in Python and WordPress.",
         metrics: [
           { label: "Language", val: "Python" },
-          { label: "Environment", val: "Jupyter Lab" },
+          { label: "CMS", val: "WordPress" },
           { label: "Project", val: "Machine-Learning-Lab" }
         ],
-        tech: ["Python", "Jupyter Notebook", "Scikit-Learn", "Pandas", "Data Science"]
+        tech: ["Python", "WordPress", "Scikit-Learn", "Pandas", "Data Science"]
       }
     };
 
@@ -3515,7 +3592,7 @@
           <div class="text-white font-semibold">Available Commands:</div>
           <div><span class="text-indigo-400 font-bold">bio</span> — Summary of Mohammad Fuad Hasan &amp; Education</div>
           <div><span class="text-indigo-400 font-bold">skills</span> — Full stack &amp; design toolkit breakdown</div>
-          <div><span class="text-purple-400 font-bold">toolkit</span> — Design &amp; Motion toolkit skills (Ai, Ps, Ae, Pr)</div>
+          <div><span class="text-purple-400 font-bold">toolkit</span> — Design &amp; Web toolkit skills (Ai, Ps, Ae, Pr)</div>
           <div><span class="text-indigo-400 font-bold">projects</span> — Selected projects from the portfolio</div>
           <div><span class="text-indigo-400 font-bold">contact</span> — Get direct contact details</div>
           <div><span class="text-indigo-400 font-bold">confetti</span> — Launch celebration fireworks</div>
@@ -3534,20 +3611,20 @@
         <div class="space-y-1 text-gray-300">
           <div>☕ <strong class="text-white">Java / Spring Boot:</strong> colonyManagement, JPA, MySQL, Security</div>
           <div>🟡 <strong class="text-white">JavaScript / React:</strong> EduAI, Digi-Seal, interactive web apps</div>
-          <div>🎨 <strong class="text-purple-300">Design &amp; Motion Toolkit:</strong> Adobe Ai (Illustrator), Ps (Photoshop), Ae (After Effects), Pr (Premiere Pro)</div>
-          <div>✨ <strong class="text-pink-300">Motion Skills:</strong> Morphing Animations, Microinteractions, Faux 3D Animation Effects</div>
-          <div>🐍 <strong class="text-white">Python / Jupyter:</strong> Machine-Learning-Lab &amp; data science</div>
+          <div>🎨 <strong class="text-purple-300">Design &amp; Web Toolkit:</strong> Adobe Ai (Illustrator), Ps (Photoshop), Ae (After Effects), Pr (Premiere Pro)</div>
+          <div>🌐 <strong class="text-white">WordPress / CMS:</strong> Custom themes, plugins &amp; site customization</div>
+          <div>🐍 <strong class="text-white">Python / ML:</strong> Machine-Learning-Lab &amp; data science</div>
           <div>🐘 <strong class="text-white">PHP / MySQL:</strong> JobChai &amp; Web Engineering</div>
         </div>
       `,
       toolkit: () => `
         <div class="space-y-1.5 text-gray-200">
-          <div class="text-purple-400 font-bold">🎨 Design &amp; Motion Toolkit Skills:</div>
-          <div>🟧 <strong class="text-orange-300">Adobe Illustrator (Ai):</strong> Vector graphics, icon systems &amp; brand assets</div>
+          <div class="text-purple-400 font-bold">🎨 Design &amp; Web Toolkit Skills:</div>
+          <div>🟧 <strong class="text-orange-300">Adobe Illustrator (Ai):</strong> Vector assets, icon systems &amp; brand assets</div>
           <div>🟦 <strong class="text-blue-300">Adobe Photoshop (Ps):</strong> UI mockups, image processing &amp; texture composition</div>
-          <div>🟪 <strong class="text-purple-300">After Effects (Ae):</strong> Expressive motion graphics &amp; keyframe UI animations</div>
+          <div>🟪 <strong class="text-purple-300">After Effects (Ae):</strong> Keyframe animations &amp; video presentation</div>
           <div>🟦 <strong class="text-indigo-300">Premiere Pro (Pr):</strong> Video editing, temporal pacing &amp; showreels</div>
-          <div>🌀 <strong class="text-pink-300">Creative Motion:</strong> Morphing animation effects, interactive microinteractions, Faux 3D perspective depth</div>
+          <div>🌐 <strong class="text-emerald-300">WordPress:</strong> Custom themes, CMS workflows &amp; database integration</div>
         </div>
       `,
       projects: () => `
@@ -3562,7 +3639,7 @@
       `,
       contact: () => `
         <div class="text-emerald-300">
-          ✉ Email: fuadfuad091@gmail.com • Open for software engineering and creative motion roles.
+          ✉ Email: fuadfuad091@gmail.com • Open for software engineering and full-stack web roles.
         </div>
       `,
       confetti: () => {
