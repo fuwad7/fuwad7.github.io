@@ -439,6 +439,233 @@
       box-shadow: 0 16px 40px -12px rgba(var(--accent-rgb), 0.15);
     }
 
+    /* ===== BIO CARD ANIMATED - MATCH SITE DARK STYLE ===== */
+    .bio-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0a0a0f;
+      animation: card-soft-pulse 4.5s ease-in-out infinite;
+      transition: box-shadow 0.5s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .bio-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.18), transparent);
+      opacity: 0;
+      animation: border-soft-pulse 4.5s ease-in-out infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.9;
+    }
+
+    .bio-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(var(--accent-rgb), 0.10), transparent 70%);
+      opacity: 0;
+      animation: glow-soft-pulse 4.5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bio-card:hover {
+      box-shadow: 0 8px 32px -12px rgba(var(--accent-rgb), 0.22);
+      border-color: rgba(var(--accent-rgb), 0.14) !important;
+    }
+
+    @keyframes card-soft-pulse {
+      0%, 100% {
+        background-color: #0a0a0f;
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      }
+
+      50% {
+        background-color: #12121a;
+        border-color: rgba(var(--accent-rgb), 0.14);
+        box-shadow: 0 8px 32px rgba(var(--accent-rgb), 0.10);
+      }
+    }
+
+    @keyframes card-soft-pulse-accent {
+      0%, 100% {
+        background-color: #0a0a0f;
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      }
+
+      50% {
+        background-color: #13131f;
+        border-color: rgba(var(--accent-rgb), 0.13);
+        box-shadow: 0 8px 28px rgba(var(--accent-rgb), 0.09);
+      }
+    }
+
+    @keyframes card-soft-pulse-accent2 {
+      0%, 100% {
+        background-color: #0a0a0f;
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      }
+
+      50% {
+        background-color: #1a1218;
+        border-color: rgba(var(--accent-2-rgb), 0.13);
+        box-shadow: 0 8px 28px rgba(var(--accent-2-rgb), 0.09);
+      }
+    }
+
+    @keyframes border-soft-pulse {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes glow-soft-pulse {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .skill-card, .about-metric {
+      background: #0a0a0f !important;
+      animation: card-soft-pulse 4.5s ease-in-out infinite !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    .skill-card:nth-child(2), .about-metric:nth-child(2) {
+      animation: card-soft-pulse-accent 4.5s ease-in-out infinite !important;
+    }
+
+    .skill-card:nth-child(3), .about-metric:nth-child(3) {
+      animation: card-soft-pulse-accent2 4.5s ease-in-out infinite !important;
+    }
+
+    @keyframes bio-card-border {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .reveal-bio {
+      opacity: 0;
+      transform: translateX(-42px) scale(0.96);
+      filter: blur(6px);
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), filter 0.85s ease;
+    }
+
+    .reveal-bio.revealed {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      filter: blur(0);
+    }
+
+    .reveal-location {
+      opacity: 0;
+      transform: translateY(36px) scale(0.9);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .reveal-location.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .reveal-focus {
+      opacity: 0;
+      transform: translateX(42px) rotateY(14deg) scale(0.93);
+      transform-origin: right center;
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-focus.revealed {
+      opacity: 1;
+      transform: translateX(0) rotateY(0) scale(1);
+    }
+
+    .location-gradient {
+      position: relative;
+      overflow: hidden;
+      background: #0a0a0f;
+      animation: card-soft-pulse-accent 4.5s ease-in-out infinite 0.3s;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    .location-gradient::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(var(--accent-rgb), 0.08), transparent 70%);
+      opacity: 0;
+      animation: glow-soft-pulse 4.5s ease-in-out infinite 0.3s;
+      pointer-events: none;
+    }
+
+    .focus-gradient {
+      position: relative;
+      overflow: hidden;
+      background: #0a0a0f;
+      animation: card-soft-pulse-accent2 4.5s ease-in-out infinite 0.6s;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    .focus-gradient::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(var(--accent-2-rgb), 0.08), transparent 70%);
+      opacity: 0;
+      animation: glow-soft-pulse 4.5s ease-in-out infinite 0.6s;
+      pointer-events: none;
+    }
+
+    @keyframes location-flow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes focus-flow {
+      0% {
+        background-position: 100% 0%;
+      }
+
+      50% {
+        background-position: 0% 100%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
     /* ===== PROJECT CARDS ===== */
     .project-card {
       transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s;
@@ -449,16 +676,24 @@
     }
 
     /* ===== DOCK NAV & MOBILE RESPONSIVE ===== */
+    html {
+      zoom: 1 !important;
+      font-size: 100% !important;
+    }
+
     html,
     body {
       overflow-x: hidden !important;
-      max-width: 100vw !important;
+      max-width: 100% !important;
       width: 100% !important;
       position: relative;
+      zoom: 1 !important;
+      transform: none !important;
     }
 
     section {
-      overflow-x: hidden;
+      overflow-x: clip;
+      max-width: 100%;
     }
 
     .dock-nav {
@@ -511,8 +746,14 @@
       .reveal-faq:nth-child(odd),
       .reveal-faq:nth-child(even),
       .reveal-stat:nth-child(1),
-      .reveal-stat:nth-child(3) {
+      .reveal-stat:nth-child(3),
+      .reveal-bio,
+      .reveal-focus {
         transform: translateY(24px) !important;
+      }
+
+      .reveal-focus.revealed {
+        transform: translateY(0) !important;
       }
 
       .reveal-project,
@@ -520,7 +761,10 @@
       .reveal-service,
       .reveal-faq,
       .reveal-contact,
-      .estimator-reveal {
+      .estimator-reveal,
+      .reveal-bio,
+      .reveal-location,
+      .reveal-focus {
         transition-duration: 0.45s !important;
       }
     }
@@ -766,7 +1010,11 @@
     /* Skill bars: animate width from 0 */
     .skill-bar-fill {
       width: 0 !important;
-      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: width 3.8s cubic-bezier(0.10, 1, 0.28, 1);
+    }
+
+    .language-skill .skill-bar-fill {
+      transition: width 4.8s cubic-bezier(0.10, 1, 0.28, 1);
     }
 
     .skill-bar-fill.animated {
@@ -1056,6 +1304,34 @@
     .estimator-reveal.revealed {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .estimator-card {
+      opacity: 0;
+      transform: scale(0.78) translateY(24px);
+      filter: blur(6px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.6s ease;
+    }
+
+    .estimator-card.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      animation: estimator-continuous 4.5s ease-in-out infinite;
+    }
+
+    @keyframes estimator-continuous {
+      0%, 100% {
+        background-color: #0a0a0f;
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      50% {
+        background-color: #12121e;
+        border-color: rgba(var(--accent-rgb), 0.14);
+        box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.08);
+      }
     }
 
     .estimator-price-number {
@@ -2004,7 +2280,7 @@
 
         <!-- Animated Bio Glass Container -->
         <div
-          class="p-6 rounded-3xl bg-gradient-to-br from-white/[0.04] via-indigo-950/20 to-black border border-indigo-500/30 backdrop-blur-md shadow-2xl relative overflow-hidden group hover:border-indigo-400/60 transition-all duration-500">
+          class="bio-card reveal-bio p-6 rounded-3xl backdrop-blur-md shadow-2xl relative overflow-hidden group">
           <div
             class="absolute -right-10 -bottom-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/25 transition-all">
           </div>
@@ -2032,12 +2308,12 @@
 
         <div class="grid grid-cols-2 gap-4 pt-2">
           <div
-            class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-indigo-500/40 transition-colors">
+            class="reveal-location location-gradient p-4 rounded-2xl border hover:border-indigo-500/40 transition-colors">
             <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Location</div>
             <div class="text-base font-bold text-white mt-1">Dhaka, Bangladesh</div>
           </div>
           <div
-            class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 animated-gradient hover:border-purple-500/40 transition-colors">
+            class="reveal-focus focus-gradient p-4 rounded-2xl border hover:border-purple-500/40 transition-colors">
             <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Creative Focus</div>
             <div class="text-base font-bold text-white mt-1">Responsive Web Applications</div>
           </div>
@@ -2486,7 +2762,7 @@
 
       <div class="grid sm:grid-cols-2 gap-4 mb-8" id="estimatorOptions">
         <label
-          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          class="estimator-card p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2500" checked>
             <div>
@@ -2498,7 +2774,7 @@
         </label>
 
         <label
-          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          class="estimator-card p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="3500" checked>
             <div>
@@ -2510,7 +2786,7 @@
         </label>
 
         <label
-          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          class="estimator-card p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2000">
             <div>
@@ -2523,7 +2799,7 @@
         </label>
 
         <label
-          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          class="estimator-card p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2800">
             <div>
@@ -2535,7 +2811,7 @@
         </label>
 
         <label
-          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          class="estimator-card p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="1800">
             <div>
@@ -2547,7 +2823,7 @@
         </label>
 
         <label
-          class="p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
+          class="estimator-card p-4 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-between cursor-pointer hover:border-indigo-500/50 transition-all select-none group">
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="1200">
             <div>
@@ -3377,7 +3653,7 @@
     const observerOptions = { threshold: 0.02, rootMargin: "0px 0px 40px 0px" };
 
     function triggerMobileScrollReveals() {
-      const revealElements = document.querySelectorAll('.reveal-project, .reveal-stat, .reveal-service, .reveal-faq, .reveal-contact, .estimator-reveal');
+      const revealElements = document.querySelectorAll('.reveal-project, .reveal-stat, .reveal-service, .reveal-faq, .reveal-contact, .estimator-reveal, .reveal-bio, .reveal-location, .reveal-focus, .estimator-card');
       const windowHeight = window.innerHeight;
       revealElements.forEach(el => {
         const rect = el.getBoundingClientRect();
@@ -3439,8 +3715,16 @@
       });
     }, observerOptions);
 
-    document.querySelectorAll('.reveal-project, .reveal-stat, .reveal-service, .reveal-faq, .reveal-contact, .estimator-reveal').forEach((el, index) => {
-      el.dataset.delay = (index % 4) * 120;
+    document.querySelectorAll('.reveal-project, .reveal-stat, .reveal-service, .reveal-faq, .reveal-contact, .estimator-reveal, .reveal-bio, .reveal-location, .reveal-focus, .estimator-card').forEach((el, index) => {
+      if (el.classList.contains('reveal-bio')) el.dataset.delay = 0;
+      else if (el.classList.contains('reveal-location')) el.dataset.delay = 160;
+      else if (el.classList.contains('reveal-focus')) el.dataset.delay = 320;
+      else if (el.classList.contains('estimator-card')) {
+        const allEst = document.querySelectorAll('.estimator-card');
+        const idx = Array.from(allEst).indexOf(el);
+        el.dataset.delay = idx * 110;
+      }
+      else el.dataset.delay = (index % 4) * 120;
       generalScrollObserver.observe(el);
     });
 
