@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fuad | Creative Developer &amp; UI Engineer</title>
   <meta name="description"
-    content="Portfolio of Fuad — Creative Developer & UI Engineer specializing in high-performance web applications, interactive motion, and immersive 3D experiences.">
+    content="Portfolio of Fuad — Creative Developer & UI Engineer specializing in high-performance web applications, expressive motion, and interactive experiences.">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -104,6 +104,12 @@
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(var(--accent-rgb), 0.11), transparent 28rem),
+        radial-gradient(circle at 88% 44%, rgba(var(--accent-2-rgb), 0.09), transparent 30rem),
+        radial-gradient(circle at 45% 100%, rgba(236, 72, 153, 0.06), transparent 26rem);
+      background-size: 180% 180%;
+      animation: body-gradient-flow 22s ease-in-out infinite alternate;
       color: var(--text-main);
       overflow-x: hidden;
       width: 100%;
@@ -263,9 +269,11 @@
 
     .gradient-text-alt {
       background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
+      background-size: 220% auto;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      animation: gradient-shift 7s ease-in-out infinite alternate;
     }
 
     @keyframes gradient-shift {
@@ -275,6 +283,40 @@
 
       100% {
         background-position: 100% 50%;
+      }
+    }
+
+    /* Ambient gradient movement keeps the visual system alive without overpowering content. */
+    .animated-gradient {
+      background-size: 240% 240%;
+      animation: ambient-gradient 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambient-gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 0%;
+      }
+
+      100% {
+        background-position: 20% 100%;
+      }
+    }
+
+    @keyframes body-gradient-flow {
+      0% {
+        background-position: 0% 0%, 100% 20%, 20% 100%;
+      }
+
+      50% {
+        background-position: 35% 25%, 65% 70%, 85% 45%;
+      }
+
+      100% {
+        background-position: 100% 50%, 0% 80%, 35% 0%;
       }
     }
 
@@ -687,20 +729,455 @@
       transform: translateY(0);
     }
 
-    /* Services: stacked slide from bottom with progressive offset */
-    .reveal-service {
-      opacity: 0;
-      transform: translateY(100px) scale(0.96);
-      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Language rows turn proficiency into a responsive, selectable instrument. */
+    .language-skill {
+      position: relative;
+      padding: 0.8rem 0.9rem;
+      margin: -0.8rem -0.9rem;
+      border: 1px solid transparent;
+      border-radius: 1rem;
+      background: radial-gradient(circle at var(--language-x, 50%) var(--language-y, 50%), rgba(var(--accent-rgb), 0.14), transparent 9rem);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
 
-    .reveal-service.revealed {
+    .language-skill::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid rgba(var(--accent-rgb), 0.32);
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .language-skill:hover,
+    .language-skill.is-active {
+      background-color: rgba(255, 255, 255, 0.035);
+      transform: translateX(5px);
+      box-shadow: 0 12px 26px -20px rgba(var(--accent-rgb), 0.7);
+    }
+
+    .language-skill:hover::after,
+    .language-skill.is-active::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .language-skill:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .language-skill .h-2 {
+      position: relative;
+      height: 0.45rem;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    }
+
+    .language-skill .skill-bar-fill {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.2);
+    }
+
+    .language-skill .skill-bar-fill::after {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 -35%;
+      width: 35%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+      transform: skewX(-18deg);
+      animation: skill-scan 2.4s ease-in-out infinite;
+    }
+
+    .language-skill.is-active .skill-bar-fill {
+      filter: brightness(1.35) saturate(1.2);
+      box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.65);
+    }
+
+    .language-skill .skill-percent {
+      min-width: 3ch;
+      text-align: right;
+    }
+
+    @keyframes skill-scan {
+      0%,
+      35% {
+        left: -35%;
+      }
+
+      75%,
+      100% {
+        left: 110%;
+      }
+    }
+
+    .skill-number-pop {
+      animation: skill-number-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes skill-number-pop {
+      0% {
+        filter: blur(4px);
+        transform: translateY(5px) scale(0.75);
+      }
+
+      65% {
+        filter: blur(0);
+        transform: translateY(-2px) scale(1.12);
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* About metrics: compact count-up cards with their own motion language */
+    .about-metric {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(99, 102, 241, 0.08));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.25rem;
+    }
+
+    .about-metric::after {
+      content: "";
+      position: absolute;
+      width: 8rem;
+      height: 8rem;
+      right: -3rem;
+      top: -3rem;
+      border-radius: 9999px;
+      background: rgba(var(--accent-rgb), 0.18);
+      filter: blur(24px);
+      pointer-events: none;
+    }
+
+    /* Animate every Tailwind gradient surface, while keeping the motion subtle. */
+    [class*="bg-gradient-"],
+    .animated-gradient {
+      background-size: 240% 240%;
+      animation: ambient-gradient 12s ease-in-out infinite alternate;
+    }
+
+    /* The six About cards behave like interactive objects, not static reveals. */
+    .skill-card,
+    .tool-card {
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      --lift: 0px;
+      --spot-x: 50%;
+      --spot-y: 50%;
+      transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(var(--lift));
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease, box-shadow 0.28s ease;
+      cursor: pointer;
+    }
+
+    .skill-card {
+      animation: skill-card-breathe 5s ease-in-out infinite;
+    }
+
+    .tool-card {
+      animation: tool-card-float 6s ease-in-out infinite;
+      background-image:
+        radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(255, 255, 255, 0.15), transparent 8rem),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(var(--accent-rgb), 0.08));
+    }
+
+    .tool-card:nth-child(2) {
+      animation-delay: -1.5s;
+    }
+
+    .tool-card:nth-child(3) {
+      animation-delay: -3s;
+    }
+
+    .tool-card:nth-child(4) {
+      animation-delay: -4.5s;
+    }
+
+    .skill-card:nth-child(2) {
+      animation-delay: -1.2s;
+    }
+
+    .skill-card:nth-child(3) {
+      animation-delay: -2.4s;
+    }
+
+    .skill-card:nth-child(4) {
+      animation-delay: -3.6s;
+    }
+
+    .skill-card:nth-child(5) {
+      animation-delay: -4.8s;
+    }
+
+    .skill-card:hover,
+    .tool-card:hover {
+      --lift: -8px;
+      border-color: rgba(var(--accent-rgb), 0.5);
+      box-shadow: 0 22px 45px -18px rgba(var(--accent-rgb), 0.5);
+    }
+
+    .skill-card::after,
+    .tool-card::after {
+      content: "";
+      position: absolute;
+      inset: -80% 35% auto -35%;
+      height: 180%;
+      background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.16), transparent 65%);
+      transform: translateX(-120%) rotate(18deg);
+      transition: transform 0.8s ease;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .skill-card:hover::after,
+    .tool-card:hover::after {
+      transform: translateX(180%) rotate(18deg);
+    }
+
+    .skill-card i {
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+    }
+
+    .skill-card:hover i {
+      transform: translateZ(22px) rotate(-8deg) scale(1.18);
+      filter: drop-shadow(0 0 10px currentColor);
+    }
+
+    .skill-card > *,
+    .tool-card > * {
+      position: relative;
+      z-index: 4;
+    }
+
+    .skill-card.is-selected,
+    .tool-card.is-selected {
+      --lift: -10px;
+      border-color: rgba(var(--accent-rgb), 0.75);
+      box-shadow: 0 24px 55px -18px rgba(var(--accent-rgb), 0.65), inset 0 0 24px rgba(var(--accent-rgb), 0.08);
+    }
+
+    .skill-card.is-selected .skill-meter-fill {
+      animation: meter-pulse 1.2s ease-in-out infinite alternate;
+    }
+
+    .skill-card:focus-visible,
+    .tool-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .skill-meter {
+      height: 4px;
+      margin-top: 1.25rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .skill-meter-fill {
+      display: block;
+      width: var(--skill-level);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+      background-size: 200% 100%;
+      animation: meter-flow 4s linear infinite;
+      transform-origin: left center;
+    }
+
+    .skill-card .skill-hint,
+    .tool-card .tool-hint {
+      opacity: 0;
+      max-height: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, max-height 0.35s ease, transform 0.35s ease;
+      overflow: hidden;
+    }
+
+    .skill-card:hover .skill-hint,
+    .skill-card.is-selected .skill-hint,
+    .tool-card:hover .tool-hint,
+    .tool-card.is-selected .tool-hint {
+      opacity: 1;
+      max-height: 2rem;
+      transform: translateY(0);
+    }
+
+    @keyframes meter-flow {
+      to {
+        background-position: 200% 0;
+      }
+    }
+
+    @keyframes meter-pulse {
+      from {
+        filter: brightness(1);
+        transform: scaleY(1);
+      }
+
+      to {
+        filter: brightness(1.45);
+        transform: scaleY(1.8);
+      }
+    }
+
+    @keyframes skill-card-breathe {
+      0%,
+      100% {
+        box-shadow: 0 10px 28px -22px rgba(var(--accent-rgb), 0.05);
+      }
+
+      50% {
+        box-shadow: 0 18px 38px -22px rgba(var(--accent-rgb), 0.32);
+      }
+    }
+
+    @keyframes tool-card-float {
+      0%,
+      100% {
+        box-shadow: 0 10px 28px -22px rgba(var(--accent-rgb), 0.12);
+      }
+
+      50% {
+        box-shadow: 0 18px 34px -20px rgba(var(--accent-rgb), 0.32);
+      }
+    }
+
+    .about-counter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(14px) scale(0.85);
+      transition: opacity 0.35s ease, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .about-counter.animated {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
 
-    /* Estimator animated price */
+    /* Services: a scroll-driven 3D orbit. The page scroll is the only control. */
+    .services-orbit-shell {
+      position: relative;
+      isolation: isolate;
+      height: 300vh;
+    }
+
+    .services-orbit-stage {
+      position: sticky;
+      top: 10vh;
+      height: 78vh;
+      min-height: 500px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      perspective: 1400px;
+    }
+
+    .services-orbit-stage::before {
+      content: "";
+      position: absolute;
+      width: min(60vw, 34rem);
+      height: min(60vw, 34rem);
+      border: 1px solid rgba(var(--accent-rgb), 0.22);
+      border-radius: 50%;
+      box-shadow:
+        0 0 80px rgba(var(--accent-rgb), 0.13),
+        inset 0 0 80px rgba(var(--accent-2-rgb), 0.08);
+      transform: rotateX(68deg) translateZ(-160px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .services-orbit-stage::after {
+      content: "SCROLL TO ORBIT";
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.38);
+      font: 600 0.62rem/1 'JetBrains Mono', monospace;
+      letter-spacing: 0.22em;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .services-orbit {
+      --orbit-radius: min(34vw, 340px);
+      position: relative;
+      width: min(86vw, 920px);
+      height: min(58vh, 480px);
+      transform-style: preserve-3d;
+      z-index: 2;
+      will-change: transform;
+      transition: transform 0.12s linear;
+    }
+
+    .services-orbit::before {
+      content: "";
+      position: absolute;
+      width: 11rem;
+      height: 11rem;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) translateZ(-140px);
+      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.2), rgba(var(--accent-2-rgb), 0.06) 42%, transparent 70%);
+      filter: blur(3px);
+      pointer-events: none;
+    }
+
+    .service-slide {
+      --slide-angle: 0deg;
+      --orbit-opacity: 0.2;
+      --orbit-scale: 0.72;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(76vw, 760px);
+      min-height: 250px;
+      opacity: var(--orbit-opacity);
+      transform: translate(-50%, -50%) rotateY(var(--slide-angle)) translateZ(var(--orbit-radius)) scale(var(--orbit-scale));
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      filter: saturate(0.55) brightness(0.55) blur(0.4px);
+      transition: opacity 0.42s ease, filter 0.42s ease, box-shadow 0.42s ease;
+      will-change: transform, opacity;
+    }
+
+    .service-slide.is-center {
+      --orbit-opacity: 1;
+      --orbit-scale: 1;
+      z-index: 4;
+      filter: saturate(1) brightness(1) blur(0);
+      box-shadow: 0 30px 80px -30px rgba(var(--accent-rgb), 0.6);
+    }
+
+    .services-orbit .service-slide:hover {
+      transform: translate(-50%, -50%) rotateY(var(--slide-angle)) translateZ(calc(var(--orbit-radius) + 18px)) scale(var(--orbit-scale));
+    }
+
+    .service-orbit-readout {
+      position: absolute;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, 0.5);
+      font: 500 0.68rem/1 'JetBrains Mono', monospace;
+      letter-spacing: 0.12em;
+    }
+
+    /* Estimator uses a rolling price and a separate timeline glide */
     .estimator-reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -711,6 +1188,52 @@
     .estimator-reveal.revealed {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .estimator-price-number {
+      display: inline-block;
+      min-width: 5.5ch;
+      transform-origin: center bottom;
+    }
+
+    .estimator-price-number.price-pop {
+      animation: price-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes price-pop {
+      0% {
+        opacity: 0.35;
+        transform: translateY(10px) rotateX(-35deg);
+      }
+
+      55% {
+        opacity: 1;
+        transform: translateY(-4px) rotateX(8deg);
+      }
+
+      100% {
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .estimate-time-slide {
+      display: inline-block;
+    }
+
+    .estimate-time-slide.changed {
+      animation: timeline-glide 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes timeline-glide {
+      0% {
+        opacity: 0;
+        transform: translateX(16px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     /* FAQ: alternating slide from left/right */
@@ -746,6 +1269,18 @@
       transform: scale(1) translateY(0);
     }
 
+    .contact-form-inner {
+      opacity: 0;
+      transform: scale(0.92) translateY(18px);
+      transition: opacity 0.55s ease 0.12s,
+        transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.12s;
+    }
+
+    .reveal-contact.revealed .contact-form-inner {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
     /* Counter number shimmer effect */
     @keyframes shimmer-number {
       0% {
@@ -764,6 +1299,17 @@
       background-clip: text;
       color: transparent;
       animation: shimmer-number 2s ease-in-out 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -951,8 +1497,8 @@
 
       <!-- Subtitle -->
       <p class="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal text-center">
-        Hey, I'm <strong class="text-white font-semibold">Fuad</strong> — an interaction designer and frontend engineer
-        crafting high-performance, fluid, and delightful web applications.
+        Hey, I'm <strong class="text-white font-semibold">Mohammad Fuad Hasan</strong> — a CIS Graduate from Daffodil
+        International University building high-performance web applications, AI portals, and full-stack software.
       </p>
 
       <!-- Interactive Role Scramble Badges -->
@@ -962,10 +1508,10 @@
           data-alt="UI &amp; Full-Stack Engineer">Frontend Architect</span>
         <span
           class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-purple-500/50 hover:bg-purple-500/10 transition-all"
-          data-alt="Motion &amp; 3D Specialist">Interaction Designer</span>
+          data-alt="Motion Graphics Specialist">Interaction Designer</span>
         <span
           class="text-scramble px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs sm:text-sm font-medium text-gray-200 interactive shadow-sm hover:border-pink-500/50 hover:bg-pink-500/10 transition-all"
-          data-alt="WebGL &amp; AI Integration">Creative Technologist</span>
+          data-alt="Motion &amp; AI Integration">Creative Technologist</span>
       </div>
 
       <!-- Hero CTA Buttons -->
@@ -997,7 +1543,7 @@
       <span
         class="text-xs uppercase tracking-[0.25em] text-gray-400 font-semibold flex items-center justify-center gap-2">
         <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping"></span>
-        Core Technologies &amp; Capabilities
+         Languages, Frameworks &amp; Design Tools
       </span>
     </div>
 
@@ -1005,90 +1551,110 @@
     <div class="marquee-container mb-4">
       <div class="marquee-track">
         <div class="flex items-center">
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span> React
-            19</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-white/20 text-white">▲</span> Next.js 15
-          </div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">TS</span>
-            TypeScript</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-400/20 text-cyan-300">🌊</span>
-            Tailwind CSS</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-400">⚡</span>
-            Three.js / R3F</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-pink-500/20 text-pink-400">✦</span> Framer
-            Motion</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-400">🟢</span>
-            Node.js</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-amber-500/20 text-amber-400">⚡</span> Vite
-          </div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-400">🤖</span>
-            OpenAI / Gemini API</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-sky-500/20 text-sky-400">🐘</span>
-            PostgreSQL</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">☕</span>
+             Java <span class="text-[10px] text-red-200/70">• primary</span></div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-yellow-500/20 text-yellow-300">JS</span>
+             JavaScript</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">HTML</span>
+             HTML5</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">CSS</span>
+             CSS3</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">PHP</span>
+             PHP</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-green-500/20 text-green-400">Py</span>
+             Python</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-gray-500/20 text-gray-300">C</span>
+             C</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-400/20 text-orange-200">◉</span>
+             Jupyter Notebook</div>
         </div>
-        <div class="flex items-center">
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span> React
-            19</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-white/20 text-white">▲</span> Next.js 15
-          </div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">TS</span>
-            TypeScript</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-400/20 text-cyan-300">🌊</span>
-            Tailwind CSS</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-400">⚡</span>
-            Three.js / R3F</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-pink-500/20 text-pink-400">✦</span> Framer
-            Motion</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-400">🟢</span>
-            Node.js</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-amber-500/20 text-amber-400">⚡</span> Vite
-          </div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-400">🤖</span>
-            OpenAI / Gemini API</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-sky-500/20 text-sky-400">🐘</span>
-            PostgreSQL</div>
-        </div>
+         <div class="flex items-center">
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">☕</span>
+             Java <span class="text-[10px] text-red-200/70">• primary</span></div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-yellow-500/20 text-yellow-300">JS</span>
+             JavaScript</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">HTML</span>
+             HTML5</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-400">CSS</span>
+             CSS3</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">PHP</span>
+             PHP</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-green-500/20 text-green-400">Py</span>
+             Python</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-gray-500/20 text-gray-300">C</span>
+             C</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-400/20 text-orange-200">◉</span>
+             Jupyter Notebook</div>
+         </div>
       </div>
     </div>
 
     <!-- Row 2: Reverse Infinite Marquee -->
     <div class="marquee-container">
       <div class="marquee-track reverse">
+         <div class="flex items-center">
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span>
+             React</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-amber-500/20 text-amber-400">⚡</span>
+             Vite</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-400/20 text-cyan-300">🌊</span>
+             Tailwind CSS</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-400">◈</span>
+             Spring Boot</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">◆</span>
+             MySQL / JPA</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
+             Firebase</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-300">S</span>
+             Supabase</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">✦</span>
+             CryptoJS / JSEncrypt</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">Ai</span>
+             Adobe Illustrator</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">Ps</span>
+             Adobe Photoshop</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-300">Ae</span>
+             After Effects</div>
+           <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">Pr</span>
+             Premiere Pro</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-fuchsia-500/20 text-fuchsia-300">≈</span>
+            Morphing Animation Effects</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">✦</span>
+            Microinteractions</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">◇</span>
+            Faux 3D Animation Effects</div>
+         </div>
         <div class="flex items-center">
-          <div class="tech-pill interactive"><span
-              class="tech-badge-icon bg-purple-500/20 text-purple-300 serif">UI</span> Product Design</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">✦</span>
-            Design Systems</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">🎬</span> Motion
-            Graphics</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">🌐</span> WebGL
-            Shaders</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">⚡</span>
-            Performance Audits</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-500/20 text-cyan-400">⚛</span>
+            React</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-amber-500/20 text-amber-400">⚡</span>
+            Vite</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-cyan-400/20 text-cyan-300">🌊</span>
+            Tailwind CSS</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-400">◈</span>
+            Spring Boot</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">◆</span>
+            MySQL / JPA</div>
           <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
-            Full-Stack SaaS</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">✨</span>
-            Micro-Interactions</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-pink-500/20 text-pink-300">📱</span>
-            Responsive Layouts</div>
-        </div>
-        <div class="flex items-center">
-          <div class="tech-pill interactive"><span
-              class="tech-badge-icon bg-purple-500/20 text-purple-300 serif">UI</span> Product Design</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">✦</span>
-            Design Systems</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">🎬</span> Motion
-            Graphics</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">🌐</span> WebGL
-            Shaders</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">⚡</span>
-            Performance Audits</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-orange-500/20 text-orange-300">🔥</span>
-            Full-Stack SaaS</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">✨</span>
-            Micro-Interactions</div>
-          <div class="tech-pill interactive"><span class="tech-badge-icon bg-pink-500/20 text-pink-300">📱</span>
-            Responsive Layouts</div>
+            Firebase</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-emerald-500/20 text-emerald-300">S</span>
+            Supabase</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-rose-500/20 text-rose-300">✦</span>
+            CryptoJS / JSEncrypt</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-red-500/20 text-red-300">Ai</span>
+            Adobe Illustrator</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-blue-500/20 text-blue-300">Ps</span>
+            Adobe Photoshop</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-purple-500/20 text-purple-300">Ae</span>
+            After Effects</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-indigo-500/20 text-indigo-300">Pr</span>
+            Premiere Pro</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-fuchsia-500/20 text-fuchsia-300">≈</span>
+            Morphing Animation Effects</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-teal-500/20 text-teal-300">✦</span>
+            Microinteractions</div>
+          <div class="tech-pill interactive"><span class="tech-badge-icon bg-violet-500/20 text-violet-300">◇</span>
+            Faux 3D Animation Effects</div>
         </div>
       </div>
     </div>
@@ -1149,8 +1715,8 @@
         <button data-filter="fullstack"
           class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">Full-Stack</button>
         <button data-filter="creative"
-          class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">3D
-          &amp; Motion</button>
+          class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">Motion
+          &amp; Interaction</button>
         <button data-filter="ai"
           class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 transition-all">AI
           Products</button>
@@ -1159,10 +1725,10 @@
 
     <!-- Projects Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
-      <!-- Project 1 -->
+      <!-- Project 1: EduAI -->
       <div
         class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
-        data-category="fullstack" data-id="p1">
+        data-category="ai" data-id="p1">
         <div>
           <div
             class="h-48 rounded-2xl bg-gradient-to-br from-indigo-950/80 via-purple-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
@@ -1171,167 +1737,154 @@
             <div
               class="relative z-10 w-full max-w-[240px] bg-black/70 border border-white/15 rounded-xl p-3 backdrop-blur-md shadow-2xl group-hover:scale-105 transition-transform duration-300">
               <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
-                <span class="text-[10px] font-mono text-indigo-400">analytics_v3.ts</span>
-                <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">LIVE
-                  99.9%</span>
+                <span class="text-[10px] font-mono text-indigo-400">EduAI</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono">JS / AI</span>
               </div>
-              <div class="h-8 flex items-end gap-1.5">
-                <div class="w-full bg-indigo-500/40 rounded-t h-4"></div>
-                <div class="w-full bg-indigo-500/60 rounded-t h-6"></div>
-                <div class="w-full bg-indigo-500 rounded-t h-8"></div>
-                <div class="w-full bg-purple-500 rounded-t h-5"></div>
-                <div class="w-full bg-indigo-400 rounded-t h-7"></div>
+              <div class="p-2 bg-white/5 rounded-lg text-[10px] text-gray-300 font-mono">
+                🤖 AI Assessment Engine • Portal Active
               </div>
             </div>
             <span
               class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-indigo-300">01</span>
           </div>
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">SaaS &amp; Analytics</span>
-            <span class="text-xs text-gray-500 font-mono">2026</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-indigo-400">AI &amp; Education</span>
+            <span class="text-xs text-gray-500 font-mono">GitHub</span>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">Nebula Dashboard
-          </h3>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">EduAI Portal</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            Real-time collaborative analytics platform processing millions of events with sub-100ms latency and custom
-            chart components.
+            Advanced AI Teaching &amp; Assessment Portal for Faculty Members, enabling automated evaluations and
+            learning telemetry.
           </p>
         </div>
         <div>
           <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Next.js
-              15</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">TypeScript</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">JavaScript</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
-            <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">WebSockets</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Node.js</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">AI /
+              LLM</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-white/10">
             <span class="text-xs text-indigo-400 font-medium group-hover:underline flex items-center gap-1">
-              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              View Repository Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
             </span>
-            <button
-              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-indigo-600 transition-colors"
-              aria-label="Open project details">
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-            </button>
+            <a href="https://github.com/fuwad7/EduAI" target="_blank" onclick="event.stopPropagation()"
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-indigo-600 transition-colors"
+              title="Open GitHub Repo">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Project 2 -->
+      <!-- Project 2: colonyManagement -->
       <div
         class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
-        data-category="creative" data-id="p2">
+        data-category="fullstack" data-id="p2">
         <div>
           <div
             class="h-48 rounded-2xl bg-gradient-to-br from-pink-950/80 via-purple-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(236,72,153,0.3),transparent_60%)]">
             </div>
-            <div class="relative z-10 text-center group-hover:scale-110 transition-transform duration-300">
+            <div class="relative z-10 text-center group-hover:scale-105 transition-transform duration-300">
               <div
-                class="w-20 h-20 rounded-full border border-pink-400/40 bg-pink-500/10 flex items-center justify-center mx-auto mb-2 shadow-2xl backdrop-blur-md">
-                <i data-lucide="box" class="w-8 h-8 text-pink-400 animate-spin" style="animation-duration: 15s;"></i>
+                class="px-4 py-2 rounded-xl bg-black/80 border border-pink-400/30 text-pink-300 font-mono text-xs shadow-xl backdrop-blur">
+                colonyManagement v1.0
               </div>
-              <span class="text-[10px] font-mono text-pink-300 tracking-widest uppercase">3D Configurator Active</span>
+              <span class="text-[10px] font-mono text-gray-400 mt-2 block">Java • Spring Boot • JPA</span>
             </div>
             <span
               class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-pink-300">02</span>
           </div>
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-semibold uppercase tracking-wider text-pink-400">E-Commerce &amp; 3D</span>
-            <span class="text-xs text-gray-500 font-mono">2026</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-pink-400">Full-Stack Web</span>
+            <span class="text-xs text-gray-500 font-mono">GitHub</span>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-pink-300 transition-colors">Aura Apparel 3D
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-pink-300 transition-colors">colonyManagement
           </h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            Luxury apparel storefront featuring interactive WebGL material shaders, custom lighting rigs, and instant
-            checkout flow.
+            Java Spring Boot colony and community management system for tracking members, utility billing, and
+            maintenance operations.
           </p>
         </div>
         <div>
           <div class="flex flex-wrap gap-2 mb-4">
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Three.js</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">React Three
-              Fiber</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">GSAP</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Java</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Stripe</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Spring Boot</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Spring Data JPA</span>
+            <span
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">MySQL</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-white/10">
             <span class="text-xs text-pink-400 font-medium group-hover:underline flex items-center gap-1">
-              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              View Repository Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
             </span>
-            <button
-              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-pink-600 transition-colors"
-              aria-label="Open project details">
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-            </button>
+            <a href="https://github.com/fuwad7/colonyManagement" target="_blank" onclick="event.stopPropagation()"
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-pink-600 transition-colors"
+              title="Open GitHub Repo">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Project 3 -->
+      <!-- Project 3: MermaidPearlResort -->
       <div
         class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
-        data-category="ai" data-id="p3">
+        data-category="creative" data-id="p3">
         <div>
           <div
             class="h-48 rounded-2xl bg-gradient-to-br from-emerald-950/80 via-teal-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(16,185,129,0.3),transparent_60%)]">
             </div>
-            <div
-              class="relative z-10 w-full max-w-[240px] bg-black/80 border border-white/15 rounded-2xl p-3.5 shadow-2xl backdrop-blur-md group-hover:scale-105 transition-transform duration-300">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-[11px] font-semibold text-white">Cortex Copilot</span>
+            <div class="relative z-10 text-center">
+              <div
+                class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300 mx-auto mb-2">
+                <i data-lucide="palmtree" class="w-6 h-6"></i>
               </div>
-              <div class="p-2 rounded-lg bg-white/5 text-[10px] text-gray-300 leading-snug font-mono">
-                Generating optimized React hook... <span class="text-emerald-400">✓ Done (12ms)</span>
-              </div>
+              <span class="text-xs font-bold text-white">Mermaid Pearl Resort</span>
             </div>
             <span
               class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-emerald-300">03</span>
           </div>
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400">AI Application</span>
-            <span class="text-xs text-gray-500 font-mono">2026</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400">Hospitality &amp; UI</span>
+            <span class="text-xs text-gray-500 font-mono">GitHub</span>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">Cortex
-            Intelligence</h3>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">Mermaid Pearl
+            Resort</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            AI workflow studio with streaming completions, vector database retrieval, and interactive node-based prompt
-            graphs.
+            A website for Mermaid Pearl Resort featuring room bookings, interactive photo showcases, and resort
+            amenities.
           </p>
         </div>
         <div>
           <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">OpenAI
-              API</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">React
-              Flow</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">FastAPI</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">HTML5</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">CSS3</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">JavaScript</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-white/10">
             <span class="text-xs text-emerald-400 font-medium group-hover:underline flex items-center gap-1">
-              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              View Repository Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
             </span>
-            <button
-              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-emerald-600 transition-colors"
-              aria-label="Open project details">
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-            </button>
+            <a href="https://github.com/fuwad7/MermaidPearlResort" target="_blank" onclick="event.stopPropagation()"
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-emerald-600 transition-colors"
+              title="Open GitHub Repo">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Project 4 -->
+      <!-- Project 4: Digi-Seal -->
       <div
         class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
         data-category="fullstack" data-id="p4">
@@ -1343,52 +1896,51 @@
             <div class="relative z-10 text-center">
               <div
                 class="px-4 py-2 rounded-xl bg-black/80 border border-amber-500/30 text-amber-300 font-mono text-xs shadow-xl backdrop-blur">
-                $ apex deploy --prod --fast
+                🔒 Cryptographic Digi-Seal
               </div>
-              <div class="text-[10px] text-gray-400 mt-2 font-mono">Response: 200 OK • 18ms</div>
+              <div class="text-[10px] text-gray-400 mt-2 font-mono">Security &amp; Encryption Lab</div>
             </div>
             <span
               class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-amber-300">04</span>
           </div>
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">DevOps &amp; APIs</span>
-            <span class="text-xs text-gray-500 font-mono">2025</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-amber-400">Security &amp;
+              Cryptography</span>
+            <span class="text-xs text-gray-500 font-mono">GitHub</span>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">Apex Developer Hub
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-amber-300 transition-colors">Digi-Seal System
           </h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            High-throughput developer platform with interactive API playgrounds, live SDK generation, and telemetry
-            dashboards.
+            University Project for Network Security and Cryptography implementing digital signatures, hash verification,
+            and document seals.
           </p>
         </div>
         <div>
           <div class="flex flex-wrap gap-2 mb-4">
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">GraphQL</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">JavaScript</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Docker</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Cryptography</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Redis</span>
-            <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Next.js</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Security</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-white/10">
             <span class="text-xs text-amber-400 font-medium group-hover:underline flex items-center gap-1">
-              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              View Repository Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
             </span>
-            <button
-              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-amber-600 transition-colors"
-              aria-label="Open project details">
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-            </button>
+            <a href="https://github.com/fuwad7/Digi-Seal" target="_blank" onclick="event.stopPropagation()"
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
+              title="Open GitHub Repo">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Project 5 -->
+      <!-- Project 5: JobChai -->
       <div
         class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
-        data-category="creative" data-id="p5">
+        data-category="fullstack" data-id="p5">
         <div>
           <div
             class="h-48 rounded-2xl bg-gradient-to-br from-cyan-950/80 via-blue-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
@@ -1397,106 +1949,96 @@
             <div class="relative z-10 flex items-center gap-3">
               <div
                 class="w-12 h-12 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300">
-                <i data-lucide="activity" class="w-6 h-6 animate-pulse"></i>
+                <i data-lucide="briefcase" class="w-6 h-6"></i>
               </div>
               <div class="text-left">
-                <div class="text-xs font-bold text-white">Audio Visualizer</div>
-                <div class="text-[10px] text-cyan-300 font-mono">60 FPS WebAudio GL</div>
+                <div class="text-xs font-bold text-white">JobChai Portal</div>
+                <div class="text-[10px] text-cyan-300 font-mono">Web Engineering PHP</div>
               </div>
             </div>
             <span
               class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-cyan-300">05</span>
           </div>
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-semibold uppercase tracking-wider text-cyan-400">Creative Audio &amp; GL</span>
-            <span class="text-xs text-gray-500 font-mono">2025</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-cyan-400">Web Engineering</span>
+            <span class="text-xs text-gray-500 font-mono">GitHub</span>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">Vortex Soundscape
-          </h3>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">JobChai Portal</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            Spatial 3D audio synthesizer and frequency visualizer created with Web Audio API, WebGL particle ribbons,
-            and midi sync.
+            PHP-based job portal university project for Web Engineering, connecting job seekers with employer listings
+            and applications.
           </p>
         </div>
         <div>
           <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">PHP</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">WebAudio</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">GLSL</span>
-            <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Canvas</span>
-            <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">TypeScript</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">MySQL</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Web
+              Engineering</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-white/10">
             <span class="text-xs text-cyan-400 font-medium group-hover:underline flex items-center gap-1">
-              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              View Repository Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
             </span>
-            <button
-              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-cyan-600 transition-colors"
-              aria-label="Open project details">
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-            </button>
+            <a href="https://github.com/fuwad7/JobChai" target="_blank" onclick="event.stopPropagation()"
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-cyan-600 transition-colors"
+              title="Open GitHub Repo">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- Project 6 -->
+      <!-- Project 6: Machine-Learning-Lab -->
       <div
         class="project-item project-card glow-card rounded-3xl p-6 flex flex-col justify-between interactive group cursor-pointer reveal-project"
-        data-category="fullstack" data-id="p6">
+        data-category="ai" data-id="p6">
         <div>
           <div
             class="h-48 rounded-2xl bg-gradient-to-br from-violet-950/80 via-fuchsia-900/30 to-black border border-white/10 relative overflow-hidden mb-6 flex items-center justify-center p-4">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.3),transparent_60%)]">
             </div>
             <div class="relative z-10 text-center">
-              <div class="flex -space-x-2 justify-center mb-2">
-                <span
-                  class="w-7 h-7 rounded-full bg-indigo-500 border border-black flex items-center justify-center text-[10px] font-bold text-white">JD</span>
-                <span
-                  class="w-7 h-7 rounded-full bg-purple-500 border border-black flex items-center justify-center text-[10px] font-bold text-white">MK</span>
-                <span
-                  class="w-7 h-7 rounded-full bg-pink-500 border border-black flex items-center justify-center text-[10px] font-bold text-white">+8</span>
+              <div
+                class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300 mx-auto mb-2">
+                <i data-lucide="brain-circuit" class="w-6 h-6"></i>
               </div>
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white font-mono">Multiplayer CRDT
-                Sync</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white font-mono">Python ML
+                Notebooks</span>
             </div>
             <span
               class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/60 border border-white/10 text-[10px] font-semibold text-purple-300">06</span>
           </div>
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-semibold uppercase tracking-wider text-purple-400">Collaboration &amp;
-              Canvas</span>
-            <span class="text-xs text-gray-500 font-mono">2025</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-purple-400">Data Science &amp; ML</span>
+            <span class="text-xs text-gray-500 font-mono">GitHub</span>
           </div>
-          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Prism Infinite
-            Canvas</h3>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Machine Learning
+            Lab</h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            Real-time infinite canvas for engineering diagrams, wireframing, and interactive markdown docs with
-            zero-latency multiplayer.
+            Comprehensive Machine Learning lab repository containing data classification, regression models, and
+            exploratory notebooks.
           </p>
         </div>
         <div>
           <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Yjs
-              CRDT</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">React</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Python</span>
             <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">WebRTC</span>
-            <span
-              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Tailwind</span>
+              class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Jupyter</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-300">Machine
+              Learning</span>
           </div>
           <div class="flex items-center justify-between pt-4 border-t border-white/10">
             <span class="text-xs text-purple-400 font-medium group-hover:underline flex items-center gap-1">
-              View Case Study <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              View Repository Details <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
             </span>
-            <button
-              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-purple-600 transition-colors"
-              aria-label="Open project details">
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-            </button>
+            <a href="https://github.com/fuwad7/Machine-Learning-Lab" target="_blank" onclick="event.stopPropagation()"
+              class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-purple-600 transition-colors"
+              title="Open GitHub Repo">
+              <i data-lucide="github" class="w-4 h-4"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -1518,116 +2060,214 @@
         </h2>
         <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
           <p>
-            I am a creative developer who bridges the gap between sophisticated aesthetics and rock-solid software
-            architecture. I believe the best web experiences are lightning fast, responsive, and packed with thoughtful
-            micro-details.
+            I am <strong class="text-white font-semibold">Mohammad Fuad Hasan</strong>, a graduate of
+            <strong>Computing and Information System (CIS)</strong> at <strong>Daffodil International
+              University</strong>.
           </p>
           <p>
-            Whether architecting high-traffic applications, building interactive 3D WebGL scenes, or polishing
-            micro-interactions, I focus on clean code, accessible user experiences, and relentless craftsmanship.
+            I bridge the gap between software engineering, AI integrations, and responsive UI design. My work ranges
+            from AI-assisted faculty tools and cryptographic security portals to full-stack web applications and
+            interactive systems.
           </p>
         </div>
 
         <div class="grid grid-cols-2 gap-4 pt-4">
           <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
             <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Location</div>
-            <div class="text-base font-bold text-white mt-1">Global / Remote</div>
+            <div class="text-base font-bold text-white mt-1">Dhaka, Bangladesh</div>
           </div>
-          <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-            <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Availability</div>
-            <div class="text-base font-bold text-emerald-400 mt-1 flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Q3 / Q4 2026
-            </div>
-          </div>
+           <div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 animated-gradient">
+             <div class="text-xs text-gray-400 font-medium uppercase tracking-wider">Creative Focus</div>
+             <div class="text-base font-bold text-white mt-1">Motion-first interfaces</div>
+           </div>
         </div>
       </div>
 
       <!-- Right Skills Radar -->
       <div class="lg:col-span-7 space-y-6">
         <div class="grid sm:grid-cols-3 gap-4">
-          <div class="glow-card p-6 interactive">
+          <div class="glow-card p-6 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
+            data-skill-level="88%" aria-label="Architecture proficiency: 88 percent">
             <div
               class="w-10 h-10 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-4">
               <i data-lucide="code-2" class="w-5 h-5"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">Architecture</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">Modern modular code, TypeScript typing, and scalable
-              frontend systems.</p>
+             <p class="text-xs text-gray-400 leading-relaxed">Modern modular code, TypeScript typing, and scalable
+               frontend systems.</p>
+             <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill" style="--skill-level: 88%"></span></div>
+             <div class="skill-hint text-[10px] text-indigo-300 font-mono mt-2">hover / tap to inspect</div>
           </div>
 
-          <div class="glow-card p-6 interactive">
+           <div class="glow-card p-6 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
+             data-skill-level="84%" aria-label="UI/UX Design proficiency: 84 percent">
             <div
               class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4">
               <i data-lucide="palette" class="w-5 h-5"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">UI/UX Design</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">Harmonious typography, spatial systems, and glassmorphic
-              micro-details.</p>
+             <p class="text-xs text-gray-400 leading-relaxed">Harmonious typography, spatial systems, and glassmorphic
+               micro-details.</p>
+             <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill" style="--skill-level: 84%"></span></div>
+             <div class="skill-hint text-[10px] text-purple-300 font-mono mt-2">hover / tap to inspect</div>
           </div>
 
-          <div class="glow-card p-6 interactive">
+           <div class="glow-card p-6 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
+             data-skill-level="90%" aria-label="Performance proficiency: 90 percent">
             <div
               class="w-10 h-10 rounded-xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 mb-4">
               <i data-lucide="zap" class="w-5 h-5"></i>
             </div>
             <h3 class="text-lg font-bold text-white mb-1">Performance</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">60fps animations, optimized bundle sizes, and Core Web
-              Vitals.</p>
+             <p class="text-xs text-gray-400 leading-relaxed">60fps animations, optimized bundle sizes, and Core Web
+               Vitals.</p>
+             <div class="skill-meter" aria-hidden="true"><span class="skill-meter-fill" style="--skill-level: 90%"></span></div>
+             <div class="skill-hint text-[10px] text-pink-300 font-mono mt-2">hover / tap to inspect</div>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="about-metric p-5 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
+            aria-label="Proficiency: 92 percent">
+            <div class="relative z-10 flex items-start justify-between gap-4">
+              <div>
+                <div class="text-[11px] text-indigo-300 font-semibold uppercase tracking-[0.18em]">Proficiency</div>
+                <p class="text-xs text-gray-400 mt-2 max-w-[12rem]">Turning complex product requirements into polished,
+                  reliable interfaces.</p>
+              </div>
+              <div class="text-4xl font-black text-white font-mono">
+                <span class="about-counter" data-about-target="92" data-about-suffix="%" data-about-anim="ease">0</span>
+              </div>
+            </div>
+             <div class="skill-hint text-[10px] text-indigo-300 font-mono mt-3">tap to focus this strength</div>
+          </div>
+          <div class="about-metric p-5 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
+            aria-label="Mastery: 88 percent">
+            <div class="relative z-10 flex items-start justify-between gap-4">
+              <div>
+                <div class="text-[11px] text-purple-300 font-semibold uppercase tracking-[0.18em]">Mastery</div>
+                <p class="text-xs text-gray-400 mt-2 max-w-[12rem]">Blending visual systems, motion, and engineering
+                  detail into one experience.</p>
+              </div>
+              <div class="text-4xl font-black text-white font-mono">
+                <span class="about-counter" data-about-target="88" data-about-suffix="%" data-about-anim="cascade">0</span>
+              </div>
+            </div>
+             <div class="skill-hint text-[10px] text-purple-300 font-mono mt-3">tap to focus this strength</div>
+          </div>
+          <div class="about-metric p-5 interactive skill-card" tabindex="0" role="button" aria-pressed="false"
+            aria-label="Primary language: Java">
+            <div class="relative z-10">
+              <div class="text-[11px] text-red-300 font-semibold uppercase tracking-[0.18em]">Primary Language</div>
+              <div class="text-3xl font-black text-white font-mono mt-2">Java</div>
+              <p class="text-xs text-gray-400 mt-1">Spring Boot · JPA · MySQL · Security</p>
+               <div class="skill-hint text-[10px] text-red-300 font-mono mt-3">tap to inspect the core stack</div>
+            </div>
           </div>
         </div>
 
         <div class="glow-card p-6 sm:p-8">
           <h3 class="text-xl font-bold text-white mb-6 flex items-center justify-between">
-            <span>Proficiency &amp; Mastery</span>
-            <span class="text-xs font-mono text-indigo-400 font-normal">Active Tech Matrix</span>
+           <span>Language Proficiency &amp; Stack</span>
+           <span id="languageFocus" class="text-xs font-mono text-red-300 font-normal">select a row to focus</span>
           </h3>
 
           <div class="space-y-4">
-            <div>
+             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
+               data-language="Java + Spring Boot" aria-label="Focus Java and Spring Boot proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                <span class="text-white">React, Next.js &amp; TypeScript</span>
-                <span class="text-indigo-400 font-mono skill-percent">98%</span>
+                 <span class="text-white">Java &amp; Spring Boot</span>
+                <span class="text-red-300 font-mono skill-percent">35%</span>
+              </div>
+              <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+                <div class="h-full rounded-full bg-gradient-to-r from-red-500 to-orange-500 skill-bar-fill"
+                  style="--bar-width: 35%">
+                </div>
+              </div>
+            </div>
+
+             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
+               data-language="JavaScript" aria-label="Focus JavaScript proficiency">
+              <div class="flex justify-between text-xs font-medium mb-1.5">
+                 <span class="text-white">JavaScript</span>
+                <span class="text-indigo-400 font-mono skill-percent">30%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
                 <div class="h-full rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 skill-bar-fill"
-                  style="--bar-width: 98%">
+                  style="--bar-width: 30%">
                 </div>
               </div>
             </div>
 
-            <div>
+             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
+               data-language="HTML5 + CSS3" aria-label="Focus HTML5 and CSS3 proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                <span class="text-white">Modern CSS, Tailwind &amp; Responsive Layouts</span>
-                <span class="text-purple-400 font-mono skill-percent">95%</span>
+                 <span class="text-white">HTML5 &amp; CSS3</span>
+                <span class="text-purple-400 font-mono skill-percent">20%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
                 <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 skill-bar-fill"
-                  style="--bar-width: 95%">
+                  style="--bar-width: 20%">
                 </div>
               </div>
             </div>
 
-            <div>
+             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
+               data-language="Python + Jupyter" aria-label="Focus Python and Jupyter proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                <span class="text-white">Motion Design, GSAP &amp; Three.js / WebGL</span>
-                <span class="text-pink-400 font-mono skill-percent">90%</span>
+                 <span class="text-white">Python &amp; Jupyter</span>
+                <span class="text-pink-400 font-mono skill-percent">10%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
                 <div class="h-full rounded-full bg-gradient-to-r from-pink-500 to-rose-500 skill-bar-fill"
-                  style="--bar-width: 90%">
+                  style="--bar-width: 10%">
                 </div>
               </div>
             </div>
 
-            <div>
+             <div class="language-skill" tabindex="0" role="button" aria-pressed="false"
+               data-language="PHP + MySQL" aria-label="Focus PHP and MySQL proficiency">
               <div class="flex justify-between text-xs font-medium mb-1.5">
-                <span class="text-white">Backend APIs, Node.js, Database &amp; Cloud</span>
-                <span class="text-emerald-400 font-mono skill-percent">88%</span>
+                 <span class="text-white">PHP &amp; MySQL</span>
+                <span class="text-emerald-400 font-mono skill-percent">5%</span>
               </div>
               <div class="h-2 rounded-full bg-white/10 overflow-hidden">
                 <div class="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 skill-bar-fill"
-                  style="--bar-width: 88%">
+                  style="--bar-width: 5%">
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-white/10">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-sm font-bold text-white">Design &amp; Motion Toolkit</span>
+              <span class="text-[11px] text-gray-500 font-mono">creative practice</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+               <div class="tool-card rounded-xl border border-orange-400/20 bg-orange-500/10 px-3 py-3 text-center interactive"
+                 tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Illustrator motion toolkit">
+                <div class="text-sm font-bold text-orange-300">Ai</div>
+                <div class="text-[10px] text-gray-300 mt-1">Illustrator</div>
+                 <div class="tool-hint text-[9px] text-orange-200 font-mono mt-2">vector motion</div>
+              </div>
+               <div class="tool-card rounded-xl border border-blue-400/20 bg-blue-500/10 px-3 py-3 text-center interactive"
+                 tabindex="0" role="button" aria-pressed="false" aria-label="Adobe Photoshop motion toolkit">
+                <div class="text-sm font-bold text-blue-300">Ps</div>
+                <div class="text-[10px] text-gray-300 mt-1">Photoshop</div>
+                 <div class="tool-hint text-[9px] text-blue-200 font-mono mt-2">image systems</div>
+              </div>
+               <div class="tool-card rounded-xl border border-purple-400/20 bg-purple-500/10 px-3 py-3 text-center interactive"
+                 tabindex="0" role="button" aria-pressed="false" aria-label="After Effects motion toolkit">
+                <div class="text-sm font-bold text-purple-300">Ae</div>
+                <div class="text-[10px] text-gray-300 mt-1">After Effects</div>
+                 <div class="tool-hint text-[9px] text-purple-200 font-mono mt-2">expressive motion</div>
+              </div>
+               <div class="tool-card rounded-xl border border-indigo-400/20 bg-indigo-500/10 px-3 py-3 text-center interactive"
+                 tabindex="0" role="button" aria-pressed="false" aria-label="Premiere Pro motion toolkit">
+                <div class="text-sm font-bold text-indigo-300">Pr</div>
+                <div class="text-[10px] text-gray-300 mt-1">Premiere Pro</div>
+                 <div class="tool-hint text-[9px] text-indigo-200 font-mono mt-2">rhythm + timing</div>
               </div>
             </div>
           </div>
@@ -1720,10 +2360,14 @@
       </p>
     </div>
 
-    <div class="space-y-4">
+    <div class="services-orbit-shell" id="servicesOrbitShell">
+      <div class="services-orbit-stage">
+        <div class="service-orbit-readout" id="servicePosition" aria-live="polite">01 / 04 · SCROLL TO EXPLORE</div>
+        <div class="services-orbit" id="servicesOrbit" aria-label="Scroll-driven services orbit">
       <!-- Service 1 -->
       <div
-        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive reveal-service">
+        class="glow-card service-slide p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive"
+        data-service-index="0">
         <div class="flex items-start sm:items-center gap-5">
           <div
             class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0 group-hover:scale-110 transition-transform">
@@ -1736,8 +2380,8 @@
                 Full-Stack Web Development</h3>
             </div>
             <p class="text-gray-400 text-sm mt-1 max-w-xl">
-              Modern, scalable applications built with Next.js, React, Node.js, and TypeScript. Optimized for extreme
-              speed, SEO, and robust security.
+              Modern, scalable applications built with Java, Spring Boot, React, Vite, and JavaScript. Optimized for
+              speed, SEO, robust APIs, and production-ready security.
             </p>
           </div>
         </div>
@@ -1749,7 +2393,8 @@
 
       <!-- Service 2 -->
       <div
-        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive reveal-service">
+        class="glow-card service-slide p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive"
+        data-service-index="1">
         <div class="flex items-start sm:items-center gap-5">
           <div
             class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0 group-hover:scale-110 transition-transform">
@@ -1775,7 +2420,8 @@
 
       <!-- Service 3 -->
       <div
-        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive reveal-service">
+        class="glow-card service-slide p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive"
+        data-service-index="2">
         <div class="flex items-start sm:items-center gap-5">
           <div
             class="w-12 h-12 rounded-2xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 shrink-0 group-hover:scale-110 transition-transform">
@@ -1784,12 +2430,12 @@
           <div>
             <div class="flex items-center gap-3">
               <span class="text-xs font-mono text-pink-400">03</span>
-              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">Motion
-                Design &amp; 3D Interactive</h3>
+              <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">
+                Expressive Typography Animations</h3>
             </div>
             <p class="text-gray-400 text-sm mt-1 max-w-xl">
-              Immersive Three.js scenes, WebGL shaders, GSAP timelines, and scroll-driven stories that captivate
-              audiences and win awards.
+              Kinetic type systems with morphing animation effects, thoughtful microinteractions, and faux 3D animation
+              effects that give digital products more depth through layered motion and perspective.
             </p>
           </div>
         </div>
@@ -1801,7 +2447,8 @@
 
       <!-- Service 4 -->
       <div
-        class="glow-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive reveal-service">
+        class="glow-card service-slide p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 group interactive"
+        data-service-index="3">
         <div class="flex items-start sm:items-center gap-5">
           <div
             class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-110 transition-transform">
@@ -1823,6 +2470,8 @@
           class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-emerald-600 transition-colors shrink-0">
           Inquire <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </a>
+      </div>
+      </div>
       </div>
     </div>
   </section>
@@ -1873,8 +2522,8 @@
           <div class="flex items-center gap-3">
             <input type="checkbox" class="estimator-chk w-4 h-4 rounded accent-indigo-500" value="2000">
             <div>
-              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">3D &amp; Motion Graphics</div>
-              <div class="text-[11px] text-gray-500">Three.js / WebGL / GSAP</div>
+              <div class="text-sm font-semibold text-white group-hover:text-indigo-300">Motion &amp; Interaction</div>
+              <div class="text-[11px] text-gray-500">Typography / SVG / CSS / GSAP</div>
             </div>
           </div>
           <span class="text-xs font-mono text-indigo-400 font-semibold">+$2.0k</span>
@@ -1923,8 +2572,10 @@
         <div>
           <div class="text-xs font-semibold uppercase tracking-wider text-gray-400">Estimated Total &amp; Timeline</div>
           <div class="flex items-baseline gap-3 mt-1">
-            <span class="text-4xl font-black text-white font-mono" id="estimatePrice">$6,000</span>
-            <span class="text-xs text-indigo-300 font-medium" id="estimateTime">~ 3 to 5 weeks</span>
+            <span class="text-4xl font-black text-white font-mono estimator-price-number" id="estimatePrice"
+              aria-live="polite">$6,000</span>
+            <span class="text-xs text-indigo-300 font-medium estimate-time-slide" id="estimateTime"
+              aria-live="polite">~ 3 to 5 weeks</span>
           </div>
         </div>
         <a href="#contact"
@@ -1971,9 +2622,9 @@
         </button>
         <div class="accordion-content">
           <div class="px-6 pb-6 text-gray-300 text-sm leading-relaxed border-t border-white/5 pt-4">
-            My primary stack revolves around React 19, Next.js 15, TypeScript, Tailwind CSS, Three.js / React Three
-            Fiber, Framer Motion, and Node.js. For databases and backends, I work with PostgreSQL, Supabase, Redis, and
-            modern AI/LLM APIs.
+            Java is my strongest language, with Spring Boot, Spring Data JPA, MySQL, and Spring Security forming my
+            backend foundation. I also work with React, Vite, Tailwind CSS, JavaScript, Python, PHP, Firebase, Supabase,
+            cryptography tools, and modern AI/LLM APIs.
           </div>
         </div>
       </div>
@@ -2028,7 +2679,7 @@
     </div>
 
     <div class="glow-card p-8 sm:p-12 relative overflow-hidden reveal-contact">
-      <form id="contactForm" class="relative z-10 space-y-6">
+      <form id="contactForm" class="contact-form-inner relative z-10 space-y-6">
         <div class="grid md:grid-cols-2 gap-6">
           <div>
             <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Your Name *</label>
@@ -2112,8 +2763,9 @@
 
     <!-- Social Link Badges -->
     <div class="flex flex-wrap justify-center gap-6 mt-12 text-xs sm:text-sm">
-      <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
-        <i data-lucide="github" class="w-4 h-4"></i> GitHub
+      <a href="#work"
+        class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
+        <i data-lucide="briefcase-business" class="w-4 h-4"></i> Selected Work
       </a>
       <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1.5 interactive">
         <i data-lucide="twitter" class="w-4 h-4"></i> Twitter / X
@@ -2493,6 +3145,45 @@
       });
     });
 
+    /* ================= SKILL / TOOL CARD OBJECT MOTION ================= */
+    document.querySelectorAll('.skill-card, .tool-card').forEach(card => {
+      const resetCard = () => {
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--tilt-y', '0deg');
+        card.style.setProperty('--spot-x', '50%');
+        card.style.setProperty('--spot-y', '50%');
+      };
+
+      card.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'touch') return;
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const tiltX = (0.5 - y) * 12;
+        const tiltY = (x - 0.5) * 14;
+        card.style.setProperty('--tilt-x', `${tiltX.toFixed(2)}deg`);
+        card.style.setProperty('--tilt-y', `${tiltY.toFixed(2)}deg`);
+        card.style.setProperty('--spot-x', `${(x * 100).toFixed(1)}%`);
+        card.style.setProperty('--spot-y', `${(y * 100).toFixed(1)}%`);
+      });
+
+      card.addEventListener('pointerleave', resetCard);
+
+      const toggleSelected = () => {
+        const selected = card.classList.toggle('is-selected');
+        card.setAttribute('aria-pressed', String(selected));
+        playTone(selected ? 660 : 440, 'sine', 0.06, 0.035);
+      };
+
+      card.addEventListener('click', toggleSelected);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleSelected();
+        }
+      });
+    });
+
     /* ================= SCROLL PROGRESS & DOCK ACTIVE STATE ================= */
     const progressBar = document.getElementById('progressBar');
     const sections = ['home', 'work', 'about', 'terminal', 'services', 'calculator', 'contact'];
@@ -2628,6 +3319,68 @@
       }
     }
 
+    /* ================= ABOUT PROFICIENCY / MASTERY COUNTERS ================= */
+    function animateAboutCounter(el) {
+      if (!el || el.dataset.started) return;
+      el.dataset.started = 'true';
+
+      const target = parseInt(el.dataset.aboutTarget, 10);
+      const suffix = el.dataset.aboutSuffix || '';
+      const animType = el.dataset.aboutAnim || 'ease';
+      el.classList.add('animated');
+
+      if (animType === 'cascade') {
+        let frame = 0;
+        const totalFrames = 26;
+        const timer = setInterval(() => {
+          frame++;
+          if (frame < totalFrames) {
+            el.textContent = `${Math.floor(Math.random() * (target + 13))}${suffix}`;
+          } else {
+            clearInterval(timer);
+            el.textContent = `${target}${suffix}`;
+          }
+        }, 42);
+      } else {
+        const duration = 1250;
+        const start = performance.now();
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = `${Math.floor(eased * target)}${suffix}`;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = `${target}${suffix}`;
+          }
+        }
+        requestAnimationFrame(step);
+      }
+    }
+
+    function animateSkillPercent(el) {
+      if (!el || el.dataset.counted) return;
+      const target = parseInt(el.textContent, 10);
+      if (Number.isNaN(target)) return;
+      el.dataset.counted = 'true';
+      const start = performance.now();
+      const duration = 950;
+
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = `${Math.round(eased * target)}%`;
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = `${target}%`;
+          el.classList.add('skill-number-pop');
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
     /* ================= SCROLL OBSERVERS FOR ANIMATED SECTIONS ================= */
     const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
 
@@ -2665,7 +3418,13 @@
             setTimeout(() => bar.classList.add('animated'), i * 150);
           });
           document.querySelectorAll('.skill-percent').forEach((percent, i) => {
-            setTimeout(() => percent.classList.add('animated'), i * 150);
+            setTimeout(() => {
+              percent.classList.add('animated');
+              animateSkillPercent(percent);
+            }, i * 150);
+          });
+          document.querySelectorAll('.about-counter').forEach((counter, i) => {
+            setTimeout(() => animateAboutCounter(counter), 250 + i * 180);
           });
           observer.unobserve(entry.target);
         }
@@ -2674,6 +3433,107 @@
 
     const aboutSection = document.getElementById('about');
     if (aboutSection) skillObserver.observe(aboutSection);
+
+    /* ================= LANGUAGE PROFICIENCY INTERACTIONS ================= */
+    document.querySelectorAll('.language-skill').forEach(row => {
+      const setFocus = () => {
+        document.querySelectorAll('.language-skill').forEach(other => {
+          if (other !== row) {
+            other.classList.remove('is-active');
+            other.setAttribute('aria-pressed', 'false');
+          }
+        });
+        const isActive = row.classList.toggle('is-active');
+        row.setAttribute('aria-pressed', String(isActive));
+        const focusLabel = document.getElementById('languageFocus');
+        if (focusLabel) {
+          focusLabel.textContent = isActive ? `${row.dataset.language} selected` : 'select a row to focus';
+        }
+        playTone(isActive ? 720 : 420, 'triangle', 0.06, 0.035);
+      };
+
+      row.addEventListener('pointermove', (e) => {
+        const rect = row.getBoundingClientRect();
+        row.style.setProperty('--language-x', `${((e.clientX - rect.left) / rect.width) * 100}%`);
+        row.style.setProperty('--language-y', `${((e.clientY - rect.top) / rect.height) * 100}%`);
+      });
+      row.addEventListener('pointerleave', () => {
+        row.style.setProperty('--language-x', '50%');
+        row.style.setProperty('--language-y', '50%');
+      });
+      row.addEventListener('click', setFocus);
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setFocus();
+        }
+      });
+    });
+
+    /* ================= SERVICES 3D SCROLL ORBIT ================= */
+    const servicesOrbitShell = document.getElementById('servicesOrbitShell');
+    const servicesOrbit = document.getElementById('servicesOrbit');
+    const serviceSlides = servicesOrbit ? [...servicesOrbit.querySelectorAll('.service-slide')] : [];
+    const servicePosition = document.getElementById('servicePosition');
+
+    if (servicesOrbitShell && servicesOrbit && serviceSlides.length) {
+      let orbitFrame = 0;
+      let activeService = 0;
+
+      serviceSlides.forEach((slide, index) => {
+        slide.style.setProperty('--slide-angle', `${index * (360 / serviceSlides.length)}deg`);
+      });
+
+      function updateServicesOrbit() {
+        orbitFrame = 0;
+        const viewportHeight = window.innerHeight;
+        const sectionStart = servicesOrbitShell.offsetTop - viewportHeight * 0.1;
+        const scrollTravel = Math.max(servicesOrbitShell.offsetHeight - viewportHeight * 0.78, 1);
+        const progress = Math.max(0, Math.min(1, (window.scrollY - sectionStart) / scrollTravel));
+        const rotation = -progress * 360;
+        servicesOrbit.style.transform = `rotateY(${rotation.toFixed(2)}deg)`;
+
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        serviceSlides.forEach((slide, index) => {
+          const angle = (index * (360 / serviceSlides.length) + rotation) * Math.PI / 180;
+          const frontness = (Math.cos(angle) + 1) / 2;
+          const distance = 1 - frontness;
+          const opacity = 0.14 + Math.pow(frontness, 0.72) * 0.86;
+          const scale = 0.7 + Math.pow(frontness, 1.15) * 0.3;
+
+          slide.style.setProperty('--orbit-opacity', opacity.toFixed(3));
+          slide.style.setProperty('--orbit-scale', scale.toFixed(3));
+          slide.style.zIndex = String(Math.round(frontness * 100));
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        if (closestIndex !== activeService) {
+          activeService = closestIndex;
+          playTone(520 + activeService * 55, 'sine', 0.035, 0.018);
+        }
+
+        serviceSlides.forEach((slide, index) => {
+          slide.classList.toggle('is-center', index === activeService);
+        });
+        if (servicePosition) {
+          servicePosition.textContent = `${String(activeService + 1).padStart(2, '0')} / ${String(serviceSlides.length).padStart(2, '0')} · SCROLL TO EXPLORE`;
+        }
+      }
+
+      function scheduleOrbitUpdate() {
+        if (!orbitFrame) orbitFrame = requestAnimationFrame(updateServicesOrbit);
+      }
+
+      window.addEventListener('scroll', scheduleOrbitUpdate, { passive: true });
+      window.addEventListener('resize', scheduleOrbitUpdate);
+      requestAnimationFrame(updateServicesOrbit);
+    }
 
     /* ================= ACCORDION FAQ ================= */
     document.querySelectorAll('.accordion-trigger').forEach(btn => {
@@ -2719,78 +3579,80 @@
     });
 
     /* ================= PROJECT CASE STUDY MODAL ================= */
+    /* ================= PROJECT CASE STUDY MODAL ================= */
     const projectData = {
       p1: {
-        title: "Nebula Analytics Dashboard",
-        category: "Full-Stack SaaS Platform",
-        tagline: "High-throughput data streaming and customizable visualization dashboards.",
-        description: "Nebula is a modern telemetry platform designed to process billions of client events. Built with Next.js 15 App Router, WebSockets, and Redis pub/sub to deliver real-time data sync with under 50ms latency.",
+        title: "EduAI Portal",
+        category: "AI Teaching & Assessment Platform",
+        tagline: "Advanced AI Teaching & Assessment Portal for Faculty Members.",
+        description: "EduAI is a specialized educational AI platform designed for faculty members to streamline assignment grading, generate learning assessments, and monitor student academic performance with intelligent AI assistants.",
         metrics: [
-          { label: "Throughput", val: "100k req/sec" },
-          { label: "Client Uptime", val: "99.99%" },
-          { label: "Latency", val: "< 45ms" }
+          { label: "Role", val: "Lead Developer" },
+          { label: "Stack", val: "JavaScript / AI" },
+          { label: "Project", val: "EduAI" }
         ],
-        tech: ["Next.js 15", "TypeScript", "Tailwind CSS", "Redis", "D3.js", "WebSockets"]
+        tech: ["JavaScript", "Node.js", "AI Assistant", "REST API", "HTML5/CSS3"]
       },
       p2: {
-        title: "Aura Apparel 3D Storefront",
-        category: "E-Commerce & Three.js WebGL",
-        tagline: "Next-generation 3D product configurator and dynamic clothing try-on.",
-        description: "A luxury lifestyle storefront empowering shoppers to customize fabric materials, lighting, and fit in photorealistic real-time WebGL. Increased user engagement by 320% and reduced return rates by 47%.",
+        title: "colonyManagement",
+        category: "Full-Stack Community Platform",
+        tagline: "Comprehensive residential colony & facility management system.",
+        description: "A Java Spring Boot management application for housing colonies and residential communities, handling member registrations, utility billing, maintenance notices, and resident directories.",
         metrics: [
-          { label: "Conversion Lift", val: "+320%" },
-          { label: "Return Rate Drop", val: "-47%" },
-          { label: "Frame Rate", val: "Smooth 60 FPS" }
+          { label: "Primary Lang", val: "Java" },
+          { label: "Framework", val: "Spring Boot" },
+          { label: "Data Layer", val: "Spring Data JPA / MySQL" },
+          { label: "Project", val: "colonyManagement" }
         ],
-        tech: ["Three.js", "React Three Fiber", "GLSL Shaders", "Stripe API", "GSAP"]
+        tech: ["Java", "Spring Boot", "Spring Data JPA", "MySQL", "Spring Security"]
       },
       p3: {
-        title: "Cortex AI Intelligence Studio",
-        category: "AI Workflow & Prompt Orchestration",
-        tagline: "Visual node-based agent orchestration with real-time vector retrieval.",
-        description: "Cortex simplifies complex AI workflows by allowing engineering teams to visually wire together LLM agents, vector embeddings, and fallback logic in a fluid visual node editor.",
+        title: "Mermaid Pearl Resort",
+        category: "Hospitality & Web Design",
+        tagline: "Interactive showcase and booking portal for Mermaid Pearl Resort.",
+        description: "A luxury resort web application featuring room package browsing, resort amenity guides, customer reservation requests, and responsive mobile-first UI components.",
         metrics: [
-          { label: "API Latency", val: "89ms avg" },
-          { label: "Active Users", val: "150k+" },
-          { label: "Model Support", val: "OpenAI, Gemini, Anthropic" }
+          { label: "Project Type", val: "Resort Portal" },
+          { label: "Primary Lang", val: "HTML / CSS / JS" },
+          { label: "Project", val: "MermaidPearlResort" }
         ],
-        tech: ["OpenAI API", "React Flow", "FastAPI", "Python", "Tailwind CSS", "Pinecone"]
+        tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "UI/UX"]
       },
       p4: {
-        title: "Apex Developer Hub",
-        category: "DevOps & Cloud Telemetry",
-        tagline: "Interactive API playgrounds and developer workflow orchestration.",
-        description: "A centralized platform featuring live in-browser GraphQL playgrounds, automatic SDK generators, and real-time container health monitoring.",
+        title: "Digi-Seal System",
+        category: "Security & Cryptography",
+        tagline: "University Project for Network Security and Cryptography.",
+        description: "An engineering project implementing digital signatures, hash calculation, and cryptographic document sealing to prevent tampering and ensure secure network transmission.",
         metrics: [
-          { label: "Deploy Time", val: "Under 12s" },
-          { label: "Integrations", val: "500+ orgs" },
-          { label: "Audit Score", val: "100/100" }
+          { label: "Course", val: "Network Security" },
+          { label: "Encryption", val: "Crypto Hashes" },
+          { label: "Project", val: "Digi-Seal" }
         ],
-        tech: ["TypeScript", "GraphQL", "Docker", "Go Backend", "Next.js"]
+        tech: ["JavaScript", "Cryptography", "Security Protocols", "Hash Validation"]
       },
       p5: {
-        title: "Vortex Spatial Soundscape",
-        category: "Creative Audio & GLSL WebGL",
-        tagline: "Interactive WebAudio frequency visualizer and generative synthesizer.",
-        description: "An audio visual experiment mapping real-time micro-frequencies into dynamic 3D ribbon particles using Web Audio API nodes and GPU fragment shaders.",
+        title: "JobChai Portal",
+        category: "Web Engineering Job System",
+        tagline: "PHP-based Job portal university project for Web Engineering.",
+        description: "JobChai is a job board platform enabling employers to post vacancy notices and job seekers to submit resumes and track application status.",
         metrics: [
-          { label: "Shader Speed", val: "120 FPS capable" },
-          { label: "Audio Engine", val: "WebAudio Native" },
-          { label: "Awards", val: "Site of the Day" }
+          { label: "Backend", val: "PHP & MySQL" },
+          { label: "Course", val: "Web Engineering" },
+          { label: "Project", val: "JobChai" }
         ],
-        tech: ["Web Audio API", "GLSL", "Canvas API", "TypeScript"]
+        tech: ["PHP", "MySQL", "Web Engineering", "HTML/CSS", "Bootstrap"]
       },
       p6: {
-        title: "Prism Infinite Whiteboard",
-        category: "Real-time Collaboration Canvas",
-        tagline: "Zero-latency infinite collaborative whiteboard with multiplayer CRDT.",
-        description: "A high-performance infinite canvas supporting diagrams, freehand stylus drawing, and rich code blocks. Synced across distributed browsers with Yjs CRDTs.",
+        title: "Machine Learning Lab",
+        category: "Data Science & Predictive Modeling",
+        tagline: "Machine Learning algorithms and data processing notebooks.",
+        description: "A repository of machine learning experiments, classification models, linear regression analysis, and exploratory data science workflows implemented in Python and Jupyter Notebooks.",
         metrics: [
-          { label: "Collab Sync", val: "< 15ms" },
-          { label: "Concurrency", val: "50+ users/room" },
-          { label: "Data Safety", val: "E2E Encrypted" }
+          { label: "Language", val: "Python" },
+          { label: "Environment", val: "Jupyter Lab" },
+          { label: "Project", val: "Machine-Learning-Lab" }
         ],
-        tech: ["Yjs CRDT", "React", "WebRTC", "Canvas API", "Tailwind"]
+        tech: ["Python", "Jupyter Notebook", "Scikit-Learn", "Pandas", "Data Science"]
       }
     };
 
@@ -2831,8 +3693,8 @@
             </div>
 
             <div class="pt-4 border-t border-white/10 flex gap-3">
-              <a href="#contact" onclick="projectModal.classList.add('hidden')" class="flex-1 bg-white hover:bg-gray-200 text-black text-center py-3 rounded-xl font-bold text-sm transition-colors">
-                Inquire About Similar Project
+              <a href="https://github.com/fuwad7" target="_blank" class="flex-1 bg-white hover:bg-gray-200 text-black text-center py-3 rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="code-2" class="w-4 h-4"></i> View Project Code
               </a>
             </div>
           </div>
@@ -2860,9 +3722,9 @@
       help: () => `
         <div class="space-y-1">
           <div class="text-white font-semibold">Available Commands:</div>
-          <div><span class="text-indigo-400 font-bold">bio</span> — Summary of Fuad and background</div>
-          <div><span class="text-indigo-400 font-bold">skills</span> — Full stack and design capabilities</div>
-          <div><span class="text-indigo-400 font-bold">projects</span> — Key highlights and production systems</div>
+          <div><span class="text-indigo-400 font-bold">bio</span> — Summary of Mohammad Fuad Hasan &amp; Education</div>
+          <div><span class="text-indigo-400 font-bold">skills</span> — Language proficiency &amp; tech breakdown</div>
+          <div><span class="text-indigo-400 font-bold">projects</span> — Selected projects from the portfolio</div>
           <div><span class="text-indigo-400 font-bold">contact</span> — Get direct contact details</div>
           <div><span class="text-indigo-400 font-bold">confetti</span> — Launch celebration fireworks</div>
           <div><span class="text-indigo-400 font-bold">theme &lt;name&gt;</span> — Switch theme (indigo, violet, emerald, cyan, amber)</div>
@@ -2871,22 +3733,28 @@
       `,
       bio: () => `
         <div class="text-gray-300 space-y-1">
-          <span class="text-white font-bold">Fuad</span> — Creative Developer &amp; Frontend Architect.<br>
-          Specializing in React, Next.js, Three.js WebGL, and scalable user interfaces.
+          <span class="text-white font-bold">Mohammad Fuad Hasan</span><br>
+          Graduate of Computing and Information System (CIS) at Daffodil International University.<br>
+          📍 Dhaka, Bangladesh • Open for projects and software engineering roles.
         </div>
       `,
       skills: () => `
         <div class="space-y-1 text-gray-300">
-          <div>⚛ <strong class="text-white">Frontend:</strong> React 19, Next.js 15, TypeScript, Tailwind CSS, Vite</div>
-          <div>🎬 <strong class="text-white">Creative:</strong> Three.js, React Three Fiber, GSAP, Canvas 2D, GLSL</div>
-          <div>🟢 <strong class="text-white">Backend &amp; DB:</strong> Node.js, Express, PostgreSQL, Redis, Supabase, Python</div>
+          <div>☕ <strong class="text-white">Java / Spring Boot:</strong> colonyManagement, Spring Data JPA, MySQL, Spring Security</div>
+          <div>🟡 <strong class="text-white">JavaScript:</strong> EduAI, Digi-Seal, interactive web apps</div>
+          <div>🟧 <strong class="text-white">HTML / CSS:</strong> responsive web interfaces and UI layouts</div>
+          <div>🐍 <strong class="text-white">Python / Jupyter:</strong> Machine-Learning-Lab and data science experiments</div>
+          <div>🐘 <strong class="text-white">PHP / MySQL:</strong> JobChai and web engineering projects</div>
         </div>
       `,
       projects: () => `
         <div class="space-y-1 text-gray-300">
-          <div>01. <strong class="text-white">Nebula Dashboard</strong> (Next.js / Realtime Analytics)</div>
-          <div>02. <strong class="text-white">Aura 3D Apparel</strong> (Three.js WebGL Configurator)</div>
-          <div>03. <strong class="text-white">Cortex Studio</strong> (AI Agent Workflow Orchestration)</div>
+          <div>01. <strong class="text-white">EduAI</strong> — AI Teaching &amp; Assessment Portal (JavaScript)</div>
+          <div>02. <strong class="text-white">colonyManagement</strong> — Residential Colony Management System</div>
+          <div>03. <strong class="text-white">MermaidPearlResort</strong> — Resort Booking Website (HTML/CSS/JS)</div>
+          <div>04. <strong class="text-white">Digi-Seal</strong> — Security &amp; Cryptography Project</div>
+          <div>05. <strong class="text-white">JobChai</strong> — PHP Web Engineering Job Portal</div>
+          <div>06. <strong class="text-white">Machine-Learning-Lab</strong> — Python Data Science &amp; ML Notebooks</div>
         </div>
       `,
       contact: () => `
@@ -2960,6 +3828,35 @@
     const estimatorChecks = document.querySelectorAll('.estimator-chk');
     const estimatePrice = document.getElementById('estimatePrice');
     const estimateTime = document.getElementById('estimateTime');
+    let currentEstimateValue = 0;
+    let estimateAnimationFrame = null;
+
+    function animateEstimatorPrice(nextValue) {
+      if (!estimatePrice) return;
+      if (estimateAnimationFrame) cancelAnimationFrame(estimateAnimationFrame);
+
+      const startValue = currentEstimateValue;
+      const startTime = performance.now();
+      const duration = 720;
+      estimatePrice.classList.remove('price-pop');
+      void estimatePrice.offsetWidth;
+      estimatePrice.classList.add('price-pop');
+
+      function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        const value = Math.round(startValue + (nextValue - startValue) * eased);
+        estimatePrice.textContent = `$${value.toLocaleString()}`;
+        if (progress < 1) {
+          estimateAnimationFrame = requestAnimationFrame(step);
+        } else {
+          currentEstimateValue = nextValue;
+          estimateAnimationFrame = null;
+        }
+      }
+
+      estimateAnimationFrame = requestAnimationFrame(step);
+    }
 
     function calculateEstimate() {
       let total = 0;
@@ -2971,11 +3868,15 @@
         }
       });
 
-      if (estimatePrice) estimatePrice.textContent = `$${total.toLocaleString()}`;
+      animateEstimatorPrice(total);
       if (estimateTime) {
-        if (count <= 2) estimateTime.textContent = '~ 2 to 3 weeks';
-        else if (count <= 4) estimateTime.textContent = '~ 4 to 6 weeks';
-        else estimateTime.textContent = '~ 7 to 10 weeks';
+        const nextTime = count <= 2 ? '~ 2 to 3 weeks' : count <= 4 ? '~ 4 to 6 weeks' : '~ 7 to 10 weeks';
+        if (estimateTime.textContent !== nextTime) {
+          estimateTime.textContent = nextTime;
+          estimateTime.classList.remove('changed');
+          void estimateTime.offsetWidth;
+          estimateTime.classList.add('changed');
+        }
       }
     }
 
