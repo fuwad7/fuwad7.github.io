@@ -3121,7 +3121,8 @@
     </div>
 
     <div class="glow-card p-8 sm:p-12 relative overflow-hidden reveal-contact">
-      <form id="contactForm" class="contact-form-inner relative z-10 space-y-6">
+      <form id="contactForm" action="https://formspree.io/f/myeyzvwb" method="POST"
+        class="contact-form-inner relative z-10 space-y-6">
         <div class="grid md:grid-cols-2 gap-6">
           <div>
             <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Your Name *</label>
@@ -4439,33 +4440,38 @@
         const budget = budgetEl ? budgetEl.value : 'Not specified';
 
         try {
-          await fetch('https://formsubmit.co/ajax/fuadfuad091@gmail.com', {
+          const response = await fetch('https://formspree.io/f/myeyzvwb', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             },
             body: JSON.stringify({
-              _subject: `Portfolio Contact from ${name}`,
-              _template: 'table',
-              Name: name,
-              Email: email,
-              Budget: budget,
-              Message: message
+              name: name,
+              email: email,
+              budget: budget,
+              message: message
             })
           });
 
-          contactSuccessNotice.classList.remove('hidden');
-          confetti({ particleCount: 100, spread: 70, origin: { y: 0.7 } });
-          playTone(650, 'sine', 0.15);
-          submitBtnText.textContent = 'Send Message';
-          lucide.createIcons();
+          if (response.ok) {
+            contactSuccessNotice.classList.remove('hidden');
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.7 } });
+            if (typeof playTone === 'function') playTone(650, 'sine', 0.15);
+            lucide.createIcons();
+          } else {
+            const data = await response.json();
+            if (data && data.errors) {
+              alert(data.errors.map(err => err.message).join(', '));
+            } else {
+              alert('Oops! There was a problem submitting your form.');
+            }
+          }
         } catch (err) {
           console.error('Contact submit error:', err);
-          contactSuccessNotice.classList.remove('hidden');
-          confetti({ particleCount: 100, spread: 70, origin: { y: 0.7 } });
+          alert('Oops! There was a problem submitting your form.');
+        } finally {
           submitBtnText.textContent = 'Send Message';
-          lucide.createIcons();
         }
       });
     }
