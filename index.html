@@ -3126,6 +3126,9 @@
     <div class="glow-card p-8 sm:p-12 relative overflow-hidden reveal-contact">
       <form id="contactForm" action="https://formspree.io/f/myeyzvwb" method="POST"
         class="contact-form-inner relative z-10 space-y-6">
+        <!-- Formspree Spam Honeypot -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none !important">
+
         <div class="grid md:grid-cols-2 gap-6">
           <div>
             <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Your Name *</label>
@@ -3182,9 +3185,9 @@
             placeholder="Tell me about your product, timeline, and goals..."></textarea>
         </div>
 
-        <!-- reCAPTCHA Widget & Verification Error -->
+        <!-- reCAPTCHA Widget (Replace YOUR_RECAPTCHA_SITE_KEY with your Google reCAPTCHA v2 site key from google.com/recaptcha/admin) -->
         <div class="flex flex-col items-center justify-center my-4 overflow-x-auto">
-          <div class="g-recaptcha" data-sitekey="6Lfu4wcTAAAAAGG2v07106RdpBqEk0sRU26UkiLg" data-theme="dark"></div>
+          <div class="g-recaptcha" data-sitekey="6Le53Z8tAAAAAFdnOXE0ponmyM_Fz8PR0O_UsS9J" data-theme="dark"></div>
           <p id="captchaError" class="text-rose-400 text-xs mt-2 hidden font-medium flex items-center gap-1">
             <i data-lucide="alert-circle" class="w-3.5 h-3.5 inline"></i> Please complete the reCAPTCHA verification
             before sending.
