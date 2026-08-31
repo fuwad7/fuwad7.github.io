@@ -47,9 +47,6 @@
   <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- Google reCAPTCHA API -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
   <style>
     :root {
       --bg: #050508;
@@ -440,6 +437,192 @@
       transform: translateY(-4px);
       border-color: rgba(var(--accent-rgb), 0.3);
       box-shadow: 0 16px 40px -12px rgba(var(--accent-rgb), 0.15);
+    }
+
+    /* ===== UNIQUE METRO TRAIN & HOLOGRAPHIC TILE ANIMATIONS ===== */
+    @property --border-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    /* Animated Express Train Headlight Beam along Subway Track */
+    .metro-headlight-beam {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 6px;
+      height: 120px;
+      transform: translateX(-50%);
+      background: linear-gradient(to bottom, transparent, rgba(129, 140, 248, 0.9), rgba(255, 255, 255, 1), transparent);
+      border-radius: 9999px;
+      filter: drop-shadow(0 0 15px rgba(99, 102, 241, 1));
+      pointer-events: none;
+      animation: metro-beam-run 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      z-index: 15;
+    }
+
+    @keyframes metro-beam-run {
+      0% {
+        top: -120px;
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      85% {
+        opacity: 1;
+      }
+
+      100% {
+        top: 100%;
+        opacity: 0;
+      }
+    }
+
+    /* Quantum Career Orbit Beacon Capsule */
+    #careerBeaconOrb {
+      position: absolute;
+      left: 6px;
+      width: 40px;
+      height: 40px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(129, 140, 248, 1) 0%, rgba(99, 102, 241, 0.85) 45%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1.5px solid rgba(168, 85, 247, 0.9);
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.9), 0 0 45px rgba(168, 85, 247, 0.6);
+      z-index: 30;
+      transition: top 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    @media (min-width: 768px) {
+      #careerBeaconOrb {
+        left: 50%;
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    .beacon-core-ring {
+      position: absolute;
+      inset: -4px;
+      border: 1.5px dashed rgba(168, 85, 247, 0.85);
+      border-radius: 50%;
+      animation: spin-beacon 6s linear infinite;
+    }
+
+    @keyframes spin-beacon {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .beacon-pulse-dot {
+      width: 14px;
+      height: 14px;
+      background: #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 14px #ffffff, 0 0 28px rgba(129, 140, 248, 1);
+      animation: beacon-pulse 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes beacon-pulse {
+      0% {
+        transform: scale(0.85);
+        box-shadow: 0 0 10px #ffffff, 0 0 20px rgba(129, 140, 248, 0.8);
+      }
+
+      100% {
+        transform: scale(1.15);
+        box-shadow: 0 0 20px #ffffff, 0 0 35px rgba(236, 72, 153, 1);
+      }
+    }
+
+    /* Station Arrival Flash Animation */
+    .station-arrival-pulse {
+      animation: station-arrival-flare 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1;
+    }
+
+    @keyframes station-arrival-flare {
+      0% {
+        box-shadow: 0 0 0 0 rgba(129, 140, 248, 0.9);
+        transform: scale(1);
+      }
+
+      50% {
+        box-shadow: 0 0 40px 15px rgba(168, 85, 247, 0.8);
+        transform: scale(1.25);
+      }
+
+      100% {
+        box-shadow: 0 0 20px 2px rgba(99, 102, 241, 0.6);
+        transform: scale(1);
+      }
+    }
+
+    /* Unique Holographic Rotating Conic Border Sweep for Tiles */
+    .holographic-tile {
+      --border-angle: 0deg;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .holographic-tile::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: conic-gradient(from var(--border-angle), rgba(99, 102, 241, 0.9), rgba(168, 85, 247, 0.9), rgba(236, 72, 153, 0.9), rgba(16, 185, 129, 0.9), rgba(99, 102, 241, 0.9));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: rotate-conic-border 4s linear infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .holographic-tile:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes rotate-conic-border {
+      to {
+        --border-angle: 360deg;
+      }
+    }
+
+    /* Pneumatic Station Docking Reveal Curve for Experience Tiles */
+    .reveal-header.revealed .glow-card,
+    .reveal-project.revealed .glow-card {
+      animation: station-card-dock 0.75s cubic-bezier(0.16, 1, 0.3, 1) 1;
+    }
+
+    @keyframes station-card-dock {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+      }
+
+      60% {
+        opacity: 1;
+        transform: translateY(-4px) scale(1.01);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     /* ===== BIO CARD ANIMATED - MATCH SITE DARK STYLE ===== */
@@ -1716,6 +1899,13 @@
       <i data-lucide="layout-grid" class="w-5 h-5"></i>
       <div class="dock-dot"></div>
     </a>
+    <a href="#experience" class="dock-item interactive" data-section="experience" aria-label="Experience">
+      <div
+        class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
+        Experience</div>
+      <i data-lucide="briefcase" class="w-5 h-5"></i>
+      <div class="dock-dot"></div>
+    </a>
     <a href="#about" class="dock-item interactive" data-section="about" aria-label="About">
       <div
         class="dock-tip absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 backdrop-blur border border-white/10 px-2.5 py-1 rounded-lg text-xs text-white">
@@ -2438,6 +2628,458 @@
     </div>
   </section>
 
+  <!-- ================= WORK EXPERIENCE — CAREER FLIGHT PATH ================= -->
+  <section id="experience" class="py-24 px-6 max-w-7xl mx-auto relative">
+
+    <!-- Header -->
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <div
+        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-xs text-indigo-400 font-semibold mb-4">
+        <i data-lucide="route" class="w-3.5 h-3.5"></i> FLIGHT PATH · MY JOURNEY
+      </div>
+      <h2 class="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight">
+        Work <span class="serif font-normal text-indigo-300">Experience.</span>
+      </h2>
+      <p class="text-gray-400 mt-3 text-sm sm:text-base max-w-lg mx-auto">
+        Scroll slowly and watch the journey fly — every stop made the route richer.
+      </p>
+    </div>
+
+    <div class="flight-layout grid lg:grid-cols-[300px_1fr] gap-12 max-w-6xl mx-auto items-start">
+
+      <!-- ===== LEFT: THE FLIGHT PATH (sticky, scroll-driven) ===== -->
+      <div class="hidden lg:block sticky top-16 h-[75vh]" id="flightStage">
+        <svg id="flightSvg" viewBox="0 0 300 580" class="w-full h-full overflow-visible">
+
+          <!-- full dotted route -->
+          <path id="routePath" d="M 150 40 C 60 130, 250 210, 150 280 C 60 360, 240 440, 150 540" fill="none"
+            stroke="rgba(255,255,255,.08)" stroke-width="3" stroke-dasharray="1 10" stroke-linecap="round" />
+
+          <!-- glowing trail (draws as you scroll) -->
+          <path id="trailPath" d="M 150 40 C 60 130, 250 210, 150 280 C 60 360, 240 440, 150 540" fill="none"
+            stroke="url(#trailGrad)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="800"
+            stroke-dashoffset="800" />
+
+          <defs>
+            <linearGradient id="trailGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#818cf8" />
+              <stop offset=".5" stop-color="#a855f7" />
+              <stop offset="1" stop-color="#34d399" />
+            </linearGradient>
+          </defs>
+
+          <!-- the flying plane -->
+          <g id="flyingPlane">
+            <path d="M0,-9 L14,0 L0,9 L4,0 Z" fill="#fff" />
+            <circle r="14" fill="rgba(129,140,248,.25)">
+              <animate attributeName="r" values="12;18;12" dur="1.8s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values=".5;.15;.5" dur="1.8s" repeatCount="indefinite" />
+            </circle>
+          </g>
+
+          <!-- ============ COMPANY PORTS ============ -->
+          <!-- Port 1 -->
+          <g class="port" data-index="0" transform="translate(150,40)">
+            <circle class="port-halo" r="34" />
+            <circle class="port-ring" r="26" />
+            <g transform="translate(-10,-10)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </g>
+            <text class="port-label" y="52" text-anchor="middle">a2i</text>
+          </g>
+
+          <!-- Port 2 -->
+          <g class="port" data-index="1" transform="translate(84,280)">
+            <circle class="port-halo" r="34" />
+            <circle class="port-ring" r="26" />
+            <g transform="translate(-10,-10)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="13.5" cy="6.5" r=".5" fill="#c084fc" />
+                <circle cx="17.5" cy="10.5" r=".5" fill="#c084fc" />
+                <circle cx="8.5" cy="7.5" r=".5" fill="#c084fc" />
+                <circle cx="6.5" cy="12.5" r=".5" fill="#c084fc" />
+                <path
+                  d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.5-.58 1.5-1.5 0-.42-.17-.8-.44-1.08-.27-.28-.44-.67-.44-1.11 0-.92.76-1.67 1.68-1.67H16c3.31 0 6-2.69 6-6 0-4.97-4.48-9-10-9z" />
+              </svg>
+            </g>
+            <text class="port-label" y="52" text-anchor="middle">Freelance</text>
+          </g>
+
+          <!-- Port 3 -->
+          <g class="port" data-index="2" transform="translate(150,540)">
+            <circle class="port-halo" r="34" />
+            <circle class="port-ring" r="26" />
+            <g transform="translate(-10,-10)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+              </svg>
+            </g>
+            <text class="port-label" y="52" text-anchor="middle">DIU · IEEE</text>
+          </g>
+
+        </svg>
+      </div>
+
+      <!-- ===== RIGHT: THE CARDS ===== -->
+      <div class="flex flex-col gap-24" id="flightCards">
+
+        <!-- Card 1: a2i -->
+        <article class="flight-card" data-color="indigo">
+          <div
+            class="fc-inner p-7 sm:p-8 rounded-3xl border border-white/10 bg-[#0a0a0f]/90 backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute -top-16 -right-16 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
+            <div class="flex items-center gap-4 mb-5 relative z-10">
+              <div
+                class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center shrink-0 text-indigo-400 shadow-[0_0_20px_rgba(99,102,241,.25)]">
+                <i data-lucide="code-2" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-mono text-indigo-400 uppercase tracking-widest">Stop 01 · Jun 2026 – Sept
+                  2026</div>
+                <h3 class="text-2xl font-black text-white">Aspire to Innovate <span class="text-indigo-300">(a2i)</span>
+                </h3>
+                <div class="text-sm font-semibold text-indigo-300">Java Development Intern</div>
+              </div>
+            </div>
+            <p class="text-gray-300 text-sm leading-relaxed mb-5 relative z-10">
+              Contributing to backend development, RESTful API architecture, and Java-based digital service solutions
+              aimed at improving public service delivery.
+            </p>
+            <div class="flex flex-wrap gap-2 relative z-10">
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 font-mono">Java</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-300 font-mono">Spring
+                Boot</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-300 font-mono">MySQL</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-300 font-mono">REST
+                API</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Freelance -->
+        <article class="flight-card" data-color="purple">
+          <div
+            class="fc-inner p-7 sm:p-8 rounded-3xl border border-white/10 bg-[#0a0a0f]/90 backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute -top-16 -right-16 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
+            <div class="flex items-center gap-4 mb-5 relative z-10">
+              <div
+                class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center shrink-0 text-purple-400 shadow-[0_0_20px_rgba(168,85,247,.25)]">
+                <i data-lucide="palette" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-mono text-purple-400 uppercase tracking-widest">Stop 02 · 2019 – Present
+                </div>
+                <h3 class="text-2xl font-black text-white">Freelance Graphics Designer</h3>
+                <div class="text-sm font-semibold text-purple-300">Fiverr Seller &amp; Creative Media Specialist</div>
+              </div>
+            </div>
+            <p class="text-gray-300 text-sm leading-relaxed mb-5 relative z-10">
+              Delivered branding, graphic design, and motion video editing for global and local clients on Fiverr.
+              Managed full
+              creative lifecycles — concept to final delivery.
+            </p>
+            <div class="flex flex-wrap gap-2 relative z-10">
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono">Fiverr</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-300 font-mono">Photoshop</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 font-mono">Illustrator</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 font-mono">After
+                Effects</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-pink-500/10 border border-pink-500/20 text-pink-300 font-mono">Premiere
+                Pro</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: DIU -->
+        <article class="flight-card" data-color="emerald">
+          <div
+            class="fc-inner p-7 sm:p-8 rounded-3xl border border-white/10 bg-[#0a0a0f]/90 backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute -top-16 -right-16 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
+            <div class="flex items-center gap-4 mb-5 relative z-10">
+              <div
+                class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,.25)]">
+                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <div class="text-[11px] font-mono text-emerald-400 uppercase tracking-widest">Stop 03 · 2026 Graduate
+                </div>
+                <h3 class="text-2xl font-black text-white">BSc in Computer &amp; Information Science</h3>
+                <div class="text-sm font-semibold text-emerald-300">Daffodil International University · CGPA 3.30</div>
+              </div>
+            </div>
+            <div class="space-y-3 text-xs text-gray-300 mb-5 relative z-10">
+              <div class="p-3 rounded-xl bg-white/[0.03] border border-white/10">
+                <div class="font-bold text-white">IEEE QPAIN 2026 — Conference Certificate</div>
+                <div class="text-gray-400 mt-0.5">2nd Intl. Conference on Quantum Photonics, AI &amp; Networking</div>
+                <div class="text-emerald-400 font-mono mt-1 text-[11px]">Paper #4319: Crop Selection &amp; Yield
+                  Prediction ML Framework</div>
+              </div>
+              <div class="p-3 rounded-xl bg-white/[0.03] border border-white/10">
+                <div class="font-bold text-white">AWS Academy Graduate</div>
+                <div class="text-gray-400">Amazon Web Services (AWS Cloud Foundations)</div>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 relative z-10">
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-mono">Machine
+                Learning</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-300 font-mono">AWS
+                Cloud</span>
+              <span
+                class="text-[11px] px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-gray-300 font-mono">IEEE
+                Author</span>
+            </div>
+          </div>
+        </article>
+
+
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* ---------- flight path ports ---------- */
+    .port {
+      cursor: default;
+    }
+
+    .port-halo {
+      fill: transparent;
+      transition: fill .4s;
+    }
+
+    .port-ring {
+      fill: #0a0a10;
+      stroke: rgba(255, 255, 255, .15);
+      stroke-width: 2.5;
+      transition: stroke .4s, filter .4s, transform .4s cubic-bezier(.34, 1.56, .64, 1);
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+
+    .ring-dashed {
+      stroke-dasharray: 5 6;
+    }
+
+    .port-logo-svg {
+      transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+
+    .port-label {
+      fill: #666;
+      font-family: monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      transition: fill .4s;
+    }
+
+    .port.active .port-ring {
+      stroke: #a5b4fc;
+      filter: drop-shadow(0 0 10px rgba(129, 140, 248, .7));
+      transform: scale(1.1);
+    }
+
+    .port.active .port-halo {
+      fill: rgba(99, 102, 241, .08);
+    }
+
+    .port.active .port-label {
+      fill: #fff;
+    }
+
+    /* magnetic hover on ports */
+    .port:hover .port-ring {
+      stroke: #a5b4fc;
+      transform: scale(1.08);
+    }
+
+    /* plane */
+    #flyingPlane {
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, .6));
+    }
+
+    /* ---------- cards ---------- */
+    .flight-card {
+      will-change: transform, opacity;
+    }
+
+    .fc-inner {
+      transition: transform .5s cubic-bezier(.22, 1, .36, 1), border-color .4s, box-shadow .5s;
+    }
+
+    /* scroll-activated states (class added by JS based on plane position) */
+    .flight-card {
+      opacity: .25;
+      transform: translateY(30px) scale(.97);
+      transition: opacity .6s ease, transform .6s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .flight-card.near {
+      opacity: .55;
+      transform: translateY(10px) scale(.99);
+    }
+
+    .flight-card.active {
+      opacity: 1;
+      transform: none;
+    }
+
+    .flight-card.active .fc-inner {
+      transform: translateY(-4px);
+    }
+
+    .flight-card[data-color="indigo"].active .fc-inner {
+      border-color: rgba(99, 102, 241, .5);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, .15);
+    }
+
+    .flight-card[data-color="purple"].active .fc-inner {
+      border-color: rgba(168, 85, 247, .5);
+      box-shadow: 0 20px 60px rgba(168, 85, 247, .15);
+    }
+
+    .flight-card[data-color="emerald"].active .fc-inner {
+      border-color: rgba(16, 185, 129, .5);
+      box-shadow: 0 20px 60px rgba(16, 185, 129, .15);
+    }
+
+
+    /* card logo micro-bounce when activated */
+    .flight-card.active .fc-logo {
+      animation: logoPop .6s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    @keyframes logoPop {
+      0% {
+        transform: scale(.6) rotate(-12deg);
+      }
+
+      60% {
+        transform: scale(1.12) rotate(4deg);
+      }
+
+      100% {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 1023px) {
+
+      /* mobile: hide flight path, cards still get activation states */
+      #flightStage {
+        display: none;
+      }
+
+      .flight-card {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+
+  <script>
+      (() => {
+        const svg = document.getElementById('flightSvg');
+        if (!svg) return;
+
+        const route = document.getElementById('routePath');
+        const trail = document.getElementById('trailPath');
+        const plane = document.getElementById('flyingPlane');
+        const ports = [...document.querySelectorAll('.port')];
+        const cards = [...document.querySelectorAll('.flight-card')];
+        const routeLen = route.getTotalLength();
+        trail.style.strokeDasharray = routeLen;
+        trail.style.strokeDashoffset = routeLen;
+
+        let current = 0;
+        let currentPort = -1;
+
+        function getActiveCardIndex() {
+          const mid = window.innerHeight * 0.45;
+          let best = -1;
+          let bestDist = Infinity;
+          cards.forEach((c, i) => {
+            const r = c.getBoundingClientRect();
+            const cardMid = r.top + r.height / 2;
+            const dist = Math.abs(cardMid - mid);
+            if (dist < bestDist) {
+              bestDist = dist;
+              best = i;
+            }
+          });
+          return best;
+        }
+
+        function computeTarget() {
+          if (!cards.length) return 0;
+          const firstCard = cards[0].getBoundingClientRect();
+          const lastCard = cards[cards.length - 1].getBoundingClientRect();
+          const targetY = window.innerHeight * 0.5;
+          const totalDist = (lastCard.top + lastCard.height / 2) - (firstCard.top + firstCard.height / 2);
+          if (totalDist <= 0) return 0;
+
+          const currentDist = targetY - (firstCard.top + firstCard.height / 2);
+          const rawProgress = currentDist / totalDist;
+          return Math.min(Math.max(rawProgress, 0), 1);
+        }
+
+        function activatePort(idx) {
+          if (idx === currentPort) return;
+          currentPort = idx;
+          ports.forEach((p, i) => p.classList.toggle('active', i <= idx));
+          cards.forEach((c, i) => {
+            c.classList.toggle('active', i === idx);
+            c.classList.toggle('near', Math.abs(i - idx) === 1);
+          });
+        }
+
+        function frame() {
+          const target = computeTarget();
+          // lerp for smooth motion
+          current += (target - current) * 0.1;
+
+          // trail draws along route
+          trail.style.strokeDashoffset = routeLen * (1 - current);
+
+          // plane rides curve
+          const pt = route.getPointAtLength(routeLen * current);
+          const ahead = route.getPointAtLength(Math.min(routeLen * current + 2, routeLen));
+          const angle = Math.atan2(ahead.y - pt.y, ahead.x - pt.x) * 180 / Math.PI;
+          plane.setAttribute('transform', `translate(${pt.x}, ${pt.y}) rotate(${angle})`);
+
+          // activate port matching closest card
+          const activeIdx = getActiveCardIndex();
+          activatePort(Math.max(activeIdx, 0));
+
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+
+        if (window.lucide) lucide.createIcons();
+      })();
+  </script>
+
+
+
   <!-- ================= ABOUT & SKILLS SECTION ================= -->
   <section id="about" class="py-24 px-6 max-w-7xl mx-auto relative">
     <div class="grid lg:grid-cols-12 gap-12 items-start">
@@ -2742,6 +3384,9 @@
         <span class="text-[11px] font-mono text-gray-500">Quick commands:</span>
         <button data-cmd="bio"
           class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">bio</button>
+        <button data-cmd="experience"
+          class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-indigo-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">🚇
+          experience</button>
         <button data-cmd="skills"
           class="term-btn px-2.5 py-1 rounded bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:bg-indigo-500/20 hover:border-indigo-500/40 transition-all">skills</button>
         <button data-cmd="toolkit"
@@ -3185,15 +3830,6 @@
             placeholder="Tell me about your product, timeline, and goals..."></textarea>
         </div>
 
-        <!-- reCAPTCHA Widget (Replace YOUR_RECAPTCHA_SITE_KEY with your Google reCAPTCHA v2 site key from google.com/recaptcha/admin) -->
-        <div class="flex flex-col items-center justify-center my-4 overflow-x-auto">
-          <div class="g-recaptcha" data-sitekey="6Le53Z8tAAAAAFdnOXE0ponmyM_Fz8PR0O_UsS9J" data-theme="dark"></div>
-          <p id="captchaError" class="text-rose-400 text-xs mt-2 hidden font-medium flex items-center gap-1">
-            <i data-lucide="alert-circle" class="w-3.5 h-3.5 inline"></i> Please complete the reCAPTCHA verification
-            before sending.
-          </p>
-        </div>
-
         <div id="contactFormError"
           class="hidden p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
           <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
@@ -3283,6 +3919,10 @@
         <a href="#work"
           class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
           <i data-lucide="layout-grid" class="w-4 h-4 text-gray-400"></i> Browse Selected Projects
+        </a>
+        <a href="#experience"
+          class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
+          <i data-lucide="briefcase" class="w-4 h-4 text-indigo-400"></i> Metro Work Experience Timeline
         </a>
         <a href="#about"
           class="cmd-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-200 hover:bg-indigo-600 hover:text-white transition-colors">
@@ -3650,7 +4290,7 @@
 
     /* ================= SCROLL PROGRESS & DOCK ACTIVE STATE ================= */
     const progressBar = document.getElementById('progressBar');
-    const sections = ['home', 'work', 'about', 'terminal', 'services', 'calculator', 'contact'];
+    const sections = ['home', 'work', 'experience', 'about', 'terminal', 'services', 'calculator', 'contact'];
     const dockItems = document.querySelectorAll('.dock-item');
 
     function handleScroll() {
@@ -4181,6 +4821,7 @@
         <div class="space-y-1">
           <div class="text-white font-semibold">Available Commands:</div>
           <div><span class="text-indigo-400 font-bold">bio</span> — Summary of Mohammad Fuad Hasan &amp; Education</div>
+          <div><span class="text-indigo-400 font-bold">experience</span> — Work Experience &amp; Career Timeline</div>
           <div><span class="text-indigo-400 font-bold">skills</span> — Full stack &amp; design toolkit breakdown</div>
           <div><span class="text-purple-400 font-bold">toolkit</span> — Design &amp; Web toolkit skills (Ai, Ps, Ae, Pr)</div>
           <div><span class="text-indigo-400 font-bold">projects</span> — Selected projects from the portfolio</div>
@@ -4197,6 +4838,33 @@
           📍 Dhaka, Bangladesh • Email: <a href="mailto:fuadfuad091@gmail.com" class="text-indigo-300 underline">fuadfuad091@gmail.com</a>
         </div>
       `,
+      experience: () => `
+        <div class="space-y-2 text-gray-200">
+          <div class="text-indigo-400 font-bold">🚄 Work Experience &amp; Career Timeline:</div>
+          <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
+            <div class="flex items-center justify-between">
+              <strong class="text-white">Aspire to Innovate (a2i) — Intern</strong>
+              <span class="text-xs text-emerald-400 font-mono">Current Role (June–Sept 2026)</span>
+            </div>
+            <div class="text-gray-400 text-xs mt-1">Java Development Intern • Java, Spring Boot, MySQL, REST APIs</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
+            <div class="flex items-center justify-between">
+              <strong class="text-white">Freelance Graphics Designer</strong>
+              <span class="text-xs text-purple-300 font-mono">2019 – Present</span>
+            </div>
+            <div class="text-gray-400 text-xs mt-1">Branding &amp; Creative Media Specialist • Photoshop, Illustrator, Premiere Pro, After Effects</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
+            <div class="flex items-center justify-between">
+              <strong class="text-white">BSc in Computer &amp; Information Science</strong>
+              <span class="text-xs text-emerald-300 font-mono">Daffodil Intl Univ (2026)</span>
+            </div>
+            <div class="text-gray-400 text-xs mt-1">CGPA 3.30 • IEEE QPAIN 2026 Conference Paper #4319 • AWS Academy Graduate</div>
+          </div>
+        </div>
+      `,
+      workexp: () => termCommands.experience(),
       skills: () => `
         <div class="space-y-1 text-gray-300">
           <div>☕ <strong class="text-white">Java / Spring Boot:</strong> Colony Management</div>
@@ -4550,28 +5218,13 @@
 
         const contactFormError = document.getElementById('contactFormError');
         const contactFormErrorText = document.getElementById('contactFormErrorText');
-        const captchaError = document.getElementById('captchaError');
 
         if (contactFormError) contactFormError.classList.add('hidden');
-        if (captchaError) captchaError.classList.add('hidden');
-
-        // Extract reCAPTCHA response token
-        const recaptchaResponse = contactForm.querySelector('[name="g-recaptcha-response"]')?.value || '';
-        const recaptchaElem = contactForm.querySelector('.g-recaptcha');
-
-        if (recaptchaElem && !recaptchaResponse) {
-          if (captchaError) captchaError.classList.remove('hidden');
-          if (contactFormError && contactFormErrorText) {
-            contactFormErrorText.textContent = 'Please complete the reCAPTCHA check before sending your message.';
-            contactFormError.classList.remove('hidden');
-          }
-          return;
-        }
 
         // Trigger paper plane flight animation across the website!
         launchPlaneAnimation();
 
-        submitBtnText.textContent = 'Sending...';
+        if (submitBtnText) submitBtnText.textContent = 'Sending...';
 
         const name = document.getElementById('contactName')?.value || 'Visitor';
         const email = document.getElementById('contactEmail')?.value || '';
@@ -4586,9 +5239,6 @@
             budget: budget,
             message: message
           };
-          if (recaptchaResponse) {
-            payload['g-recaptcha-response'] = recaptchaResponse;
-          }
 
           const response = await fetch('https://formspree.io/f/myeyzvwb', {
             method: 'POST',
@@ -4600,7 +5250,7 @@
           });
 
           if (response.ok) {
-            contactSuccessNotice.classList.remove('hidden');
+            if (contactSuccessNotice) contactSuccessNotice.classList.remove('hidden');
             confetti({ particleCount: 100, spread: 70, origin: { y: 0.7 } });
             if (typeof playTone === 'function') playTone(650, 'sine', 0.15);
             lucide.createIcons();
@@ -4626,25 +5276,55 @@
             alert('Oops! There was a problem submitting your form.');
           }
         } finally {
-          submitBtnText.textContent = 'Send Message';
+          if (submitBtnText) submitBtnText.textContent = 'Send Message';
         }
       });
     }
 
     if (resetContactBtn) {
       resetContactBtn.addEventListener('click', () => {
-        contactSuccessNotice.classList.add('hidden');
+        if (contactSuccessNotice) contactSuccessNotice.classList.add('hidden');
         const contactFormError = document.getElementById('contactFormError');
-        const captchaError = document.getElementById('captchaError');
         if (contactFormError) contactFormError.classList.add('hidden');
-        if (captchaError) captchaError.classList.add('hidden');
         contactForm.reset();
-        charCount.textContent = '0 / 500';
-        if (window.grecaptcha && typeof window.grecaptcha.reset === 'function') {
-          try { window.grecaptcha.reset(); } catch (e) { }
-        }
+        if (charCount) charCount.textContent = '0 / 500';
       });
     }
+
+    /* ================= CAREER BEACON ORB SCROLL TRACKER ================= */
+    function updateCareerBeaconPosition() {
+      const beaconOrb = document.getElementById('careerBeaconOrb');
+      const trackContainer = document.getElementById('metroTrackContainer');
+      if (!beaconOrb || !trackContainer) return;
+
+      const rect = trackContainer.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      if (rect.top <= viewportHeight && rect.bottom >= 0) {
+        const totalHeight = rect.height;
+        const scrolled = Math.max(0, Math.min(totalHeight, viewportHeight - rect.top));
+        const progress = scrolled / (totalHeight + viewportHeight * 0.3);
+        const topPercent = Math.max(6, Math.min(94, Math.round(progress * 100)));
+
+        beaconOrb.style.top = `${topPercent}%`;
+
+        // Check station node proximity for arrival flash
+        document.querySelectorAll('#experience .reveal-header').forEach((station) => {
+          const stationRect = station.getBoundingClientRect();
+          const node = station.querySelector('.w-12.h-12.rounded-full');
+          if (node && Math.abs(stationRect.top - (viewportHeight * 0.45)) < 140) {
+            if (!node.classList.contains('station-arrival-pulse')) {
+              node.classList.add('station-arrival-pulse');
+            }
+          } else if (node) {
+            node.classList.remove('station-arrival-pulse');
+          }
+        });
+      }
+    }
+
+    window.addEventListener('scroll', updateCareerBeaconPosition, { passive: true });
+    updateCareerBeaconPosition();
   </script>
 </body>
 
