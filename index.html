@@ -1786,6 +1786,58 @@
       animation: shimmer-number 2s ease-in-out 1;
     }
 
+    /* ===== MOBILE GPU & PERFORMANCE OPTIMIZATIONS ===== */
+    @media (max-width: 768px),
+    (pointer: coarse) {
+      body {
+        animation: none !important;
+        background-size: 100% 100% !important;
+      }
+
+      .noise-layer {
+        display: none !important;
+      }
+
+      .glow-card,
+      .bio-card,
+      .skill-card,
+      .about-metric {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        animation: none !important;
+        background-color: #0c0c12 !important;
+      }
+
+      .bio-card::before,
+      .bio-card::after {
+        animation: none !important;
+      }
+
+      .holographic-tile::before {
+        animation: none !important;
+      }
+
+      .gradient-text,
+      .gradient-text-alt,
+      .animated-gradient {
+        animation: none !important;
+      }
+
+      .beacon-core-ring,
+      .beacon-pulse-dot {
+        animation: none !important;
+      }
+
+      .metro-headlight-beam {
+        animation: none !important;
+      }
+
+      .marquee-container {
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
 
       *,
@@ -2820,7 +2872,7 @@
                 <div class="text-[11px] font-mono text-emerald-400 uppercase tracking-widest">Stop 03 · 2026 Graduate
                 </div>
                 <h3 class="text-2xl font-black text-white">BSc in Computer &amp; Information Science</h3>
-                <div class="text-sm font-semibold text-emerald-300">Daffodil International University · CGPA 3.30</div>
+                <div class="text-sm font-semibold text-emerald-300">Daffodil International University</div>
               </div>
             </div>
             <div class="space-y-3 text-xs text-gray-300 mb-5 relative z-10">
@@ -4051,6 +4103,14 @@
     let ringY = mouseY;
     let isMouseActive = false;
 
+    function animateCursorRing() {
+      if (!isMouseActive) return;
+      ringX += (mouseX - ringX) * 0.16;
+      ringY += (mouseY - ringY) * 0.16;
+      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
+      requestAnimationFrame(animateCursorRing);
+    }
+
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -4058,23 +4118,10 @@
         isMouseActive = true;
         cursorDot.style.opacity = '1';
         cursorRing.style.opacity = '1';
+        requestAnimationFrame(animateCursorRing);
       }
       cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
     });
-
-    document.addEventListener('mouseleave', () => {
-      cursorDot.style.opacity = '0';
-      cursorRing.style.opacity = '0';
-      isMouseActive = false;
-    });
-
-    function animateCursorRing() {
-      ringX += (mouseX - ringX) * 0.16;
-      ringY += (mouseY - ringY) * 0.16;
-      cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
-      requestAnimationFrame(animateCursorRing);
-    }
-    animateCursorRing();
 
     function attachInteractiveHover() {
       document.querySelectorAll('.interactive, a, button, input, textarea, .tech-pill').forEach(el => {
@@ -4101,7 +4148,7 @@
       const ctx = heroCanvas.getContext('2d');
       let width, height;
       let particles = [];
-      const PARTICLE_COUNT = 40;
+      const PARTICLE_COUNT = window.innerWidth < 768 ? 18 : 40;
 
       function resizeCanvas() {
         const parent = heroCanvas.parentElement;
@@ -4155,7 +4202,18 @@
         }
       }
 
+      let heroCanvasVisible = true;
+      const heroCanvasObserver = new IntersectionObserver(([entry]) => {
+        const wasVisible = heroCanvasVisible;
+        heroCanvasVisible = entry.isIntersecting;
+        if (!wasVisible && heroCanvasVisible) {
+          requestAnimationFrame(animParticles);
+        }
+      }, { threshold: 0 });
+      heroCanvasObserver.observe(heroCanvas);
+
       function animParticles() {
+        if (!heroCanvasVisible) return;
         ctx.clearRect(0, 0, width, height);
         particles.forEach(p => {
           p.update();
@@ -4529,10 +4587,24 @@
       }
     }
 
-    window.addEventListener('scroll', triggerMobileScrollReveals, { passive: true });
-    window.addEventListener('resize', triggerMobileScrollReveals);
-    document.addEventListener('DOMContentLoaded', triggerMobileScrollReveals);
-    setTimeout(triggerMobileScrollReveals, 200);
+    let isScrollScheduled = false;
+    function handleScrollOptimized() {
+      if (!isScrollScheduled) {
+        isScrollScheduled = true;
+        requestAnimationFrame(() => {
+          triggerMobileScrollReveals();
+          if (typeof updateCareerBeaconPosition === 'function') {
+            updateCareerBeaconPosition();
+          }
+          isScrollScheduled = false;
+        });
+      }
+    }
+
+    window.addEventListener('scroll', handleScrollOptimized, { passive: true });
+    window.addEventListener('resize', handleScrollOptimized);
+    document.addEventListener('DOMContentLoaded', handleScrollOptimized);
+    setTimeout(handleScrollOptimized, 200);
 
     const generalScrollObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -5323,7 +5395,7 @@
       }
     }
 
-    window.addEventListener('scroll', updateCareerBeaconPosition, { passive: true });
+    // Initial run for career beacon position
     updateCareerBeaconPosition();
   </script>
 </body>
