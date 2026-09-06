@@ -801,7 +801,7 @@ h1,h2,h3{font-weight:400;margin:0;letter-spacing:-.005em}
   <div class="cur-head">
     <h2 class="display h-sec" data-rv="up">Talk to the machine.</h2>
     <p class="body-lg" data-rv="up">A live shell sits inside the mainframe. Type <b style="color:var(--bone)">help</b>,
-      or tap a command chip — <b style="color:var(--bone)">theme</b> even re-lights the whole board.</p>
+      or tap a command chip — <b style="color:var(--bone)">theme</b> even re-lights the rings.</p>
   </div>
   <div class="term" data-rv="up">
     <div class="term-bar">
@@ -1074,9 +1074,11 @@ h1,h2,h3{font-weight:400;margin:0;letter-spacing:-.005em}
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
 /* =====================================================================
-FUAD — THE MAINFRAME. A night flight across a living circuit board:
-etched PCB ground, data pulses on the copper, server monoliths, code
-rain, snippet gates and a wireframe compiler core. All procedural.
+FUAD — THE MAINFRAME, pillar-free edition.
+A night flight across a living circuit board: etched PCB ground, data
+pulses on the copper, warp rings in place of gates, holographic code
+windows in place of towers, code rain, floating glyphs and a wireframe
+compiler core at the end of the path. All procedural.
 ===================================================================== */
 (function () {
 'use strict';
@@ -1115,12 +1117,10 @@ function texBoardSet() {
   var rnd = mulberry32(1234);
   x.fillStyle = '#060a10'; x.fillRect(0, 0, W, W);
   gx.fillStyle = '#000000'; gx.fillRect(0, 0, W, W);
-  /* substrate mottle */
   for (var i = 0; i < 2600; i++) {
-    x.fillStyle = rnd() > .5 ? 'rgba(110,190,220,' + (rnd()*.03) + ')' : 'rgba(0,0,0,' + (rnd()*.2) + ')';
+    x.fillStyle = rnd() > .5 ? 'rgba(124,131,255,' + (rnd()*.045) + ')' : 'rgba(0,0,0,' + (rnd()*.22) + ')';
     x.fillRect(rnd()*W, rnd()*W, 1 + rnd()*3, 1 + rnd()*3);
   }
-  /* etched traces — orthogonal runs with pads at the ends */
   for (var t2 = 0; t2 < 120; t2++) {
     var px = Math.floor(rnd()*16) * 64, py = Math.floor(rnd()*16) * 64;
     var hot = rnd() > .72;
@@ -1138,12 +1138,10 @@ function texBoardSet() {
       dir = !dir;
     }
     x.stroke(); gx.stroke();
-    /* solder pad */
     x.fillStyle = 'rgba(150,220,240,.25)'; gx.fillStyle = 'rgba(150,230,255,.9)';
     x.beginPath(); x.arc(px, py, 4.5, 0, TAU); x.fill();
     gx.beginPath(); gx.arc(px, py, 3, 0, TAU); gx.fill();
   }
-  /* vias */
   for (var v = 0; v < 160; v++) {
     var vx = rnd()*W, vy = rnd()*W, vr = 2 + rnd()*3;
     x.strokeStyle = 'rgba(34,211,238,.16)'; x.lineWidth = 1.4;
@@ -1151,7 +1149,6 @@ function texBoardSet() {
     gx.strokeStyle = 'rgba(34,211,238,.4)'; gx.lineWidth = 1;
     gx.beginPath(); gx.arc(vx, vy, vr, 0, TAU); gx.stroke();
   }
-  /* IC chips sitting on the board */
   for (var k = 0; k < 9; k++) {
     var cw2 = 60 + rnd()*80, ch2 = 40 + rnd()*60, cx2 = rnd()*(W-cw2), cy2 = rnd()*(W-ch2);
     x.fillStyle = '#0a0f16'; x.fillRect(cx2, cy2, cw2, ch2);
@@ -1165,29 +1162,53 @@ function texBoardSet() {
   }
   return { map: c, glow: g };
 }
-/* -------------------------------------------------- server monolith */
-function texServer() {
-  var W = 256, H = 512, c = cvs(W, H), x = c.getContext('2d');
-  var rnd = mulberry32(99);
-  var g = x.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, '#10161f'); g.addColorStop(1, '#070a10');
-  x.fillStyle = g; x.fillRect(0, 0, W, H);
-  /* rack slots */
-  for (var y = 18; y < H - 18; y += 26) {
-    x.fillStyle = 'rgba(0,0,0,.55)'; x.fillRect(16, y, W - 32, 12);
-    var leds = 2 + ((rnd()*4)|0);
-    for (var l = 0; l < leds; l++) {
-      var on = rnd() > .35;
-      var col = rnd();
-      x.fillStyle = !on ? 'rgba(60,70,85,.5)' :
-        (col > .66 ? 'rgba(110,231,255,.95)' : (col > .33 ? 'rgba(150,160,255,.95)' : 'rgba(235,242,255,.95)'));
-      x.fillRect(W - 30 - l*13, y + 3, 6, 6);
-    }
-    x.fillStyle = 'rgba(120,140,160,.14)';
-    x.fillRect(22, y + 3, (W - 70) * (.3 + rnd()*.6), 6);
+/* ---------------------------------------------- holographic code window */
+var CODE_FILES = ['ColonyService.java', 'App.jsx', 'schema.sql', 'main.py',
+  'theme.scss', 'api.routes.js', 'seal.crypto.js', 'jobchai.php'];
+var CODE_LINES = ['public class Colony {', 'const [state, setState] =',
+  'SELECT * FROM flats', 'def train_model(df):', '@RestController',
+  'import React from "react"', 'return res.status(200)', 'git push origin main'];
+function texCodeWin(seed) {
+  var W = 512, H = 330, c = cvs(W, H), x = c.getContext('2d');
+  var rnd = mulberry32(seed);
+  x.fillStyle = 'rgba(6,11,18,.88)'; x.fillRect(0, 0, W, H);
+  x.strokeStyle = 'rgba(110,220,255,.4)'; x.lineWidth = 3; x.strokeRect(2, 2, W - 4, H - 4);
+  x.strokeStyle = 'rgba(124,131,255,.18)'; x.lineWidth = 1; x.strokeRect(9, 9, W - 18, H - 18);
+  /* title bar */
+  x.fillStyle = 'rgba(12,20,30,.95)'; x.fillRect(3, 3, W - 6, 36);
+  var dots = ['rgba(251,113,133,.9)', 'rgba(251,191,36,.9)', 'rgba(52,211,153,.9)'];
+  for (var d = 0; d < 3; d++) {
+    x.fillStyle = dots[d]; x.beginPath(); x.arc(24 + d * 20, 21, 5.5, 0, TAU); x.fill();
   }
-  /* edge highlight */
-  x.fillStyle = 'rgba(140,200,225,.10)'; x.fillRect(0, 0, 3, H);
+  x.font = '500 16px "JetBrains Mono", monospace';
+  x.fillStyle = 'rgba(125,211,252,.95)';
+  x.fillText(CODE_FILES[seed % CODE_FILES.length], 92, 27);
+  /* the code itself */
+  var TOK = ['#7dd3fc', '#a5b4fc', '#f9a8d4', '#6ee7b7', '#fcd34d', '#c4b5fd', '#93c5fd'];
+  var y = 62, line = 1;
+  while (y < H - 14) {
+    x.font = '400 13px "JetBrains Mono", monospace';
+    x.fillStyle = 'rgba(120,140,165,.55)';
+    x.fillText(('0' + line).slice(-2), 14, y);
+    if (rnd() > .62) {
+      x.fillStyle = rnd() > .5 ? 'rgba(165,180,252,.92)' : 'rgba(110,231,183,.9)';
+      x.fillText(CODE_LINES[(rnd() * CODE_LINES.length) | 0], 44 + (rnd() > .6 ? 18 : 0), y);
+    } else {
+      var tx2 = 44 + (rnd() > .7 ? 18 : 0), n = 2 + ((rnd() * 5) | 0);
+      for (var t = 0; t < n && tx2 < W - 46; t++) {
+        var w = 18 + rnd() * 72;
+        x.fillStyle = TOK[(rnd() * TOK.length) | 0];
+        x.globalAlpha = .55 + rnd() * .4;
+        x.fillRect(tx2, y - 10, w, 11);
+        x.globalAlpha = 1;
+        tx2 += w + 9;
+      }
+    }
+    y += 19; line++;
+  }
+  var g = x.createLinearGradient(0, H - 60, 0, H);
+  g.addColorStop(0, 'rgba(34,211,238,0)'); g.addColorStop(1, 'rgba(34,211,238,.10)');
+  x.fillStyle = g; x.fillRect(0, H - 60, W, 60);
   return c;
 }
 /* ------------------------------------------------------- code rain */
@@ -1211,7 +1232,7 @@ function texRain(seed) {
   }
   return c;
 }
-/* ------------------------------------------------- gate snippet plaque */
+/* ----------------------------------------- gate snippet plaque */
 function texSnippet(text) {
   var c = cvs(760, 110), x = c.getContext('2d');
   x.clearRect(0, 0, 760, 110);
@@ -1246,7 +1267,6 @@ function texSky() {
     x.fillStyle = 'rgba(190,220,240,' + ((.10 + rnd()*.4) * (1 - sy/H)) + ')';
     x.beginPath(); x.arc(sx, sy, r, 0, TAU); x.fill();
   }
-  /* horizon bloom */
   var hg = x.createLinearGradient(0, H*.72, 0, H);
   hg.addColorStop(0, 'rgba(20,120,160,0)'); hg.addColorStop(1, 'rgba(24,140,180,.16)');
   x.fillStyle = hg; x.fillRect(0, H*.72, W, H*.28);
@@ -1312,7 +1332,8 @@ function tx(canvasEl, o) {
   return t;
 }
 var WORLD = { strips: [], recolor: [], rains: [], glyphs: [], blocks: [],
-  blinkers: [], pulses: null, orbiters: [], ripples: [], mist: [] };
+  blinkers: [], pulses: null, orbiters: [], ripples: [], mist: [],
+  rings: [], screens: [] };
 /* ------------------------------------------------------- the ground */
 function buildShell() {
   var sky = new THREE.Mesh(new THREE.PlaneGeometry(480, 230),
@@ -1327,34 +1348,50 @@ function buildShell() {
   });
   var floor = new THREE.Mesh(new THREE.PlaneGeometry(260, 440), floorMat);
   floor.rotation.x = -Math.PI / 2; floor.position.set(0, 0, -80); scene.add(floor);
-}
-function buildMonoliths() {
-  var srvTex = tx(texServer(), { wrap: THREE.ClampToEdgeWrapping });
-  var mat = new THREE.MeshStandardMaterial({
-    map: srvTex, emissiveMap: srvTex, emissive: 0xffffff, emissiveIntensity: .9,
-    color: 0x8fa0b8, roughness: .6, metalness: .35
-  });
-  var rnd = mulberry32(303);
-  for (var i = 0; i < 22; i++) {
-    var w = 1.8 + rnd() * 2.6, h = 5 + rnd() * 17, d = 1.8 + rnd() * 2.2;
-    var m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  /* small ground debris — kept, these are not pillars */
+  var rnd = mulberry32(404);
+  var slabMat = new THREE.MeshStandardMaterial({ color: 0x11141d, roughness: .5, metalness: .3 });
+  for (var i = 0; i < 24; i++) {
+    var s = .5 + rnd() * 1.4;
+    var m = new THREE.Mesh(new THREE.BoxGeometry(s, s * (.4 + rnd() * .7), s), slabMat);
     var side = rnd() > .5 ? 1 : -1;
-    m.position.set(side * (11 + rnd() * 14), h / 2, 8 - rnd() * 165);
-    m.rotation.y = (rnd() - .5) * .5;
+    m.position.set(side * (9 + rnd() * 9), s * .2, 6 - rnd() * 150);
+    m.rotation.y = rnd() * TAU;
     scene.add(m);
-    /* antenna + blinker */
-    if (rnd() > .55) {
-      var ant = new THREE.Mesh(new THREE.CylinderGeometry(.04, .04, 2.4, 6),
-        new THREE.MeshStandardMaterial({ color: 0x1a2230, roughness: .5, metalness: .6 }));
-      ant.position.set(m.position.x, h + 1.2, m.position.z); scene.add(ant);
-      var tipMat = new THREE.MeshBasicMaterial({ color: rnd() > .5 ? 0x6ee7ff : 0xa855f7,
-        toneMapped: false, transparent: true, opacity: .9 });
-      var tip = new THREE.Mesh(new THREE.SphereGeometry(.12, 8, 8), tipMat);
-      tip.position.set(m.position.x, h + 2.45, m.position.z); scene.add(tip);
-      WORLD.blinkers.push({ mat: tipMat, ph: rnd() * TAU });
-    }
   }
 }
+/* ------------------------------------------- holographic code windows */
+function buildCodeWindows() {
+  var rnd = mulberry32(303);
+  var texs = [];
+  for (var t = 0; t < 6; t++) texs.push(tx(texCodeWin(11 + t * 7)));
+  var glowTex = tx(texGlow('rgba(120,210,255,.5)', 'rgba(70,130,235,.16)'));
+  for (var i = 0; i < 18; i++) {
+    var w = 4.6 + rnd() * 1.8, h = w * (330 / 512);
+    var mat = new THREE.MeshBasicMaterial({ map: texs[i % 6], transparent: true,
+      opacity: .88, side: THREE.DoubleSide, depthWrite: false, fog: false, toneMapped: false });
+    var m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
+    var side = i % 2 === 0 ? 1 : -1;
+    var px = side * (8.5 + rnd() * 11);
+    var py = 3.2 + rnd() * 9.5;
+    var pz = 6 - rnd() * 158;
+    m.position.set(px, py, pz);
+    m.rotation.y = -side * (.35 + rnd() * .35);   /* angled toward the flight path */
+    m.renderOrder = 4;
+    scene.add(m);
+    var glow = new THREE.Mesh(new THREE.PlaneGeometry(w * 1.7, h * 2.1),
+      new THREE.MeshBasicMaterial({ map: glowTex, transparent: true,
+        blending: THREE.AdditiveBlending, depthWrite: false, fog: false,
+        opacity: .18 + rnd() * .14 }));
+    glow.position.set(px, py, pz - .12);
+    glow.rotation.y = m.rotation.y;
+    glow.renderOrder = 3;
+    scene.add(glow);
+    WORLD.screens.push({ m: m, g: glow, y0: py, ph: rnd() * TAU,
+      sp: .35 + rnd() * .4, blink: rnd() > .72, mat: mat });
+  }
+}
+/* ---------------------------------------------------- the warp rings */
 var SNIPPETS = [
   '> npm run build --prod',
   'while(alive){ eat(); sleep(); code(); }',
@@ -1369,39 +1406,53 @@ var SNIPPETS = [
   'try { ship(); } catch(e){ fix(); }',
   '01000110 01010101 01000001 01000100'
 ];
-function buildGates() {
-  var dark = new THREE.MeshStandardMaterial({ color: 0x10151f, roughness: .7, metalness: .45 });
-  var dark2 = new THREE.MeshStandardMaterial({ color: 0x0b0f16, roughness: .9, metalness: .1 });
+function buildPortals() {
   var cols = [0x22d3ee, 0x7c83ff, 0xa855f7];
+  var glowTex = tx(texGlow('rgba(170,235,255,.85)', 'rgba(90,150,255,.25)'));
+  var nodeGeo = new THREE.SphereGeometry(.14, 10, 10);
   for (var i = 0; i < 12; i++) {
-    var z = 4 - i * 12.6;
-    var W = 5.4, H = 10;
-    [-1, 1].forEach(function (s) {
-      var p = new THREE.Mesh(new THREE.BoxGeometry(.5, H, .6), dark);
-      p.position.set(s * W, H / 2, z); scene.add(p);
-      var foot = new THREE.Mesh(new THREE.BoxGeometry(.9, .4, 1.0), dark2);
-      foot.position.set(s * W, .2, z); scene.add(foot);
-    });
-    var lintel = new THREE.Mesh(new THREE.BoxGeometry(W * 2 + 1.6, .7, .85), dark);
-    lintel.position.set(0, H, z); scene.add(lintel);
-    var under = new THREE.Mesh(new THREE.BoxGeometry(W * 2 + .6, .22, .6), dark2);
-    under.position.set(0, H - 1.1, z); scene.add(under);
-    /* emissive edge strips */
-    var stripMat = new THREE.MeshBasicMaterial({ color: cols[i % 3], toneMapped: false,
-      transparent: true, opacity: .85 });
-    [-1, 1].forEach(function (s) {
-      var st = new THREE.Mesh(new THREE.BoxGeometry(.07, H * .88, .07), stripMat);
-      st.position.set(s * (W - .3), H * .47, z); scene.add(st);
-    });
-    var hs = new THREE.Mesh(new THREE.BoxGeometry(W * 2 - .4, .06, .06), stripMat);
-    hs.position.set(0, H - .42, z); scene.add(hs);
-    WORLD.strips.push({ mat: stripMat, ph: i * .8, base: .85, i: i });
-    /* the snippet plaque under the lintel */
-    var pl = new THREE.Mesh(new THREE.PlaneGeometry(5.6, .82),
+    var z = 4 - i * 12.6, yc = 5.6, R = 4.7;
+    var ringMat = new THREE.MeshBasicMaterial({ color: cols[i % 3], toneMapped: false,
+      transparent: true, opacity: .9, fog: false });
+    var ring = new THREE.Mesh(new THREE.TorusGeometry(R, .07, 8, 110), ringMat);
+    ring.position.set(0, yc, z);
+    scene.add(ring);
+    var innerMat = new THREE.MeshBasicMaterial({ color: cols[(i + 1) % 3], toneMapped: false,
+      transparent: true, opacity: .5, fog: false });
+    var inner = new THREE.Mesh(new THREE.TorusGeometry(R - .8, .035, 8, 90), innerMat);
+    inner.position.set(0, yc, z + .25);
+    scene.add(inner);
+    var halo = new THREE.Mesh(new THREE.PlaneGeometry(R * 3.1, R * 3.1),
+      new THREE.MeshBasicMaterial({ map: glowTex, transparent: true,
+        blending: THREE.AdditiveBlending, depthWrite: false, fog: false, opacity: .16 }));
+    halo.position.set(0, yc, z - .3); halo.renderOrder = 1;
+    scene.add(halo);
+    /* orbiting data nodes */
+    var nodeMat = new THREE.MeshBasicMaterial({ color: 0xdff6ff, toneMapped: false,
+      fog: false, transparent: true, opacity: .95 });
+    var nodes = [];
+    for (var n = 0; n < 3; n++) {
+      var nd = new THREE.Mesh(nodeGeo, nodeMat);
+      scene.add(nd);
+      nodes.push({ m: nd, a: n / 3 * TAU + i, sp: .5 + (i % 3) * .22 });
+    }
+    /* the snippet plaque rides in the mouth of the ring */
+    var pl = new THREE.Mesh(new THREE.PlaneGeometry(5.4, .78),
       new THREE.MeshBasicMaterial({ map: tx(texSnippet(SNIPPETS[i])), transparent: true,
         depthWrite: false, toneMapped: false, fog: false, opacity: .92 }));
-    pl.position.set(0, H - 2.0, z + .5); pl.renderOrder = 3;
+    pl.position.set(0, yc - R + 1.5, z + .4);
+    pl.renderOrder = 3;
     scene.add(pl);
+    /* a puddle of ring-light on the copper */
+    var pud = new THREE.Mesh(new THREE.PlaneGeometry(7.5, 7.5),
+      new THREE.MeshBasicMaterial({ map: glowTex, transparent: true,
+        blending: THREE.AdditiveBlending, depthWrite: false, opacity: .1, color: cols[i % 3] }));
+    pud.rotation.x = -Math.PI / 2; pud.position.set(0, .05, z); pud.renderOrder = 6;
+    scene.add(pud);
+    WORLD.strips.push({ mat: ringMat, ph: i * .8, base: .9, i: i });
+    WORLD.rings.push({ ring: ring, inner: inner, halo: halo, nodes: nodes,
+      z: z, yc: yc, R: R, dir: i % 2 === 0 ? 1 : -1 });
+    if (i % 2 === 0) WORLD.blinkers.push({ mat: nodeMat, ph: i * 1.3 });
   }
 }
 var CORE = { x: 0, y: 13, z: -176 };
@@ -1429,7 +1480,6 @@ function buildCore() {
   r2.position.set(CORE.x, CORE.y, CORE.z); r2.rotation.z = .9; r2.rotation.x = .4;
   scene.add(r2); WORLD.ring2 = r2;
   WORLD.recolor.push({ m: r2Mat, ci: 1 });
-  /* orbiting data cubes */
   var cubeMat = new THREE.MeshBasicMaterial({ color: 0x6ee7ff, toneMapped: false, fog: false });
   WORLD.recolor.push({ m: cubeMat, ci: 2 });
   for (var i = 0; i < 8; i++) {
@@ -1456,9 +1506,6 @@ function buildGlyphsAndBlocks() {
     scene.add(m);
     WORLD.glyphs.push({ m: m, y0: m.position.y, ph: rnd() * TAU, sp: .4 + rnd() * .5 });
   }
-  WORLD.recolor.push({ m: null, ci: 2 }); /* placeholder removed below */
-  WORLD.recolor.pop();
-  /* drifting wireframe data blocks */
   var blkMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee, wireframe: true,
     transparent: true, opacity: .26, toneMapped: false });
   WORLD.recolor.push({ m: blkMat, ci: 2 });
@@ -1502,7 +1549,6 @@ function buildAtmosphere() {
     scene.add(r);
     WORLD.rains.push({ m: r, sp: speeds[ti] * (.7 + rnd() * .6) });
   }
-  WORLD.recolor.push({ m: null, ci: 2 }); WORLD.recolor.pop();
   /* data pulses racing along the copper */
   var NP = COARSE ? 70 : 150;
   var pos = new Float32Array(NP * 3), data = [];
@@ -1785,7 +1831,6 @@ function layoutWord() {
   var s = (R.x - L.x) * fill / WORD.ink.w;
   var B = hit(0, narrow ? -.14 : -.55);
   WORD.group.scale.setScalar(s);
-  WORD.group.position.x = -WORD.ink.cx * s + (WORD.ink.cx * s); /* centered */
   WORD.group.position.x = 0;
   WORD.baseY = B.y;
   WORD.rise = WORD.ink.asc * s * 1.2;
@@ -2032,7 +2077,7 @@ function wireTerminal() {
         '&nbsp;&nbsp;<b>toolkit</b> — design &amp; media tools<br>' +
         '&nbsp;&nbsp;<b>projects</b> — selected work<br>' +
         '&nbsp;&nbsp;<b>contact</b> — open the channel<br>' +
-        '&nbsp;&nbsp;<b>theme &lt;name&gt;</b> — re-light the board (indigo, violet, emerald, cyan, amber)<br>' +
+        '&nbsp;&nbsp;<b>theme &lt;name&gt;</b> — re-light the rings (indigo, violet, emerald, cyan, amber)<br>' +
         '&nbsp;&nbsp;<b>confetti</b> — celebration protocol<br>' +
         '&nbsp;&nbsp;<b>clear</b> — wipe the screen';
     },
@@ -2086,7 +2131,7 @@ function wireTerminal() {
     echo(cmd);
     if (cmd.indexOf('theme') === 0) {
       var n = cmd.slice(5).trim();
-      if (setTheme(n)) print('✦ accent shifted to <b>' + n + '</b> — the board re-lit.');
+      if (setTheme(n)) print('✦ accent shifted to <b>' + n + '</b> — the rings re-lit.');
       else print('unknown theme — try indigo, violet, emerald, cyan, amber');
       return;
     }
@@ -2221,15 +2266,38 @@ function resize() {
 }
 function updateWorld(dt) {
   WORLD.uT.value = clock;
-  /* gate strips breathe */
+  /* the warp rings breathe */
   for (var i = 0; i < WORLD.strips.length; i++) {
     var s = WORLD.strips[i];
     s.mat.opacity = s.base + Math.sin(clock * 1.5 + s.ph) * .12;
   }
-  /* antenna blinkers */
+  /* antenna-style node blinkers */
   for (var bI = 0; bI < WORLD.blinkers.length; bI++) {
     var bl = WORLD.blinkers[bI];
     bl.mat.opacity = .25 + .75 * Math.abs(Math.sin(clock * 1.8 + bl.ph));
+  }
+  /* rings turn, their nodes orbit */
+  for (var ri = 0; ri < WORLD.rings.length; ri++) {
+    var rg = WORLD.rings[ri];
+    rg.ring.rotation.z += dt * .12 * rg.dir;
+    rg.inner.rotation.z -= dt * .2 * rg.dir;
+    rg.halo.material.opacity = .14 + Math.sin(clock * .8 + ri) * .04;
+    for (var ni = 0; ni < rg.nodes.length; ni++) {
+      var nd = rg.nodes[ni];
+      nd.a += nd.sp * dt;
+      nd.m.position.set(Math.cos(nd.a) * rg.R, rg.yc + Math.sin(nd.a) * rg.R, rg.z + .1);
+    }
+  }
+  /* hologram windows drift, and the bad ones flicker */
+  for (var si = 0; si < WORLD.screens.length; si++) {
+    var sc = WORLD.screens[si];
+    sc.m.position.y = sc.y0 + Math.sin(clock * sc.sp + sc.ph) * .55;
+    sc.g.position.y = sc.m.position.y;
+    sc.m.rotation.z = Math.sin(clock * .4 + sc.ph) * .02;
+    if (sc.blink) {
+      sc.mat.opacity = .84 + Math.sin(clock * .9 + sc.ph) * .05
+        + (Math.sin(clock * 9.3 + sc.ph) > .94 ? -.38 : 0);
+    }
   }
   /* the compiler core turns */
   if (WORLD.wire) {
@@ -2289,8 +2357,8 @@ function updateWorld(dt) {
     var r = WORLD.ripples[q], u = r.userData;
     u.t += dt * u.sp;
     if (u.t > 4) { u.t = 0; u.x = (Math.random() - .5) * 22; u.z = 4 - Math.random() * 140; }
-    var kk = u.t / 4, sc = .3 + kk * 4.6;
-    r.scale.set(sc, sc, 1);
+    var kk = u.t / 4, sc2 = .3 + kk * 4.6;
+    r.scale.set(sc2, sc2, 1);
     r.position.set(u.x, .03, u.z);
     r.material.opacity = Math.sin(kk * Math.PI) * .16;
   }
@@ -2336,8 +2404,8 @@ var JOBS = [
     ]);
   }],
   ['Etching the board', function () { initGL(); WORLD.uT = { value: 0 }; buildRig(); buildLights(); buildShell(); }],
-  ['Raising the monoliths', function () { buildMonoliths(); buildGlyphsAndBlocks(); }],
-  ['Hanging the gates', function () { buildGates(); }],
+  ['Opening the holograms', function () { buildCodeWindows(); buildGlyphsAndBlocks(); }],
+  ['Warping the rings', function () { buildPortals(); }],
   ['Lighting the core', function () { buildCore(); }],
   ['Compiling the rain', function () { buildAtmosphere(); buildWisps(); }],
   ['Cutting the word', function () { buildWordmark(); layoutWord(); measure(); }]
